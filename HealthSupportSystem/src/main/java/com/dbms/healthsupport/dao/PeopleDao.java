@@ -23,13 +23,24 @@ public class PeopleDao {
 		
 		Statement stmt = conn.createStatement();
 		
-		String createSQL = " CREATE TABLE table1 ("
-				+ "SSN Integer,"
-				+ "FirstName VARCHAR(10))";
+		//String createSQL = " CREATE TABLE table1 ("
+		//		+ "SSN Integer,"
+		//		+ "FirstName VARCHAR(10))";
 		
 		String insertSQL = "INSERT INTO table1 VALUES(12345, 'Akshay')";
+		ResultSet rs = stmt.executeQuery(insertSQL);
 		
-		ResultSet rs = stmt.executeQuery(createSQL);
+		String selectSQL = "SELECT SSN, FirstName FROM table1";
+		rs = stmt.executeQuery(selectSQL);
+		
+		while(rs.next())
+		{
+			Long r1 = rs.getLong("SSN");
+			System.out.println("Name: " + r1 );
+			
+			String r2 = rs.getString("FirstName");
+			System.out.println("Name: " + r2);
+		}
 		
 	}
 	
