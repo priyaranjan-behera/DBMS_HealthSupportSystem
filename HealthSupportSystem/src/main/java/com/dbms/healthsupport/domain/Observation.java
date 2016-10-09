@@ -5,12 +5,16 @@ import java.util.Date;
 public class Observation {
 
 	int observationSpecificationId;
-	String value;
+	String observationValue;
 	Date observationTime;
 	Date recordedTime;
 	
-	public Observation() {
+	public Observation(int observationSpecificationId, String observationValue, Date observationTime, Date recordedTime) {
 		
+		this.observationSpecificationId = observationSpecificationId;
+		this.observationValue = observationValue;
+		this.observationTime = observationTime;
+		this.recordedTime = recordedTime;
 	}
 
 	public int getObservationSpecificationId() {
@@ -21,12 +25,12 @@ public class Observation {
 		this.observationSpecificationId = observationSpecificationId;
 	}
 
-	public String getValue() {
-		return value;
+	public String getObservationValue() {
+		return observationValue;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setObservationValue(String observationValue) {
+		this.observationValue = observationValue;
 	}
 
 	public Date getObservationTime() {

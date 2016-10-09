@@ -5,8 +5,9 @@ public class MetricTypeValue {
 	int metricTypeValueID;
 	String metricTypeValue;
 	
-	public MetricTypeValue() {
-		
+	public MetricTypeValue(int metricTypeValueID, String metricTypeValue) {
+		this.metricTypeValueID = metricTypeValueID;
+		this.metricTypeValue = metricTypeValue;
 	}
 
 	public int getMetricTypeValueID() {
