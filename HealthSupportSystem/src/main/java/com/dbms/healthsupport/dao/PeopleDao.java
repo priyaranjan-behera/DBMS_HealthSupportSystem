@@ -17,6 +17,11 @@ public class PeopleDao implements DaoInterface<PeopleDao> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void deleteData() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
