@@ -2,32 +2,50 @@ package com.dbms.healthsupport.domain;
 
 public class People {
 
-	public Integer getSsn() {
-		return ssn;
-	}
-	public void setSsn(Integer ssn) {
-		this.ssn = ssn;
-	}
-	public String getFirstName() {
-		return FirstName;
-	}
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
-	}
-	public String getLastName() {
-		return LastName;
-	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-	public People(Integer ssn, String firstName, String lastName) {
+	Long ssn;
+	String firstName;
+	String lastName;
+	String address;
+	
+	public People(Long ssn, String firstName, String lastName, String address) {
 		super();
 		this.ssn = ssn;
-		FirstName = firstName;
-		LastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
 	}
-	Integer ssn;
-	String FirstName;
-	String LastName;
+
+	public Long getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(Long ssn) {
+		this.ssn = ssn;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	
 }
