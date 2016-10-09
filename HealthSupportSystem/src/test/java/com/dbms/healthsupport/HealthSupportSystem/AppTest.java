@@ -40,7 +40,7 @@ public class AppTest
     public void testApp()
     {
 
-    	
+    	/*
     	static final String jdbcURL = "jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01";
     	
     	static String user = "pbehera";	// For example, "jsmith"
@@ -76,5 +76,7 @@ public class AppTest
     		}
     		
     	}
+    	
+    	*/
     }
 }
