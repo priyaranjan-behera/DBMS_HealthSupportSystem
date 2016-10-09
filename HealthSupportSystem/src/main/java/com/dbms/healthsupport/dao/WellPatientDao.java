@@ -82,6 +82,7 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 			Date dob = rs.getDate("dob");
 			String gender = rs.getString("gender");
 			People people = peopleDao.getDataBySsn(ssn);
+			//Retrieve data from Health Supporter table and work on it.
 			output.add(new WellPatient(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), dob, gender));
 		}
 		

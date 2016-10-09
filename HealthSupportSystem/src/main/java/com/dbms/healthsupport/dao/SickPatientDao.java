@@ -81,6 +81,7 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 			Date dob = rs.getDate("dob");
 			String gender = rs.getString("gender");
 			People people = peopleDao.getDataBySsn(ssn);
+			//Retrieve data from health supporter map table
 			output.add(new SickPatient(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), dob, gender));
 		}
 		
