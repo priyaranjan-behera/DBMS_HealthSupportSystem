@@ -28,10 +28,10 @@ public class PeopleDao implements DaoInterface<People> {
 	    Statement stmt = conn.createStatement();
 	    
 		String createSQL = " CREATE TABLE PEOPLE ("
-				+ "SSN Integer,"
-				+ "FirstName VARCHAR(10),"
-				+ "LastName VARCHAR(10),"
-				+ "Address VARCHAR(10))";
+				+ "ssn Integer,"
+				+ "firstName VARCHAR(10),"
+				+ "lastName VARCHAR(10),"
+				+ "address VARCHAR(10))";
 		
 		ResultSet rs = stmt.executeQuery(createSQL);
 		
@@ -59,7 +59,7 @@ public class PeopleDao implements DaoInterface<People> {
 
 	    Statement stmt = conn.createStatement();
 	    
-		String deleteSQL = " DELETE FROM PEOPLE WHERE (SSN="
+		String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn="
 				+ x.getSsn()
 				+ ")";
 		 
@@ -71,7 +71,7 @@ public class PeopleDao implements DaoInterface<People> {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PEOPLE)";
+		String selectSQL = "SELECT * FROM PEOPLE";
 		 
 		List<People> output = new ArrayList<People>();
 		
@@ -80,15 +80,36 @@ public class PeopleDao implements DaoInterface<People> {
 
 		while(rs.next())
 		{
-			Long ssn = rs.getLong("SSN");
-			String fName = rs.getString("FirstName");
-			String lName = rs.getString("LastName");
-			String address = rs.getString("Address");
+			Long ssn = rs.getLong("ssn");
+			String fName = rs.getString("firstName");
+			String lName = rs.getString("lastName");
+			String address = rs.getString("address");
 			
 			output.add(new People(ssn, fName, lName, address));
 		}
 		
 		return output;
+	}
+	
+	public People getDataBySsn(Long ssn) throws SQLException
+	{
+		Statement stmt = conn.createStatement();
+	    
+		String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + ssn;
+		ResultSet rs = stmt.executeQuery(selectSQL);
+		
+
+		while(rs.next())
+		{
+			String fName = rs.getString("firstName");
+			String lName = rs.getString("lastName");
+			String address = rs.getString("address");
+			
+			return new People(ssn, fName, lName, address);
+		}
+		
+		return null;
+		
 	}
 
 
