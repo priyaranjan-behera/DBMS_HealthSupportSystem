@@ -1,20 +1,36 @@
 package com.dbms.healthsupport.dao;
 
-public class MetricTypeValueDao implements DaoInterface<MetricTypeValueDao>{
+import java.util.List;
 
-	public void createTable() {
+import com.dbms.healthsupport.domain.MetricTypeValue;
+
+public class MetricTypeValueDao implements DaoInterface<MetricTypeValue>{
+
+	public void createTable() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void insertData() {
+	public void insertData(MetricTypeValue x) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void deleteData() {
+	public void deleteData(MetricTypeValue x) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public List<MetricTypeValue> getData() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void dropTable() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

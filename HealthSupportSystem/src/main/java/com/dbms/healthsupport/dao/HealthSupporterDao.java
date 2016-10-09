@@ -2,31 +2,29 @@ package com.dbms.healthsupport.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
-import com.dbms.healthsupport.domain.Recommendation;
+import com.dbms.healthsupport.domain.HealthSupporter;
 
-public class RecommendationDao implements DaoInterface<Recommendation>{
+public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 
 	public void createTable() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void insertData(Recommendation x) throws Exception {
+	public void insertData(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void deleteData(Recommendation x) throws Exception {
+	public void deleteData(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public List<Recommendation> getData() throws Exception {
+	public List<HealthSupporter> getData() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,6 +34,7 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		
 	}
 	
-	
+
+
 
 }
