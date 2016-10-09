@@ -5,4 +5,5 @@ public class People {
 	Integer ssn;
 	String FirstName;
 	String LastName;
+	
 }
