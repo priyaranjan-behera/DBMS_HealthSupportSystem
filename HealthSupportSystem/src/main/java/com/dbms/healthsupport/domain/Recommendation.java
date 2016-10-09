@@ -1,17 +1,17 @@
 package com.dbms.healthsupport.domain;
 
 public class Recommendation {
-	public Integer getRec_id() {
-		return rec_id;
+	public Integer getrecId() {
+		return recId;
 	}
-	public void setRec_id(Integer rec_id) {
-		this.rec_id = rec_id;
+	public void setrecId(Integer recId) {
+		this.recId = recId;
 	}
-	public Integer getFreq_id() {
-		return freq_id;
+	public Integer getfreqId() {
+		return freqId;
 	}
-	public void setFreq_id(Integer freq_id) {
-		this.freq_id = freq_id;
+	public void setfreqId(Integer freqId) {
+		this.freqId = freqId;
 	}
 	public Integer getThreshold() {
 		return threshold;
@@ -19,13 +19,13 @@ public class Recommendation {
 	public void setThreshold(Integer threshold) {
 		this.threshold = threshold;
 	}
-	public Recommendation(Integer rec_id, Integer freq_id, Integer threshold) {
+	public Recommendation(Integer recId, Integer freqId, Integer threshold) {
 		super();
-		this.rec_id = rec_id;
-		this.freq_id = freq_id;
+		this.recId = recId;
+		this.freqId = freqId;
 		this.threshold = threshold;
 	}
-	Integer rec_id;
-	Integer freq_id;
+	Integer recId;
+	Integer freqId;
 	Integer threshold;
 }
