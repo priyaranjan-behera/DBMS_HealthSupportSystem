@@ -2,32 +2,32 @@ package com.dbms.healthsupport.domain;
 
 public class Alert {
 
-	Integer alertid;
-	String alerttype;
-	String actiontaken;
-	public Integer getAlertid() {
-		return alertid;
+	Integer alertId;
+	String alertType;
+	String actionTaken;
+	public Integer getAlertId() {
+		return alertId;
 	}
-	public void setAlertid(Integer alertid) {
-		this.alertid = alertid;
+	public void setAlertId(Integer alertid) {
+		this.alertId = alertid;
 	}
-	public String getAlerttype() {
-		return alerttype;
+	public String getAlertType() {
+		return alertType;
 	}
-	public void setAlerttype(String alerttype) {
-		this.alerttype = alerttype;
+	public void setAlertType(String alerttype) {
+		this.alertType = alerttype;
 	}
-	public String getActiontaken() {
-		return actiontaken;
+	public String getActionTaken() {
+		return actionTaken;
 	}
-	public void setActiontaken(String actiontaken) {
-		this.actiontaken = actiontaken;
+	public void setActionTaken(String actiontaken) {
+		this.actionTaken = actiontaken;
 	}
 	public Alert(Integer alertid, String alerttype, String actiontaken) {
 		super();
-		this.alertid = alertid;
-		this.alerttype = alerttype;
-		this.actiontaken = actiontaken;
+		this.alertId = alertid;
+		this.alertType = alerttype;
+		this.actionTaken = actiontaken;
 	}
 	
 
