@@ -13,4 +13,9 @@ public class ObservationDao implements DaoInterface<ObservationDao> {
 		
 	}
 
+	public void deleteData() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
