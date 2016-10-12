@@ -4,5 +4,6 @@ public interface DaoInterface<T> {
 	
 	void createTable();
 	void insertData();
+	void deleteData();
 
 }
