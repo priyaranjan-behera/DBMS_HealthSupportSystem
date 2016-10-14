@@ -1,13 +1,13 @@
 package com.dbms.healthsupport.domain;
 
 public class ObservationSpec {
-	String ObservationName;
+	String observationName;
 	String description;
 	public String getObservationName() {
-		return ObservationName;
+		return observationName;
 	}
 	public void setObservationName(String observationName) {
-		ObservationName = observationName;
+		this.observationName = observationName;
 	}
 	public String getDescription() {
 		return description;
@@ -17,7 +17,7 @@ public class ObservationSpec {
 	}
 	public ObservationSpec(String observationName, String description) {
 		super();
-		ObservationName = observationName;
+		this.observationName = observationName;
 		this.description = description;
 	}
 	

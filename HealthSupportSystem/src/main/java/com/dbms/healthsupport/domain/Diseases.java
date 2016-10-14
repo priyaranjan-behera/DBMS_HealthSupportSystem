@@ -1,24 +1,24 @@
 package com.dbms.healthsupport.domain;
 
 public class Diseases {
-	public String getDis_name() {
-		return dis_name;
+	public String getDisName() {
+		return disName;
 	}
-	public void setDis_name(String dis_name) {
-		this.dis_name = dis_name;
+	public void setDisName(String disName) {
+		this.disName = disName;
 	}
-	public String getDis_description() {
-		return dis_description;
+	public String getDisDescription() {
+		return disDescription;
 	}
-	public void setDis_description(String dis_description) {
-		this.dis_description = dis_description;
+	public void setDisDescription(String disDescription) {
+		this.disDescription = disDescription;
 	}
-	public Diseases(String dis_name, String dis_description) {
+	public Diseases(String disName, String disDescription) {
 		super();
-		this.dis_name = dis_name;
-		this.dis_description = dis_description;
+		this.disName = disName;
+		this.disDescription = disDescription;
 	}
-	String dis_name;
-	String dis_description;
+	String disName;
+	String disDescription;
 
 }
