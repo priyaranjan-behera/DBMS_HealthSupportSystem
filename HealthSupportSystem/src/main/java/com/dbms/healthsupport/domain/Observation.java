@@ -11,20 +11,23 @@ public class Observation {
 	String patientId;
 	Integer observationSpecification;
 	
-	public Observation(int observationSpecificationId, String observationValue, Date observationTime, Date recordedTime) {
-		
-		this.observationSpecification = observationSpecificationId;
+	public Observation(Integer observationId, String observationValue, Date observationTime, Date recordedTime,
+			String patientId, Integer observationSpecification) {
+		super();
+		this.observationId = observationId;
 		this.observationValue = observationValue;
 		this.observationTime = observationTime;
 		this.recordedTime = recordedTime;
+		this.patientId = patientId;
+		this.observationSpecification = observationSpecification;
 	}
 
-	public int getObservationSpecificationId() {
-		return observationSpecification;
+	public Integer getObservationId() {
+		return observationId;
 	}
 
-	public void setObservationSpecificationId(int observationSpecificationId) {
-		this.observationSpecification = observationSpecificationId;
+	public void setObservationId(Integer observationId) {
+		this.observationId = observationId;
 	}
 
 	public String getObservationValue() {
@@ -50,4 +53,22 @@ public class Observation {
 	public void setRecordedTime(Date recordedTime) {
 		this.recordedTime = recordedTime;
 	}
+
+	public String getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(String patientId) {
+		this.patientId = patientId;
+	}
+
+	public Integer getObservationSpecification() {
+		return observationSpecification;
+	}
+
+	public void setObservationSpecification(Integer observationSpecification) {
+		this.observationSpecification = observationSpecification;
+	}
+	
+	
 }
