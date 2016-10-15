@@ -97,6 +97,26 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 		ResultSet rs = stmt.executeQuery(dropSQL);
 		
 	}
+
+	public void insertRow(SickPatient x) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteRow(SickPatient x) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<SickPatient> getAllData() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SickPatient getDataById(Object id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

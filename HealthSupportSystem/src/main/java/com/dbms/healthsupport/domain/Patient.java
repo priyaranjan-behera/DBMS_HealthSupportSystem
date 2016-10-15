@@ -17,11 +17,10 @@ public class Patient extends People {
 	List<String> diseases;
 	List<Integer> observations;
 	
-	
-	public Patient(Long ssn, String firstName, String lastName, String address, Date dob, String gender,
-			String primaryHealthSupporter, List<String> secondaryHealthSupporters, List<Integer> recommendations,
-			List<Integer> limits, List<String> diseases, List<Integer> observations) {
-		super(ssn, firstName, lastName, address);
+	public Patient(Long ssn, String firstName, String lastName, String address, String password, Date dob,
+			String gender, String primaryHealthSupporter, List<String> secondaryHealthSupporters,
+			List<Integer> recommendations, List<Integer> limits, List<String> diseases, List<Integer> observations) {
+		super(ssn, firstName, lastName, address, password);
 		this.dob = dob;
 		this.gender = gender;
 		this.primaryHealthSupporter = primaryHealthSupporter;
@@ -31,7 +30,7 @@ public class Patient extends People {
 		this.diseases = diseases;
 		this.observations = observations;
 	}
-
+	
 
 	public Date getDob() {
 		return dob;
