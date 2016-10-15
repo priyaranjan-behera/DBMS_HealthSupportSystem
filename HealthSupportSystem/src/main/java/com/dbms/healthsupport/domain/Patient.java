@@ -10,11 +10,17 @@ public class Patient extends People {
 	Date dob;
 	String gender;
 	
-	HealthSupporterDetails primaryHealthSupporter;
-	List<HealthSupporterDetails> secondaryHealthSupporters;
+	String primaryHealthSupporter;
+	List<String> secondaryHealthSupporters;
+	List<Integer>recommendations;
+	List<Integer>limits; 
+	List<String> diseases;
+	List<Integer> observations;
+	
+	
 	
 	public Patient(Long ssn, String firstName, String lastName, String address, Date dob, String gender,
-			HealthSupporterDetails primaryHealthSupporter, List<HealthSupporterDetails> secondaryHealthSupporters) {
+			String primaryHealthSupporter, List<String> secondaryHealthSupporters) {
 		super(ssn, firstName, lastName, address);
 		this.dob = dob;
 		this.gender = gender;
@@ -22,20 +28,18 @@ public class Patient extends People {
 		this.secondaryHealthSupporters = secondaryHealthSupporters;
 	}
 	
-	
-	public HealthSupporterDetails getPrimaryHealthSupporter() {
+	public String getPrimaryHealthSupporter() {
 		return primaryHealthSupporter;
 	}
-	public void setPrimaryHealthSupporter(HealthSupporterDetails primaryHealthSupporter) {
+	public void setPrimaryHealthSupporter(String primaryHealthSupporter) {
 		this.primaryHealthSupporter = primaryHealthSupporter;
 	}
-	public List<HealthSupporterDetails> getSecondaryHealthSupporters() {
+	public List<String> getSecondaryHealthSupporters() {
 		return secondaryHealthSupporters;
 	}
-	public void setSecondaryHealthSupporters(List<HealthSupporterDetails> secondaryHealthSupporters) {
+	public void setSecondaryHealthSupporters(List<String> secondaryHealthSupporters) {
 		this.secondaryHealthSupporters = secondaryHealthSupporters;
 	}
-	
 	public Date getDob() {
 		return dob;
 	}

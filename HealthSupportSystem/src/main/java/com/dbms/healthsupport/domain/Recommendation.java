@@ -1,6 +1,14 @@
 package com.dbms.healthsupport.domain;
 
 public class Recommendation {
+	
+	Integer recId;
+	String frequencyName;
+	Integer threshold;
+	
+	Integer observationSpecification;
+	
+	
 	public Integer getrecId() {
 		return recId;
 	}
@@ -25,7 +33,5 @@ public class Recommendation {
 		this.freqId = freqId;
 		this.threshold = threshold;
 	}
-	Integer recId;
-	Integer freqId;
-	Integer threshold;
+
 }

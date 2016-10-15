@@ -1,8 +1,13 @@
 package com.dbms.healthsupport.domain;
 
+import java.util.List;
+
 public class ObservationSpec {
 	String observationName;
 	String description;
+	
+	List<Integer> metrics;
+	
 	public String getObservationName() {
 		return observationName;
 	}

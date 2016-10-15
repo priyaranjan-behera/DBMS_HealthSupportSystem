@@ -4,25 +4,27 @@ import java.util.Date;
 
 public class Observation {
 
-	int observationSpecificationId;
+	Integer observationId;
 	String observationValue;
 	Date observationTime;
 	Date recordedTime;
+	String patientId;
+	Integer observationSpecification;
 	
 	public Observation(int observationSpecificationId, String observationValue, Date observationTime, Date recordedTime) {
 		
-		this.observationSpecificationId = observationSpecificationId;
+		this.observationSpecification = observationSpecificationId;
 		this.observationValue = observationValue;
 		this.observationTime = observationTime;
 		this.recordedTime = recordedTime;
 	}
 
 	public int getObservationSpecificationId() {
-		return observationSpecificationId;
+		return observationSpecification;
 	}
 
 	public void setObservationSpecificationId(int observationSpecificationId) {
-		this.observationSpecificationId = observationSpecificationId;
+		this.observationSpecification = observationSpecificationId;
 	}
 
 	public String getObservationValue() {

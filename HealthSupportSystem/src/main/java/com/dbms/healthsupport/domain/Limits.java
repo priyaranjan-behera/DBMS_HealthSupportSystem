@@ -28,4 +28,5 @@ public class Limits {
 	Integer limitID;
 	Integer lowerLimit;
 	Integer upperLimit;
+	Integer metricId;
 }

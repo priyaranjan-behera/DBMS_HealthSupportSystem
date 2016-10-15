@@ -1,8 +1,11 @@
 package com.dbms.healthsupport.domain;
 
+import java.util.List;
+
 public class HealthSupporter extends People {
 	
 	Long contactNumber;
+	List<String> patients;    
 
 	public Long getContactNumber() {
 		return contactNumber;
