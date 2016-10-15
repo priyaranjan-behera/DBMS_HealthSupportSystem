@@ -22,6 +22,8 @@ public class Alert {
 		this.limitId = limitId;
 		this.recommendationId = recommendationId;
 	}
+	
+	
 	public Integer getAlertId() {
 		return alertId;
 	}

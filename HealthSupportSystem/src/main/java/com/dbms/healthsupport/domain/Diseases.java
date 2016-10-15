@@ -9,6 +9,13 @@ public class Diseases {
 	List<Integer> limits;
 	
 	
+	public Diseases(String disName, String disDescription, List<Integer> recommendations, List<Integer> limits) {
+		super();
+		this.disName = disName;
+		this.disDescription = disDescription;
+		this.recommendations = recommendations;
+		this.limits = limits;
+	}
 	public String getDisName() {
 		return disName;
 	}
@@ -21,11 +28,21 @@ public class Diseases {
 	public void setDisDescription(String disDescription) {
 		this.disDescription = disDescription;
 	}
-	public Diseases(String disName, String disDescription) {
-		super();
-		this.disName = disName;
-		this.disDescription = disDescription;
+	public List<Integer> getRecommendations() {
+		return recommendations;
 	}
+	public void setRecommendations(List<Integer> recommendations) {
+		this.recommendations = recommendations;
+	}
+	public List<Integer> getLimits() {
+		return limits;
+	}
+	public void setLimits(List<Integer> limits) {
+		this.limits = limits;
+	}
+	
+	
+	
 	
 
 }
