@@ -20,54 +20,9 @@ public class PeopleDao implements DaoInterface<People> {
 				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
 		
 	}
-	
-	
-	public void createTable() throws SQLException {
-		// TODO Auto-generated method stub
-
-	    Statement stmt = conn.createStatement();
-	    
-		String createSQL = " CREATE TABLE PEOPLE ("
-				+ "ssn Integer,"
-				+ "firstName VARCHAR(10),"
-				+ "lastName VARCHAR(10),"
-				+ "address VARCHAR(10))";
-		
-		ResultSet rs = stmt.executeQuery(createSQL);
-		
-	}
-
-	public void insertData(People x) throws Exception {
-		// TODO Auto-generated method stub
-	
-
-	    Statement stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO PEOPLE values ("
-				+ x.getSsn() + "," 
-				+ x.getFirstName() + ","
-				+ x.getLastName() + ","
-				+ x.getAddress()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
-	}
 
 
-	public void deleteData(People x) throws Exception {
-		// TODO Auto-generated method stub
-
-	    Statement stmt = conn.createStatement();
-	    
-		String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn="
-				+ x.getSsn()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(deleteSQL);
-	}
-
-
-	public List<People> getData() throws Exception {
+	public List<People> getAllData() throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
@@ -84,18 +39,19 @@ public class PeopleDao implements DaoInterface<People> {
 			String fName = rs.getString("firstName");
 			String lName = rs.getString("lastName");
 			String address = rs.getString("address");
+			String password = rs.getString("password");
 			
-			output.add(new People(ssn, fName, lName, address));
+			output.add(new People(ssn, fName, lName, address, password));
 		}
 		
 		return output;
 	}
 	
-	public People getDataBySsn(Long ssn) throws SQLException
+	public People getDataById(Object ssn) throws Exception
 	{
 		Statement stmt = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + ssn;
+		String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + (Long)ssn;
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		
 
@@ -104,8 +60,9 @@ public class PeopleDao implements DaoInterface<People> {
 			String fName = rs.getString("firstName");
 			String lName = rs.getString("lastName");
 			String address = rs.getString("address");
+			String password = rs.getString("password");
 			
-			return new People(ssn, fName, lName, address);
+			return new People((Long)ssn, fName, lName, address, password);
 		}
 		
 		return null;
@@ -121,13 +78,35 @@ public class PeopleDao implements DaoInterface<People> {
 		 
 		ResultSet rs = stmt.executeQuery(dropSQL);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+	public void insertRow(People x) throws Exception {
+		// TODO Auto-generated method stub
+
+	    Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO PEOPLE values ("
+				+ x.getSsn() + "," 
+				+ x.getFirstName() + ","
+				+ x.getLastName() + ","
+				+ x.getAddress()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		
+	}
+
+
+	public void deleteRow(People x) throws Exception {
+		// TODO Auto-generated method stub
+		  Statement stmt = conn.createStatement();
+		    
+			String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn="
+					+ x.getSsn()
+					+ ")";
+			 
+			ResultSet rs = stmt.executeQuery(deleteSQL);
+		
+	}
 
 }

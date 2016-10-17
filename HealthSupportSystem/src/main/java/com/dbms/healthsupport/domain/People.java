@@ -6,14 +6,18 @@ public class People {
 	String firstName;
 	String lastName;
 	String address;
+	String password; 
 	
-	public People(Long ssn, String firstName, String lastName, String address) {
+
+	public People(Long ssn, String firstName, String lastName, String address, String password) {
 		super();
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.password = password;
 	}
+
 
 	public Long getSsn() {
 		return ssn;
@@ -46,6 +50,17 @@ public class People {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 
 	
 }
