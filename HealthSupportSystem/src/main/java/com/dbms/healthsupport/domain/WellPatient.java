@@ -13,6 +13,4 @@ public class WellPatient extends Patient {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 }

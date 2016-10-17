@@ -20,20 +20,9 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
 	
 	}
-	public void createTable() throws SQLException {
-		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String createSQL = " CREATE TABLE DISEASES ("
-				+ "DiseaseName VARCHAR(10),"
-				+ "DiseaseDescription VARCHAR(20))";
-		
-		ResultSet rs = stmt.executeQuery(createSQL);
-		
-		
-	}
 
-	public void insertData(Diseases x) throws Exception {
+	public void insertRow(Diseases x) throws Exception {
+		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
@@ -43,10 +32,10 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
-	}
 		
+	}
 
-	public void deleteData(Diseases x) throws Exception {
+	public void deleteRow(Diseases x) throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
@@ -55,11 +44,12 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(deleteSQL);
+		
 	}
 
-	public List<Diseases> getData() throws Exception {
+	public List<Diseases> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-Statement stmt = conn.createStatement();
+		Statement stmt = conn.createStatement();
 	    
 		String selectSQL = "SELECT * FROM DISEASES";
 		 
@@ -79,15 +69,11 @@ Statement stmt = conn.createStatement();
 		return output;
 	}
 
-	public void dropTable() throws Exception {
+	public List<Diseases> getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE DISEASES";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
-		
+		return null;
 	}
+
 
 
 
