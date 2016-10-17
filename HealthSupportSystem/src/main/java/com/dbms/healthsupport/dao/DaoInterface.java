@@ -13,6 +13,6 @@ public interface DaoInterface<T> {
 	void insertRow(T x) throws Exception;
 	void deleteRow(T x) throws Exception;
 	List<T>getAllData() throws Exception;
-	List<T>getDataById(Object id) throws Exception;
+	T getDataById(Object id) throws Exception;
 
 }
