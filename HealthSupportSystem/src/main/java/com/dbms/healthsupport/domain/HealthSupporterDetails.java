@@ -1,8 +1,6 @@
-package com.dbms.healthsupport.dao;
+package com.dbms.healthsupport.domain;
 
 import java.sql.Date;
-
-import com.dbms.healthsupport.domain.HealthSupporter;
 
 public class HealthSupporterDetails {
 

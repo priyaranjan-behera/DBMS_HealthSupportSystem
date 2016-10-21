@@ -3,22 +3,20 @@ package com.dbms.healthsupport.domain;
 import java.sql.Date;
 import java.util.List;
 
-import com.dbms.healthsupport.dao.HealthSupporterDetails;
-
 public class Patient extends People {
 	
 	Date dob;
 	String gender;
 	
-	String primaryHealthSupporter;
-	List<String> secondaryHealthSupporters;
+	Long primaryHealthSupporter;
+	List<Long> secondaryHealthSupporters;
 	List<Integer>recommendations;
 	List<Integer>limits; 
 	List<String> diseases;
 	List<Integer> observations;
 	
 	public Patient(Long ssn, String firstName, String lastName, String address, String password, Date dob,
-			String gender, String primaryHealthSupporter, List<String> secondaryHealthSupporters,
+			String gender, Long primaryHealthSupporter, List<Long> secondaryHealthSupporters,
 			List<Integer> recommendations, List<Integer> limits, List<String> diseases, List<Integer> observations) {
 		super(ssn, firstName, lastName, address, password);
 		this.dob = dob;
@@ -64,22 +62,22 @@ public class Patient extends People {
 	}
 
 
-	public String getPrimaryHealthSupporter() {
+	public Long getPrimaryHealthSupporter() {
 		return primaryHealthSupporter;
 	}
 
 
-	public void setPrimaryHealthSupporter(String primaryHealthSupporter) {
+	public void setPrimaryHealthSupporter(Long primaryHealthSupporter) {
 		this.primaryHealthSupporter = primaryHealthSupporter;
 	}
 
 
-	public List<String> getSecondaryHealthSupporters() {
+	public List<Long> getSecondaryHealthSupporters() {
 		return secondaryHealthSupporters;
 	}
 
 
-	public void setSecondaryHealthSupporters(List<String> secondaryHealthSupporters) {
+	public void setSecondaryHealthSupporters(List<Long> secondaryHealthSupporters) {
 		this.secondaryHealthSupporters = secondaryHealthSupporters;
 	}
 
