@@ -3,8 +3,6 @@ package com.dbms.healthsupport.domain;
 import java.sql.Date;
 import java.util.List;
 
-import com.dbms.healthsupport.dao.HealthSupporterDetails;
-
 public class Patient extends People {
 	
 	Date dob;
