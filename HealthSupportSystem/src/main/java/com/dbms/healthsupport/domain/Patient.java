@@ -31,6 +31,18 @@ public class Patient extends People {
 		this.observations = observations;
 	}
 	
+	public Patient(Patient patient) {
+		super(patient.getSsn(), patient.getFirstName(), patient.getLastName(), patient.getAddress(), patient.getPassword());
+		this.dob = patient.getDob();
+		this.gender = patient.getGender();
+		this.primaryHealthSupporter = patient.getPrimaryHealthSupporter();
+		this.secondaryHealthSupporters = patient.getSecondaryHealthSupporters();
+		this.recommendations = patient.getRecommendations();
+		this.limits = patient.getLimits();
+		this.diseases = patient.getDiseases();
+		this.observations = patient.getObservations();
+	}
+	
 
 	public Date getDob() {
 		return dob;
