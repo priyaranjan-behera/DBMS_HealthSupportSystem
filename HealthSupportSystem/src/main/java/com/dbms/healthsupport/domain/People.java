@@ -17,6 +17,16 @@ public class People {
 		this.address = address;
 		this.password = password;
 	}
+	
+	public People(People people)
+	{
+		this.ssn = people.getSsn();
+		this.firstName = people.getFirstName();
+		this.lastName = people.getLastName();
+		this.address = people.getAddress();
+		this.password = people.getAddress();
+		
+	}
 
 
 	public Long getSsn() {
