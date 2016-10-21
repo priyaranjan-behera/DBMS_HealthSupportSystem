@@ -69,19 +69,18 @@ public class PatientDao implements DaoInterface<Patient> {
 			//Only those health supporters that have auth date before current date should be retrieved.
 			String selectSQL1 = "SELECT * FROM PatientAssignedToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\"primary\"";
 			ResultSet rs1 = stmt.executeQuery(selectSQL1);
-			
-			String primaryHealthSupporter=null;
+			Long primaryHealthSupporter=null;
 			if(rs1.next()){
-				primaryHealthSupporter=rs1.getString("HsSSN");
+				primaryHealthSupporter=rs1.getLong("HsSSN");
 			}
 			
 			
 			String selectSQL2 = "SELECT * FROM PatientAssignedToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\"secondary\"";
 			ResultSet rs2 = stmt.executeQuery(selectSQL2);
 			
-			List<String> secondaryHealthSupporters=new ArrayList<String>();
+			List<Long> secondaryHealthSupporters=new ArrayList<Long>();
 			while(rs2.next()){
-				secondaryHealthSupporters.add(rs2.getString("HsSSN"));
+				secondaryHealthSupporters.add(rs2.getLong("HsSSN"));
 			}
 			
 			String selectSQL3 = "SELECT * FROM LimitsForPatient  WHERE PatientSSN = " + (Long)ssn ;
