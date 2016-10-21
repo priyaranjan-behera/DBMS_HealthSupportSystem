@@ -23,18 +23,6 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 		
 	}
 	
-	public void createTable()throws SQLException {
-		Statement stmt = conn.createStatement();
-	    
-		String createSQL = " CREATE TABLE OBSERVATIONSPEC ("
-				+ "observationName VARCHAR(10),"
-				+ "description VARCHAR(10))";
-		
-		ResultSet rs = stmt.executeQuery(createSQL);
-	
-	}
-
-	
 	public void insertData(ObservationSpec x) throws Exception {
 	    Statement stmt = conn.createStatement();
 	    
@@ -59,12 +47,39 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 		
 	}
 
-	public List<ObservationSpec> getData() throws Exception {
+	
+	public void dropTable() throws Exception {
+		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM OBSERVATIONSPEC)";
+		String dropSQL = "DROP TABLE OBSERVATIONSPEC";
 		 
-		List<ObservationSpec> output = new ArrayList<ObservationSpec>();
+		ResultSet rs = stmt.executeQuery(dropSQL);
+		
+	}
+
+	public void insertRow(ObservationSpec x) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteRow(ObservationSpec x) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<ObservationSpec> getAllData() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservationSpec getDataById(Object id) throws Exception {
+		// TODO Auto-generated method stub
+		Statement stmt = conn.createStatement();
+	    
+		String selectSQL = "SELECT * FROM OBSERVATIONSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+		 
+		ObservationSpec output =null;
 		
 		ResultSet rs = stmt.executeQuery(selectSQL);
 	
@@ -74,20 +89,18 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			String observationName = rs.getString("observationName");
 			String description = rs.getString("description");
 			
-			output.add(new ObservationSpec(observationName,description));
+			String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+			 
+			List<Integer> metrics=new ArrayList<Integer>();
+			ResultSet rs1 = stmt.executeQuery(selectSQL);
+			while(rs1.next()){
+				metrics.add(rs1.getInt("METRICNAME"));
+			}
+			
+			output=new ObservationSpec(observationName,description,metrics);
 		}
 		
 		return output;
-	}
-
-	public void dropTable() throws Exception {
-		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE OBSERVATIONSPEC";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
-		
 	}
 	
 }
