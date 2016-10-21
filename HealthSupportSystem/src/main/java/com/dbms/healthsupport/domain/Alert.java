@@ -6,23 +6,37 @@ public class Alert {
 	String alertType;
 	String actionTaken;
 	
-	String pateintId;
+	Long patientId;
 	Integer limitId;
 	Integer recommendationId;
 	
 	
+
 	
-	public Alert(Integer alertId, String alertType, String actionTaken, String pateintId, Integer limitId,
+	
+	public Alert(Integer alertId, String alertType, String actionTaken, Long patientId, Integer limitId,
 			Integer recommendationId) {
 		super();
 		this.alertId = alertId;
 		this.alertType = alertType;
 		this.actionTaken = actionTaken;
-		this.pateintId = pateintId;
+		this.patientId = patientId;
 		this.limitId = limitId;
 		this.recommendationId = recommendationId;
 	}
 	
+	public Alert(Integer alertId, String alertType, String actionTaken, Long patientId, Integer limitId,
+			Boolean isLimit) {
+		super();
+		this.alertId = alertId;
+		this.alertType = alertType;
+		this.actionTaken = actionTaken;
+		this.patientId = patientId;
+		if(isLimit)
+			this.limitId = limitId;
+		else
+			this.recommendationId = limitId;
+	}
 	
 	public Integer getAlertId() {
 		return alertId;
@@ -42,11 +56,11 @@ public class Alert {
 	public void setActionTaken(String actiontaken) {
 		this.actionTaken = actiontaken;
 	}
-	public String getPateintId() {
-		return pateintId;
+	public Long getPatientId() {
+		return patientId;
 	}
-	public void setPateintId(String pateintId) {
-		this.pateintId = pateintId;
+	public void setPatientId(Long patientId) {
+		this.patientId = patientId;
 	}
 	public Integer getLimitId() {
 		return limitId;
