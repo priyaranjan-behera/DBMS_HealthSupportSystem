@@ -91,10 +91,10 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			
 			String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
 			 
-			List<Integer> metrics=new ArrayList<Integer>();
+			List<String> metrics=new ArrayList<String>();
 			ResultSet rs1 = stmt.executeQuery(selectSQL);
 			while(rs1.next()){
-				metrics.add(rs1.getInt("METRICNAME"));
+				metrics.add(rs1.getString("METRICNAME"));
 			}
 			
 			output=new ObservationSpec(observationName,description,metrics);

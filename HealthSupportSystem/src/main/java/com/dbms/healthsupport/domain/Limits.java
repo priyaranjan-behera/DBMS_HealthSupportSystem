@@ -5,7 +5,9 @@ public class Limits {
 	Integer limitID;
 	Integer lowerLimit;
 	Integer upperLimit;
-	Integer metricId;
+	String metricId;
+	String observationSpec;
+	
 	public Integer getLimitID() {
 		return limitID;
 	}
@@ -24,20 +26,28 @@ public class Limits {
 	public void setUpperLimit(Integer upperLimit) {
 		this.upperLimit = upperLimit;
 	}
-	public Integer getMetricId() {
+	public String getMetricId() {
 		return metricId;
 	}
-	public void setMetricId(Integer metricId) {
+	public void setMetricId(String metricId) {
 		this.metricId = metricId;
 	}
-	
-	public Limits(Integer limitID, Integer lowerLimit, Integer upperLimit, Integer metricId) {
+	public String getObservationSpec() {
+		return observationSpec;
+	}
+	public void setObservationSpec(String observationSpec) {
+		this.observationSpec = observationSpec;
+	}
+	public Limits(Integer limitID, Integer lowerLimit, Integer upperLimit, String metricId, String observationSpec) {
 		super();
 		this.limitID = limitID;
 		this.lowerLimit = lowerLimit;
 		this.upperLimit = upperLimit;
 		this.metricId = metricId;
+		this.observationSpec = observationSpec;
 	}
+	
+	
 	
 	
 

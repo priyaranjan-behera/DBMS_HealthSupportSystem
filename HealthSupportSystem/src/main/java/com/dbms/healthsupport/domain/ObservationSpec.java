@@ -6,7 +6,7 @@ public class ObservationSpec {
 	String observationName;
 	String description;
 	
-	List<Integer> metrics;
+	List<String> metrics;
 
 	public String getObservationName() {
 		return observationName;
@@ -24,21 +24,21 @@ public class ObservationSpec {
 		this.description = description;
 	}
 
-	public List<Integer> getMetrics() {
+	public List<String> getMetrics() {
 		return metrics;
 	}
 
-	public void setMetrics(List<Integer> metrics) {
+	public void setMetrics(List<String> metrics) {
 		this.metrics = metrics;
 	}
 
-	public ObservationSpec(String observationName, String description, List<Integer> metrics) {
+	public ObservationSpec(String observationName, String description, List<String> metrics) {
 		super();
 		this.observationName = observationName;
 		this.description = description;
 		this.metrics = metrics;
 	}
-	
-	
+
+
 	
 }
