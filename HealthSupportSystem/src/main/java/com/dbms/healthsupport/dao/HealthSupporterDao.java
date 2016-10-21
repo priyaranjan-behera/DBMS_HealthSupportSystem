@@ -24,19 +24,23 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 	}
 	
-	public void createTable() throws Exception {
+	
+	
+
+	
+
+
+	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
-		String createSQL = " CREATE TABLE HEALTHSUPPORTER ("
-				+ "ssn Integer,"
-				+ "contactNumber Integer)";
-		
-		ResultSet rs = stmt.executeQuery(createSQL);
+		String dropSQL = "DROP TABLE HEALTHSUPPORTER";
+		 
+		ResultSet rs = stmt.executeQuery(dropSQL);
 		
 	}
 
-	public void insertData(HealthSupporter x) throws Exception {
+	public void insertRow(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
@@ -49,50 +53,45 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 	}
 
-	public void deleteData(HealthSupporter x) throws Exception {
+	public void deleteRow(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String deleteSQL = " DELETE FROM HEALTHSUPPORTER WHERE (ssn="
-				+ x.getSsn()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(deleteSQL);
 		
 	}
 
-	public List<HealthSupporter> getData() throws Exception {
+	public List<HealthSupporter> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+
+	public HealthSupporter getDataById(Object id) throws Exception {
+		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM HEALTHSUPPORTER";
+		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
 		 
-		List<HealthSupporter> output = new ArrayList<HealthSupporter>();
+		HealthSupporter output=null;
 		
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		
 		PeopleDao peopleDao = new PeopleDao();
 	
-
+		List<String> patients=new ArrayList<String>();
+		String selectSQL1="SELECT * FROM PATIENTASSIGNEDHEALTHSUPPORTER WHERE HSSN="+(Long)id;
+		ResultSet rs1 = stmt.executeQuery(selectSQL);
+		while(rs1.next()){
+			patients.add(rs.getString("PATIENTTSSN"));
+		}
+		
 		while(rs.next())
 		{
 			Long ssn = rs.getLong("ssn");
 			Long contactNumber = rs.getLong("contactNumber");
-			People people = peopleDao.getDataBySsn(ssn);
-			output.add(new HealthSupporter(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), contactNumber));
+			People people = peopleDao.getDataById(ssn);
+			output=new HealthSupporter(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), people.getPassword(), contactNumber, patients);
 		}
 		
 		return output;
-	}
 
-	public void dropTable() throws Exception {
-		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE HEALTHSUPPORTER";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
 		
 	}
 	
