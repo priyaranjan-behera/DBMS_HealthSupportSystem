@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.ObservationSpec;
-import com.dbms.healthsupport.domain.People;
 
 
 public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
