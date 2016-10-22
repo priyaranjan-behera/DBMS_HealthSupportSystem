@@ -24,11 +24,6 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 	}
 	
-	
-	
-
-	
-
 
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub

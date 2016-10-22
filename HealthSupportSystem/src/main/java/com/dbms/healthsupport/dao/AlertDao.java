@@ -25,21 +25,70 @@ public class AlertDao implements DaoInterface<Alert> {
 		
 	}
 
-
+//id
+//type
+//patient ssn
+//alert action
+	
 	public void insertRow(Alert x) throws Exception {
 		// TODO Auto-generated method stub
+		Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO ALERT values ("
+				+ x.getAlertId()+ "," 
+				+ x.getAlertType()+ ","
+				+ x.getPatientId()+ ","
+				+ x.getActionTaken()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		
 		
 	}
 
 	public void deleteRow(Alert x) throws Exception {
 		// TODO Auto-generated method stub
+		Statement stmt = conn.createStatement();
+	    
+		String deleteSQL = " DELETE FROM ALERT WHERE (alertId="
+				+ x.getAlertId()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(deleteSQL);
 		
 	}
 
+	/*
+	 * 	Integer alertId;
+	String alertType;
+	String actionTaken;
+	
+	Long patientId;
+	 * 
+	 * */
 	public List<Alert> getAllData() throws Exception {
 		// TODO Auto-generated method stub
+		Statement stmt = conn.createStatement();
+		List<Alert> output = new ArrayList<Alert>();
+	    
+		/*
+		String selectSQL = "SELECT * FROM ALERT";
+		 
 		
-		return null;
+		
+		ResultSet rs = stmt.executeQuery(selectSQL);
+	
+
+		while(rs.next()) {				
+			String alertId = rs.getString("alertId");
+			String alertType = rs.getString("alertType");
+			String actionTaken = rs.getString("actionTaken");
+			String patientId = rs.getString("patientId");
+			
+			output.add(new Alert(Integer.parseInt(alertId), alertType, actionTaken, (long)patientId);
+		}*/
+		
+		return output;
 	}
 
 	public Alert getDataById(Object id) throws Exception {

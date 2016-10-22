@@ -23,7 +23,6 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 
 	public void insertRow(Diseases x) throws Exception {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO DISEASES values ("
@@ -95,7 +94,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 
 	public Diseases getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-Statement stmt = conn.createStatement();
+        Statement stmt = conn.createStatement();
 	    
 	
 		//Cross check if works
