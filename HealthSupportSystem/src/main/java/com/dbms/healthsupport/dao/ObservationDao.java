@@ -13,11 +13,10 @@ import com.dbms.healthsupport.domain.Observation;
 
 public class ObservationDao implements DaoInterface<Observation> {
 	
-    Connection conn;
 	
-	public ObservationDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
+		return DriverManager.getConnection
 				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
 		
 	}
@@ -26,13 +25,29 @@ public class ObservationDao implements DaoInterface<Observation> {
 	public void deleteData(Observation x) throws Exception {
 		// TODO Auto-generated method stub
 		
-	    Statement stmt = conn.createStatement();
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			 String deleteSQL = " DELETE FROM OBSERVATION WHERE (observationSpecificationId="
+							+ x.getObservationId()
+							+ ")";
+					 
+			 rs = stmt.executeQuery(deleteSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 	    
-	 String deleteSQL = " DELETE FROM OBSERVATION WHERE (observationSpecificationId="
-					+ x.getObservationId()
-					+ ")";
-			 
-	    ResultSet rs = stmt.executeQuery(deleteSQL);
 		
 	}
 
@@ -40,27 +55,63 @@ public class ObservationDao implements DaoInterface<Observation> {
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
 		
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE OBSERVATION";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String dropSQL = "DROP TABLE OBSERVATION";
+			 
+			rs = stmt.executeQuery(dropSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
+		
+		
 		
 	}
 
 	public void insertRow(Observation x) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO OBSERVATION values ("
-				+ x.getObservationId() + "," 
-				+ x.getObservationValue() + ","
-				+ x.getObservationTime() + ","
-				+ x.getRecordedTime()
-				+ ")";
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
 		
-		ResultSet rs = stmt.executeQuery(insertSQL);
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String insertSQL = " INSERT INTO OBSERVATION values ("
+					+ x.getObservationId() + "," 
+					+ x.getObservationValue() + ","
+					+ x.getObservationTime() + ","
+					+ x.getRecordedTime()
+					+ ")";
+			
+			rs = stmt.executeQuery(insertSQL);
 
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
+		
 	}
 
 	public void deleteRow(Observation x) throws Exception {
@@ -71,32 +122,51 @@ public class ObservationDao implements DaoInterface<Observation> {
 	
 	public Observation getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String selectSQL = "SELECT * FROM OBSERVATION WHERE OBSERVATIONID="+(Integer)id;
-		 
-		Observation output=null;
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
-	
-
-		while(rs.next())
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try
 		{
-			int observationSpecificationId = rs.getInt("observationSpecificationId");
-			String observationValue = rs.getString("observationValue");
-			Date observationTime = rs.getDate("observationTime");
-			Date recordedTime = rs.getDate("recordedTime");
-			String patientSSN=rs.getString("PATIENTSSN");
-			String selectSQL1 = "SELECT * FROM OBSERVATIONDETAILS WHERE OBSERVATIONID="+(Integer)id;
-			String observationSpecName=null; 
-			ResultSet rs1 = stmt.executeQuery(selectSQL1);
-			while(rs1.next()){
-				observationSpecName=rs1.getString("OBSERVATIONSPECNAME");
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM OBSERVATION WHERE OBSERVATIONID="+(Integer)id;
+			 
+			Observation output=null;
+			
+			rs = stmt.executeQuery(selectSQL);
+		
+
+			while(rs.next())
+			{
+				int observationSpecificationId = rs.getInt("observationSpecificationId");
+				String observationValue = rs.getString("observationValue");
+				Date observationTime = rs.getDate("observationTime");
+				Date recordedTime = rs.getDate("recordedTime");
+				String patientSSN=rs.getString("PATIENTSSN");
+				String selectSQL1 = "SELECT * FROM OBSERVATIONDETAILS WHERE OBSERVATIONID="+(Integer)id;
+				String observationSpecName=null; 
+				ResultSet rs1 = stmt.executeQuery(selectSQL1);
+				while(rs1.next()){
+					observationSpecName=rs1.getString("OBSERVATIONSPECNAME");
+				}
+				output=new Observation(observationSpecificationId, observationValue, observationTime, recordedTime,patientSSN,observationSpecName);
 			}
-			output=new Observation(observationSpecificationId, observationValue, observationTime, recordedTime,patientSSN,observationSpecName);
+			
+			return output;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
 		
-		return output;
+		return null;
+		
 	}
 
 

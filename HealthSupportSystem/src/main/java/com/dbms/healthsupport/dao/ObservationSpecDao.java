@@ -13,59 +13,110 @@ import com.dbms.healthsupport.domain.ObservationSpec;
 
 public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 	
-	Connection conn;
 	
-	public ObservationSpecDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
+		return DriverManager.getConnection
 				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
 		
 	}
 	
 	public void insertData(ObservationSpec x) throws Exception {
-	    Statement stmt = conn.createStatement();
 	    
-		String insertSQL = " INSERT INTO OBSERVATIONSPEC values ("
-				+ x.getObservationName() + "," 
-				+ x.getDescription()
-				+ ")";
+
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
 		
-		ResultSet rs = stmt.executeQuery(insertSQL);
-		
-		for(String metric: x.getMetrics())
-		{
-			insertSQL = "INSERT INTO METRICINOBSSPEC values ("
-				+ metric + "," 
-				+ x.getObservationName()
-				+ ")";
+		try
+		{	
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String insertSQL = " INSERT INTO OBSERVATIONSPEC values ("
+					+ x.getObservationName() + "," 
+					+ x.getDescription()
+					+ ")";
 			
 			rs = stmt.executeQuery(insertSQL);
+			
+			for(String metric: x.getMetrics())
+			{
+				insertSQL = "INSERT INTO METRICINOBSSPEC values ("
+					+ metric + "," 
+					+ x.getObservationName()
+					+ ")";
+				
+				rs = stmt.executeQuery(insertSQL);
+			}
+
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
-		 
+				 
 
 	}
 
 	public void deleteData(ObservationSpec x) throws Exception {
 		// TODO Auto-generated method stub
-
-	    Statement stmt = conn.createStatement();
-	    
-		String deleteSQL = " DELETE FROM OBSERVATIONSPEC WHERE (observationName="
-				+ x.getObservationName()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(deleteSQL);
 		
+
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String deleteSQL = " DELETE FROM OBSERVATIONSPEC WHERE (observationName="
+					+ x.getObservationName()
+					+ ")";
+			 
+			rs = stmt.executeQuery(deleteSQL);
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+
 	}
 
 	
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE OBSERVATIONSPEC";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
+		
+		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String dropSQL = "DROP TABLE OBSERVATIONSPEC";
+			 
+			rs = stmt.executeQuery(dropSQL);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 
@@ -86,32 +137,52 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 
 	public ObservationSpec getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String selectSQL = "SELECT * FROM OBSERVATIONSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
-		 
-		ObservationSpec output =null;
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
-	
-
-		while(rs.next())
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try
 		{
-			String observationName = rs.getString("observationName");
-			String description = rs.getString("description");
-			
-			String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM OBSERVATIONSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
 			 
-			List<String> metrics=new ArrayList<String>();
-			ResultSet rs1 = stmt.executeQuery(selectSQL);
-			while(rs1.next()){
-				metrics.add(rs1.getString("METRICNAME"));
+			ObservationSpec output =null;
+			
+			rs = stmt.executeQuery(selectSQL);
+		
+
+			while(rs.next())
+			{
+				String observationName = rs.getString("observationName");
+				String description = rs.getString("description");
+				
+				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+				 
+				List<String> metrics=new ArrayList<String>();
+				ResultSet rs1 = stmt.executeQuery(selectSQL1);
+				while(rs1.next()){
+					metrics.add(rs1.getString("METRICNAME"));
+				}
+				
+				output=new ObservationSpec(observationName,description,metrics);
 			}
 			
-			output=new ObservationSpec(observationName,description,metrics);
+			return output;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally{
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
 		
-		return output;
-	}
-	
+		return null;
+
+		}
+			
 }

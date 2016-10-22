@@ -112,36 +112,59 @@ public class PeopleDao implements DaoInterface<People> {
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
 		
-		Connection conn = getConnection();
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE PEOPLE";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
+		Statement stmt = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String dropSQL = "DROP TABLE PEOPLE"; 
+			rs = stmt.executeQuery(dropSQL);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
 	}
 
 
 	public void insertRow(People x) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Connection conn = getConnection();
-	    Statement stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO PEOPLE values ("
-				+ x.getSsn() + ",\'" 
-				+ x.getFirstName() + "\',\'"
-				+ x.getLastName() + "\',\'"
-				+ x.getAddress() + "\',\'"
-				+ x.getPassword()
-				+ "\')";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		
-		System.out.println("Query: " + insertSQL);
-		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
-		System.out.println("Executed Query: " + insertSQL);
-		stmt.close();
-		rs.close();
-		
+		try
+		{
+
+			conn = getConnection();
+		    stmt = conn.createStatement();
+		    
+			String insertSQL = " INSERT INTO PEOPLE values ("
+					+ x.getSsn() + ",\'" 
+					+ x.getFirstName() + "\',\'"
+					+ x.getLastName() + "\',\'"
+					+ x.getAddress() + "\',\'"
+					+ x.getPassword()
+					+ "\')";
+			
+			System.out.println("Query: " + insertSQL);
+			rs = stmt.executeQuery(insertSQL);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 
