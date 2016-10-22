@@ -9,10 +9,10 @@ public class Observation {
 	Date observationTime;
 	Date recordedTime;
 	String patientId;
-	Integer observationSpecification;
+	String observationSpecification;
 	
 	public Observation(Integer observationId, String observationValue, Date observationTime, Date recordedTime,
-			String patientId, Integer observationSpecification) {
+			String patientId, String observationSpecification) {
 		super();
 		this.observationId = observationId;
 		this.observationValue = observationValue;
@@ -62,11 +62,11 @@ public class Observation {
 		this.patientId = patientId;
 	}
 
-	public Integer getObservationSpecification() {
+	public String getObservationSpecification() {
 		return observationSpecification;
 	}
 
-	public void setObservationSpecification(Integer observationSpecification) {
+	public void setObservationSpecification(String observationSpecification) {
 		this.observationSpecification = observationSpecification;
 	}
 	
