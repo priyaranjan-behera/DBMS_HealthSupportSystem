@@ -25,11 +25,6 @@ public class AlertDao implements DaoInterface<Alert> {
 		
 	}
 
-//id
-//type
-//patient ssn
-//alert action
-	
 	public void insertRow(Alert x) throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
@@ -58,35 +53,27 @@ public class AlertDao implements DaoInterface<Alert> {
 		
 	}
 
-	/*
-	 * 	Integer alertId;
-	String alertType;
-	String actionTaken;
-	
-	Long patientId;
-	 * 
-	 * */
 	public List<Alert> getAllData() throws Exception {
 		// TODO Auto-generated method stub
 		Statement stmt = conn.createStatement();
-		List<Alert> output = new ArrayList<Alert>();
-	    
-		/*
+	
 		String selectSQL = "SELECT * FROM ALERT";
-		 
 		
+		List<Alert> output = new ArrayList<Alert>();
 		
 		ResultSet rs = stmt.executeQuery(selectSQL);
 	
 
-		while(rs.next()) {				
-			String alertId = rs.getString("alertId");
-			String alertType = rs.getString("alertType");
-			String actionTaken = rs.getString("actionTaken");
-			String patientId = rs.getString("patientId");
+		while(rs.next()) {
 			
-			output.add(new Alert(Integer.parseInt(alertId), alertType, actionTaken, (long)patientId);
-		}*/
+			Integer id = rs.getInt("alertId");
+			String alertType = rs.getString("alertType");
+			Long patientSSN = rs.getLong("patientSSN");
+			String alertAction = rs.getString("alertAction");
+			Integer limitId = rs.getInt("limitId");
+
+			output.add(new Alert((Integer)id, alertType, alertAction, patientSSN, limitId, true));
+		}
 		
 		return output;
 	}
