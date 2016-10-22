@@ -18,14 +18,16 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 
 	Connection conn;
 	
-	public WellPatientDao() throws SQLException {
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+	public static Connection getConnection() throws SQLException
+	{
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
 	public void insertRow(WellPatient x) throws Exception {
 		// TODO Auto-generated method stub
+		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO WELLPATIENT values ("
@@ -33,6 +35,9 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
+		stmt.close();
+		rs.close();
+	
 	}
 
 	public void deleteRow(WellPatient x) throws Exception {
@@ -47,17 +52,31 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 
 	public WellPatient getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-	
-		Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
 		String selectSQL = "SELECT * FROM SICKPATIENT WHERE patientSSN = " + (Long)id; 
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 		
 		if(rs.next())
 		{
 			Long patientSSN = rs.getLong("patientSSN");
 			PatientDao patientDao = new PatientDao();
 			return new WellPatient(patientDao.getDataById(patientSSN));
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
 		return null;
 	}
