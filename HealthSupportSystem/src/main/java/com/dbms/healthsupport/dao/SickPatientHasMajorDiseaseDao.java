@@ -35,6 +35,8 @@ public class SickPatientHasMajorDiseaseDao  {
 			
 			stmt = conn.createStatement();
 			
+			//This will be a check for shifting well patient to sick patient
+			if(new PatientDao().isSick(x.getSsn())) {
 		    
 			String insertSQL = " INSERT INTO SickHasMajorDisease values ("
 					+ x.getSsn() + ","
@@ -44,6 +46,8 @@ public class SickPatientHasMajorDiseaseDao  {
 			 System.out.println("Query is: " + insertSQL);
 			 
 			rs = stmt.executeQuery(insertSQL);
+			}
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
