@@ -116,7 +116,32 @@ public class PatientDao implements DaoInterface<Patient> {
 		}
 				
 	}
-
+	public void updateRow(Patient x) throws Exception{
+		
+		Statement stmt = null;
+		Connection conn = null;
+		//ResultSet rs = null;
+		
+		try{
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String updateSQL = "UPDATE PATIENT SET dob ="+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + "," + "gender ="+ x.getGender() +" WHERE (ssn="+ x.getSsn() +")";
+		
+			stmt.executeUpdate(updateSQL);
+			
+			PeopleDao peopleDao= new PeopleDao();
+			People people = peopleDao.getDataById(x.getSsn());
+			peopleDao.updatePeopleRow(people);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			//rs.close();
+			stmt.close();
+			conn.close();
+		}
+	}
 	public List<Patient> getAllData() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
