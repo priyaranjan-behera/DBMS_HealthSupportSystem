@@ -26,6 +26,19 @@ public class LimitsDao implements DaoInterface<Limits>{
 
 	public void insertRow(Limits x) throws Exception {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO LIMITS values ("
+				+ x.getLimitID() + "," 
+				+ x.getLowerLimit() + ","
+				+ x.getUpperLimit() + ","
+				+ x.getObservationSpec() + ","
+				+ x.getMetricId()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		
 		
 	}
 
