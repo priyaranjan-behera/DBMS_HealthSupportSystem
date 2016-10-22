@@ -15,16 +15,18 @@ import com.dbms.healthsupport.domain.Recommendation;
 public class RecommendationDao implements DaoInterface<Recommendation>{
 	Connection conn;
 	
-	public RecommendationDao() throws SQLException
+	
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
 	public void insertRow(Recommendation x) throws Exception {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
+		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO RECOMMENDATION values ("
@@ -35,6 +37,8 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
+		stmt.close();
+		rs.close();
 		
 		
 	}
@@ -51,10 +55,17 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 
 	public Recommendation getDataById(Object id) throws Exception {
 		// TO
-		Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try{
+			
+		conn = getConnection();	
+		stmt = conn.createStatement();
 		String selectSQL = "SELECT * FROM RECOMMENDATION  WHERE recommendationId = " + (Integer)id; 
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 		
 		if(rs.next())
 		{
@@ -65,7 +76,15 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		 
 			return new Recommendation(recommendationId, frequencyId, threshold, observationSpecName);
 		}
-		
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		return null;
 	}
 	
