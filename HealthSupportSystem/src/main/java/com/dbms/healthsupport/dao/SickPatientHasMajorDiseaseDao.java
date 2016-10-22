@@ -10,6 +10,7 @@ import java.util.List;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.SickPatient;
+import com.dbms.healthsupport.domain.WellPatient;
 
 public class SickPatientHasMajorDiseaseDao  {
 	
@@ -78,6 +79,16 @@ public class SickPatientHasMajorDiseaseDao  {
 					+ ")";
 			 
 			rs = stmt.executeQuery(deleteSQL);
+			
+			String selectSQL = "SELECT * FROM SickHasMajorDisease WHERE PatientSSN = " + x.getSsn();
+			rs = stmt.executeQuery(selectSQL);
+			
+			if(rs.next())
+			{} else {
+			WellPatient wp = new WellPatient(x);
+			new WellPatientDao().insertRow(wp);
+			}
+			
 		}
 		catch (Exception e) {
 			// TODO: handle exception
