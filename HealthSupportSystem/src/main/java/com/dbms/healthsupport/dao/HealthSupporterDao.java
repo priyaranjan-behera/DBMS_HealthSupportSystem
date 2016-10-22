@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
 public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
@@ -89,7 +90,32 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public void updateRow(HealthSupporter x) throws Exception{
+		
+		Statement stmt = null;
+		Connection conn = null;
+		//ResultSet rs = null;
+		
+		try{
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String updateSQL = "UPDATE HEALTHSUPPORTER SET contact ="+ x.getContactNumber() +" WHERE (ssn="+ x.getSsn() +")";
+		
+			stmt.executeUpdate(updateSQL);
+			
+			PeopleDao peopleDao= new PeopleDao();
+			People people = peopleDao.getDataById(x.getSsn());
+			peopleDao.updatePeopleRow(people);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			//rs.close();
+			stmt.close();
+			conn.close();
+		}
+	}
 	public HealthSupporter getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;

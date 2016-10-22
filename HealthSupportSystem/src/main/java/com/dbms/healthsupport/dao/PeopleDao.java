@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
 public class PeopleDao implements DaoInterface<People> {
@@ -168,7 +169,31 @@ public class PeopleDao implements DaoInterface<People> {
 		
 	}
 
-
+	public void updatePeopleRow(People x) throws Exception{
+		
+		Statement stmt = null;
+		Connection conn = null;
+		//ResultSet rs = null;
+		
+		try{
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String updateSQL = "UPDATE PEOPLE SET firstName ="+ x.getFirstName() + "\',\'"
+					+ x.getLastName() + "\',\'"
+					+ x.getAddress() + "\',\'"
+					+ x.getPassword() + "," +" WHERE (ssn="+ x.getSsn() +")";
+		
+			stmt.executeUpdate(updateSQL);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			//rs.close();
+			stmt.close();
+			conn.close();
+		}
+	}
 	public void deleteRow(People x) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;
