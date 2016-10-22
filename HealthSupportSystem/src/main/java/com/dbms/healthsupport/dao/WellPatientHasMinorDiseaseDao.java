@@ -34,11 +34,11 @@ public class WellPatientHasMinorDiseaseDao{
 			conn = getConnection();
 			
 			stmt = conn.createStatement();
-		    
-			String insertSQL = " INSERT INTO WellPatientHasMinorDisease values ("
-					+ x.getSsn() + ","
+			
+			String insertSQL = " INSERT INTO  WellPatientHasMinorDisease values ("
+					+ x.getSsn() + ", \'" 
 					+ y.getDisName()
-					+ ")";
+					+ "\')";
 			
 			 System.out.println("Query is: " + insertSQL);
 			 

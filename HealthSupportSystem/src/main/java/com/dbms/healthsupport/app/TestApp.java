@@ -10,11 +10,14 @@ import com.dbms.healthsupport.dao.FrequencyDao;
 import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
+import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
+import com.dbms.healthsupport.domain.WellPatient;
 
 public class TestApp {
 
@@ -28,10 +31,11 @@ public class TestApp {
 		//testDisease();
 		//testFrequency();
 		//testHealthSupporter();
-		testLimits();
+		//testLimits();
+		//testSickPatientHasMajorDisease();
+		testWellPatientHasMinorDisease();
 	}
 	
-static void test
 
 static void testHealthSupporter() throws Exception
 {
@@ -125,5 +129,54 @@ static void testPeople()
 	}
 }
 
+static void testSickPatientHasMajorDisease() { 
+	
+	try {
+		
+		SickPatientHasMajorDiseaseDao sickPatientHasMajorDiseaseDao = new SickPatientHasMajorDiseaseDao();
+
+		PeopleDao peopleDao = new PeopleDao();
+		
+		People people = peopleDao.getDataById(new Long(1));
+		Patient patient = new Patient(people, java.sql.Date.valueOf("1984-05-26"), "Male");
+		
+		
+		Diseases disease = new Diseases("HIV", "SLSLSLLSLSLSLLSLSLLSLSLLSLS");
+		
+		sickPatientHasMajorDiseaseDao.addDiseaseDiagnoses(patient, disease);
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+
+static void testWellPatientHasMinorDisease() {
+	
+     try {
+		
+    	WellPatientHasMinorDiseaseDao wellPatientHasMinorDiseaseDao = new WellPatientHasMinorDiseaseDao();
+
+ 		PeopleDao peopleDao = new PeopleDao();
+ 		
+ 		People people = peopleDao.getDataById(new Long(1));
+ 		Patient patient = new Patient(people, java.sql.Date.valueOf("1984-05-26"), "Male");
+ 		WellPatient wellPatient = new WellPatient(patient);
+ 		
+ 		Diseases disease = new Diseases("SICK", "SLSLSLLSLSLSLLSLSLLSLSLLSLS");
+ 		
+ 		wellPatientHasMinorDiseaseDao.addDiseaseDiagnoses(wellPatient, disease);
+ 		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+//TODO
+//Secondary list to single
+//SSN long, String
+//Exceptions
 
 }
