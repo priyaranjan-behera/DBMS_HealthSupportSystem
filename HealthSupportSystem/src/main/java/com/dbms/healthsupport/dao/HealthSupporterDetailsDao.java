@@ -17,14 +17,13 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 
 	
 
-	Connection conn;
-	
-	public HealthSupporterDetailsDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
+
 	
 	
 
@@ -35,14 +34,23 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 	
 	public HealthSupporterDetails getDataById(Object patientSSN, Object HSSSN) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		HealthSupporterDetails output=null;
+		
+		try
+		{
+		
+		con = getConnection();
+		stmt = con.createStatement();
 	    
 		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
 				" AND HSSSN=" + (Long)HSSSN;
 		 
-		HealthSupporterDetails output=null;
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 		
 		if (rs.next()){
 			Date authDate = rs.getDate("authorizationDate");
@@ -52,6 +60,18 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		return output;
 
 		
+	}catch(Exception e)
+		{
+		e.printStackTrace();
+	}
+	finally {
+		rs.close();
+		stmt.close();
+		con.close();
+		
+	}
+	
+	return output;
 	}
 
 

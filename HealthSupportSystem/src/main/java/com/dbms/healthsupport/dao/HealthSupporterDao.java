@@ -15,36 +15,68 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 
 	
 
-	Connection conn;
-	
-	public HealthSupporterDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
+
 	
 
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String dropSQL = "DROP TABLE HEALTHSUPPORTER";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+		
+			con = getConnection();
+		    
+			String dropSQL = "DROP TABLE HEALTHSUPPORTER";
+			 
+			rs = stmt.executeQuery(dropSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		}
 		
 	}
 
 	public void insertRow(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+		
+		stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO HEALTHSUPPORTER values ("
 				+ x.getSsn() + "," 
 				+ x.getContactNumber()
 				+ ")";
 		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
+		rs = stmt.executeQuery(insertSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
 		
 	}
 
@@ -60,13 +92,21 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 
 	public HealthSupporter getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
-		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
-		 
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		HealthSupporter output=null;
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		try
+		{
+		
+		conn = getConnection();
+		
+		stmt = conn.createStatement();
+	    
+		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
+		
+		rs = stmt.executeQuery(selectSQL);
 		
 		PeopleDao peopleDao = new PeopleDao();
 	
@@ -86,7 +126,19 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		}
 		
 		return output;
-
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		}
+		
+		return output;
+		
 		
 	}
 	
