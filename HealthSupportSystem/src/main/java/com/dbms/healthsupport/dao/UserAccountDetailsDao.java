@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dbms.healthsupport.domain.People;
 import com.dbms.healthsupport.domain.UserAccountDetails;
 
 public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
@@ -33,10 +34,17 @@ public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
 		
 	}
 
-	public void insertData(UserAccountDetails x) throws Exception {
+	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
-		
-	    Statement stmt = conn.createStatement();
+		Statement stmt = conn.createStatement();
+	    
+		String dropSQL = "DROP TABLE USERACCOUNTDETAILS";
+		 
+		ResultSet rs = stmt.executeQuery(dropSQL);
+	}
+	public void insertRow(UserAccountDetails x) throws Exception {
+		// TODO Auto-generated method stub
+          Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO USERACCOUNTDETAILS values ("
 				+ x.getSsn() + "," 
@@ -46,8 +54,7 @@ public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
 		ResultSet rs = stmt.executeQuery(insertSQL);
 		
 	}
-
-	public void deleteData(UserAccountDetails x) throws Exception {
+	public void deleteRow(UserAccountDetails x) throws Exception {
 		// TODO Auto-generated method stub
 		
 	    Statement stmt = conn.createStatement();
@@ -59,10 +66,8 @@ public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
 		ResultSet rs = stmt.executeQuery(deleteSQL);
 		
 	}
-
-	public List<UserAccountDetails> getData() throws Exception {
-		// TODO Auto-generated method stub
-Statement stmt = conn.createStatement();
+	public List<UserAccountDetails> getAllData() throws Exception {
+        Statement stmt = conn.createStatement();
 	    
 		String selectSQL = "SELECT * FROM USERACCOUNTDETAILS";
 		 
@@ -81,14 +86,22 @@ Statement stmt = conn.createStatement();
 		
 		return output;
 	}
-
-	public void dropTable() throws Exception {
-		// TODO Auto-generated method stub
+	public UserAccountDetails getDataById(Object ssn) throws Exception {
+	    
 		Statement stmt = conn.createStatement();
 	    
-		String dropSQL = "DROP TABLE USERACCOUNTDETAILS";
-		 
-		ResultSet rs = stmt.executeQuery(dropSQL);
+		String selectSQL = "SELECT * FROM USERACCOUNTDETAILS  WHERE ssn = " + (Long)ssn;
+		ResultSet rs = stmt.executeQuery(selectSQL);
+		
+
+		while(rs.next())
+		{
+			String password = rs.getString("password");
+			
+			return new UserAccountDetails((Long)ssn,password);
+		}
+		
+		return null;
 	}
 
 }
