@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dbms.healthsupport.domain.HealthSupporter;
 import com.dbms.healthsupport.domain.MetricTypeValue;
 
 public class MetricTypeValueDao implements DaoInterface<MetricTypeValue>{
@@ -34,32 +35,7 @@ public class MetricTypeValueDao implements DaoInterface<MetricTypeValue>{
 		
 	}
 
-	public void insertData(MetricTypeValue x) throws Exception {
-		// TODO Auto-generated method stub
-		
-	    Statement stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO METRICTYPEVALUE values ("
-				+ x.getMetricTypeValueID() + "," 
-				+ x.getMetricTypeValue()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
-		
-	}
-
-	public void deleteData(MetricTypeValue x) throws Exception {
-		// TODO Auto-generated method stub
-		
-        Statement stmt = conn.createStatement();
-	    
-		String deleteSQL = " DELETE FROM METRICTYPEVALUE WHERE (metricTypeValueID="
-				+ x.getMetricTypeValueID()
-				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(deleteSQL);
-		
-	}
+	
 
 	public List<MetricTypeValue> getData() throws Exception {
         
@@ -91,6 +67,54 @@ public class MetricTypeValueDao implements DaoInterface<MetricTypeValue>{
 		 
 		ResultSet rs = stmt.executeQuery(dropSQL);
 		
+	}
+
+	public void insertRow(MetricTypeValue x) throws Exception {
+		// TODO Auto-generated method stub
+	    Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO METRICTYPEVALUE values ("
+				+ x.getMetricTypeValue() + "," 
+				+ x.getMetricTypeValueID()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+	
+	}
+
+	public void deleteRow(MetricTypeValue x) throws Exception {
+		// TODO Auto-generated method stub
+		
+        Statement stmt = conn.createStatement();
+	    
+		String deleteSQL = " DELETE FROM METRICTYPEVALUE WHERE (metricTypeValueID="
+				+ x.getMetricTypeValueID()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(deleteSQL);
+		
+		
+	}
+
+	public List<MetricTypeValue> getAllData() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MetricTypeValue getDataById(Object id) throws Exception {
+		// TODO Auto-generated method stub
+		MetricTypeValue output=null;
+		Statement stmt = conn.createStatement();
+	    String selectSQL = "SELECT * FROM METRICTYPEVALUE WHERE METRICTYPEVALUEID="+(Integer)id;
+		 
+		ResultSet rs = stmt.executeQuery(selectSQL);
+		
+		while(rs.next()){
+			Integer metricTypeValueId=rs.getInt("metricTypeValueId");
+			String metricTypeValue=rs.getString("metricTypeValue");
+			output=new MetricTypeValue(metricTypeValueId,metricTypeValue);
+		}
+		return output;
 	}
 
 	

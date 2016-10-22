@@ -77,9 +77,9 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 	
 		List<Long> patients=new ArrayList<Long>();
 		String selectSQL1="SELECT * FROM PATIENTASSIGNEDHEALTHSUPPORTER WHERE HSSN="+(Long)id;
-		ResultSet rs1 = stmt.executeQuery(selectSQL);
+		ResultSet rs1 = stmt.executeQuery(selectSQL1);
 		while(rs1.next()){
-			patients.add(rs.getLong("PATIENTTSSN"));
+			patients.add(rs1.getLong("PATIENTTSSN"));
 		}
 		
 		while(rs.next())
