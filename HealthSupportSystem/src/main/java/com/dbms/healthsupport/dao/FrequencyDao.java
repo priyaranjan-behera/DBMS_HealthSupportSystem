@@ -27,6 +27,14 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 
 	public void insertRow(Frequency x) throws Exception {
 		// TODO Auto-generated method stub
+        Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO FREQUENCY values ("
+				+ x.getFrequencyName() + "," 
+				+ x.getDuration()
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
 		
 	}
 

@@ -89,7 +89,8 @@ public class PeopleDao implements DaoInterface<People> {
 				+ x.getSsn() + "," 
 				+ x.getFirstName() + ","
 				+ x.getLastName() + ","
-				+ x.getAddress()
+				+ x.getAddress()+","
+				+ x.getPassword()
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
