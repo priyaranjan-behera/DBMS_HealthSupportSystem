@@ -8,9 +8,6 @@ public class HealthSupporterDetails {
 	Long healthSupporterSSN;
 	Date authDate;
 	
-	
-	
-	
 	public HealthSupporterDetails(Long patientSSN, Long healthSupporterSSN, Date authDate) {
 		super();
 		this.patientSSN = patientSSN;

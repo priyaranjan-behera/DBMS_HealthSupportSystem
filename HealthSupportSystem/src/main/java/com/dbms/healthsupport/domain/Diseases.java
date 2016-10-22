@@ -16,6 +16,15 @@ public class Diseases {
 		this.recommendations = recommendations;
 		this.limits = limits;
 	}
+
+	public Diseases(String disName, String disDescription) {
+		super();
+		this.disName = disName;
+		this.disDescription = disDescription;
+	}
+
+	
+	
 	public String getDisName() {
 		return disName;
 	}

@@ -5,8 +5,14 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import com.dbms.healthsupport.dao.DiseasesDao;
+import com.dbms.healthsupport.dao.FrequencyDao;
+import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.domain.Diseases;
+import com.dbms.healthsupport.domain.Frequency;
+import com.dbms.healthsupport.domain.HealthSupporter;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
@@ -18,10 +24,61 @@ public class TestApp {
 
 	public static void main(String[] args) throws Exception{
 		//testPeople();
-		testPatient();
-			}
+		//testPatient();
+		//testDisease();
+		//testFrequency();
+		//testHealthSupporter();
+		testLimits();
+	}
+	
+static void test
+
+static void testHealthSupporter() throws Exception
+{
+	HealthSupporterDao healthSupporterDao = new HealthSupporterDao();
+	
+	PeopleDao peopleDao = new PeopleDao();
+	
+	People people = peopleDao.getDataById(new Long(1));
+	HealthSupporter healthSupporter = new HealthSupporter(people, new Long("9842158165"));
+	
+	//healthSupporterDao.insertRow(healthSupporter);
+	healthSupporter = healthSupporterDao.getDataById(new Long(1));
+	
+	System.out.println("Name: "+ healthSupporter.getFirstName() +"Contact Number: " + healthSupporter.getContactNumber());
+
+}
+	
+static void testFrequency() throws Exception
+{
+	FrequencyDao frequencyDao = new FrequencyDao();
+	
+	Frequency frequency = new Frequency("Weekly", 7);
+	//frequencyDao.insertRow(frequency);
+	
+	frequency = new Frequency("Daily", 1);
+	//frequencyDao.insertRow(frequency);
+	
+	System.out.println(frequencyDao.getDataById("Weekly").getFrequencyName());
+	System.out.println(frequencyDao.getDataById("Weekly").getDuration());
+}
 
 
+static void testDisease() throws Exception
+{
+	DiseasesDao diseasesDao = new DiseasesDao();
+
+	Diseases disease = new Diseases("Heart Disease","Heart Disease Description");
+	//diseasesDao.insertRow(disease);
+	
+	disease = new Diseases("HIV","HIV Description");
+	//diseasesDao.insertRow(disease);
+	
+	System.out.println(diseasesDao.getDataById("HIV").toString());
+	
+}
+	
+	
 static void testPatient() throws Exception
 {
 
