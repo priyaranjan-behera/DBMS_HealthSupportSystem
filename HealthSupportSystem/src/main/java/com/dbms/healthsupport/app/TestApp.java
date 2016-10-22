@@ -14,8 +14,12 @@ public class TestApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			People people = new People(new Long(123), "Akshay", "Nayak", "512TartanCircle", "anayakv");
 			PeopleDao peopleDao = new PeopleDao();
+			People people = new People(new Long(323), "Akshay", "Nayak", "512TartanCircle", "anayakv");
+			peopleDao.insertRow(people);
+			people = new People(new Long(423), "Akshay", "Nayak", "512TartanCircle", "anayakv");
+			peopleDao.insertRow(people);
+			people = new People(new Long(53), "Akshay", "Nayak", "512TartanCircle", "anayakv");
 			peopleDao.insertRow(people);
 			System.out.println(peopleDao.getDataById(new Long(123)).toString());
 		} catch (Exception e) {

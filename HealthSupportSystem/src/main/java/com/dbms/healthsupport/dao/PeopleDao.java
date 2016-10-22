@@ -12,25 +12,35 @@ import com.dbms.healthsupport.domain.People;
 
 public class PeopleDao implements DaoInterface<People> {
 
-	Connection conn;
 	
-	public PeopleDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "anayakv", "200110688");
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
 
 	public List<People> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<People> output = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		
+		stmt = con.createStatement();
 	    
 		String selectSQL = "SELECT * FROM PEOPLE";
 		 
-		List<People> output = new ArrayList<People>();
+		output = new ArrayList<People>();
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 	
 
 		while(rs.next())
@@ -43,27 +53,56 @@ public class PeopleDao implements DaoInterface<People> {
 			
 			output.add(new People(ssn, fName, lName, address, password));
 		}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		}
 		
 		return output;
+		
 	}
 	
 	public People getDataById(Object ssn) throws Exception
 	{
-		Statement stmt = conn.createStatement();
-	    
-		String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + (Long)ssn;
-		ResultSet rs = stmt.executeQuery(selectSQL);
 		
-
-		while(rs.next())
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
 		{
-			String fName = rs.getString("firstName");
-			String lName = rs.getString("lastName");
-			String address = rs.getString("address");
-			String password = rs.getString("password");
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + (Long)ssn;
+			rs = stmt.executeQuery(selectSQL);
 			
-			return new People((Long)ssn, fName, lName, address, password);
+
+			while(rs.next())
+			{
+				String fName = rs.getString("firstName");
+				String lName = rs.getString("lastName");
+				String address = rs.getString("address");
+				String password = rs.getString("password");
+				
+				return new People((Long)ssn, fName, lName, address, password);
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
 		}
+		finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
 		
 		return null;
 		
@@ -72,6 +111,8 @@ public class PeopleDao implements DaoInterface<People> {
 
 	public void dropTable() throws Exception {
 		// TODO Auto-generated method stub
+		
+		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
 	    
 		String dropSQL = "DROP TABLE PEOPLE";
@@ -82,7 +123,8 @@ public class PeopleDao implements DaoInterface<People> {
 
 	public void insertRow(People x) throws Exception {
 		// TODO Auto-generated method stub
-
+		
+		Connection conn = getConnection();
 	    Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO PEOPLE values ("
@@ -92,21 +134,41 @@ public class PeopleDao implements DaoInterface<People> {
 				+ x.getAddress() + "\',\'"
 				+ x.getPassword()
 				+ "\')";
+		
+		System.out.println("Query: " + insertSQL);
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
+		System.out.println("Executed Query: " + insertSQL);
+		stmt.close();
+		rs.close();
+		
 		
 	}
 
 
 	public void deleteRow(People x) throws Exception {
 		// TODO Auto-generated method stub
-		  Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
 		    
 			String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn="
 					+ x.getSsn()
 					+ ")";
 			 
-			ResultSet rs = stmt.executeQuery(deleteSQL);
+			rs = stmt.executeQuery(deleteSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 
