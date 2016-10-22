@@ -110,4 +110,10 @@ public class PeopleDao implements DaoInterface<People> {
 		
 	}
 
+
+	public void createTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
