@@ -22,6 +22,36 @@ public class PatientDao implements DaoInterface<Patient> {
 		
 	}
 	
+	public boolean isSick(Object ssn) throws Exception
+	{	
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM SICKPATIENT  WHERE patientSSN = " + (Long)ssn;
+			rs = stmt.executeQuery(selectSQL);
+			
+			if(rs.next())
+				return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		
+		return false;
+		
+	}
+	
 	public void insertRow(Patient x) throws Exception {
 		
 		Statement stmt = null;
