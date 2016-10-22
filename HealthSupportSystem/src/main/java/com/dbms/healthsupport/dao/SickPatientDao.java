@@ -25,7 +25,13 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 
 	public void insertRow(SickPatient x) throws Exception {
 		// TODO Auto-generated method stub
-		
+		Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO SICKPATIENT values ("
+				+ x.getSsn() + "," 
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
 	}
 
 	public void deleteRow(SickPatient x) throws Exception {
