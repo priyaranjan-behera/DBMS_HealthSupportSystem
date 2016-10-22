@@ -2,20 +2,20 @@ package com.dbms.healthsupport.domain;
 
 public class Frequency {
 	
-	String frequencyDesc;
+	String frequencyName;
 	Integer duration;
 	
 	
-	public Frequency(String frequencyDesc, Integer duration) {
+	public Frequency(String frequencyName, Integer duration) {
 		super();
-		this.frequencyDesc = frequencyDesc;
+		this.frequencyName = frequencyName;
 		this.duration = duration;
 	}
-	public String getFrequencyDesc() {
-		return frequencyDesc;
+	public String getFrequencyName() {
+		return frequencyName;
 	}
-	public void setFrequencyDesc(String frequencyDesc) {
-		this.frequencyDesc = frequencyDesc;
+	public void setFrequencyDesc(String frequencyName) {
+		this.frequencyName = frequencyName;
 	}
 	public Integer getDuration() {
 		return duration;
