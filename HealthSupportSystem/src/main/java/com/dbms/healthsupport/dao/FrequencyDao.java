@@ -18,23 +18,37 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 	
 	Connection conn;
 	
-	public FrequencyDao() throws SQLException
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+	 return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
+
 	public void insertRow(Frequency x) throws Exception {
 		// TODO Auto-generated method stub
-        Statement stmt = conn.createStatement();
-	    
+	    Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+	   try{ 
+		conn = getConnection();
+		stmt = conn.createStatement();
 		String insertSQL = " INSERT INTO FREQUENCY values ("
 				+ x.getFrequencyName() + "," 
 				+ x.getDuration()
 				+ ")";
 		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
+        rs = stmt.executeQuery(insertSQL);
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+	   
 		
 	}
 
@@ -50,11 +64,15 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 
 	public Frequency getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		
-		Statement stmt = conn.createStatement();
+	   try{ 
+		conn = getConnection();
+		stmt = conn.createStatement();
 		String selectSQL = "SELECT * FROM FREQUENCY";
-		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+         rs = stmt.executeQuery(selectSQL);
 		
 		if(rs.next()){
 			String frequencyDesc = rs.getString("frequencyDesc");
@@ -62,7 +80,14 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 			
 			return new Frequency(frequencyDesc, duration);
 			
+		}} catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
+	   
 		return null;
 	}
 	
