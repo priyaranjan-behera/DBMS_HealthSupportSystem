@@ -17,17 +17,28 @@ public class LimitsDao implements DaoInterface<Limits>{
 	
 	Connection conn;
 
-	public LimitsDao() throws SQLException
+
+	public static Connection getConnection() throws SQLException
 	{
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+		return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
+	
 	public void insertRow(Limits x) throws Exception {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		stmt = con.createStatement();
 	    
 		String insertSQL = " INSERT INTO LIMITS values ("
 				+ x.getLimitID() + "," 
@@ -37,7 +48,19 @@ public class LimitsDao implements DaoInterface<Limits>{
 				+ x.getMetricId()
 				+ ")";
 		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
+		rs = stmt.executeQuery(insertSQL);
+		}catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		}
+		
+	
 		
 		
 	}
@@ -54,11 +77,19 @@ public class LimitsDao implements DaoInterface<Limits>{
 
 	public Limits getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		stmt = con.createStatement();
 	    
 		String selectSQL = "SELECT * FROM LIMITS";
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 		
 		while(rs.next()){
 			Integer limitID = rs.getInt("limitID");
@@ -67,9 +98,20 @@ public class LimitsDao implements DaoInterface<Limits>{
 			String metricID = rs.getString("metricID");
 			String observationSpec = rs.getString("observationSpec");
 			
-			return new Limits(upperlimit, upperlimit, upperlimit, observationSpec, observationSpec);
+			return new Limits(limitID, lowerlimit, upperlimit, metricID, observationSpec);
 			
 		}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		}
+		
 		
 		return null;
 	}
