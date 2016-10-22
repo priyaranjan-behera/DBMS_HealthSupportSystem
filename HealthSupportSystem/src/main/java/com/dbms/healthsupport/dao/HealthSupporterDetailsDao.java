@@ -230,7 +230,7 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		if(new PatientDao.isSick(patientSSN)){
+		if(new PatientDao().isSick(patientSSN)){
 			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
 					" AND PRIMARYSECONDARY = secondary";
 			 
