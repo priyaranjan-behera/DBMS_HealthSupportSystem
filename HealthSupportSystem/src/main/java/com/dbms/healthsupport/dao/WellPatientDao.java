@@ -26,7 +26,13 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 
 	public void insertRow(WellPatient x) throws Exception {
 		// TODO Auto-generated method stub
-		
+		Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO WELLPATIENT values ("
+				+ x.getSsn() + "," 
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
 	}
 
 	public void deleteRow(WellPatient x) throws Exception {

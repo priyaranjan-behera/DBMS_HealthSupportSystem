@@ -29,8 +29,20 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 				+ x.getObservationName() + "," 
 				+ x.getDescription()
 				+ ")";
-		 
+		
 		ResultSet rs = stmt.executeQuery(insertSQL);
+		
+		for(String metric: x.getMetrics())
+		{
+			insertSQL = "INSERT INTO METRICINOBSSPEC values ("
+				+ metric + "," 
+				+ x.getObservationName()
+				+ ")";
+			
+			rs = stmt.executeQuery(insertSQL);
+		}
+		 
+
 	}
 
 	public void deleteData(ObservationSpec x) throws Exception {
