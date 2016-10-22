@@ -17,7 +17,7 @@ public class PeopleDao implements DaoInterface<People> {
 	public PeopleDao() throws SQLException
 	{
 		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "anayakv", "200110688");
 		
 	}
 
@@ -86,12 +86,12 @@ public class PeopleDao implements DaoInterface<People> {
 	    Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO PEOPLE values ("
-				+ x.getSsn() + "," 
-				+ x.getFirstName() + ","
-				+ x.getLastName() + ","
-				+ x.getAddress()+","
+				+ x.getSsn() + ",\'" 
+				+ x.getFirstName() + "\',\'"
+				+ x.getLastName() + "\',\'"
+				+ x.getAddress() + "\',\'"
 				+ x.getPassword()
-				+ ")";
+				+ "\')";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
 		
