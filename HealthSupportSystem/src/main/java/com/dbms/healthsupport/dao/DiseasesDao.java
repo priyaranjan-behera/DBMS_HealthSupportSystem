@@ -15,49 +15,82 @@ import com.dbms.healthsupport.domain.People;
 public class DiseasesDao implements	DaoInterface<Diseases> {
 	Connection conn;
 	
-	public DiseasesDao() throws SQLException{	
-		this.conn = DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
-	
+	public static Connection getConnection() throws SQLException
+	{
+	 return(DriverManager.getConnection
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+		
 	}
 
 	public void insertRow(Diseases x) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 	    
+		try {
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
 		String insertSQL = " INSERT INTO DISEASES values ("
 				+ x.getDisName() + "," 
 				+ x.getDisDescription()
 				+ ")";
 		 
-		ResultSet rs = stmt.executeQuery(insertSQL);
+        rs = stmt.executeQuery(insertSQL);
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 
 	public void deleteRow(Diseases x) throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 	    
+	    try {
+        conn = getConnection();
+        stmt = conn.createStatement();
+        
 		String deleteSQL = " DELETE FROM DISEASES WHERE (DiseaseName="
 				+ x.getDisName()
 				+ ")";
-		 
-		ResultSet rs = stmt.executeQuery(deleteSQL);
+        rs = stmt.executeQuery(deleteSQL);
+	    }catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 
 	public List<Diseases> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		Statement stmt = conn.createStatement();
-	    
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Diseases> output = null;
+		
+	    try {
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
 		//String selectSQL = "SELECT * FROM DISEASES d, RecommendationForDisease r, LimitsForDisease l where d.DiseaseName = r.DiseaseName AND l.DiseaseName = r.DiseaseName";
 		String selectSQL = "SELECT * FROM DISEASES d";
 		
 		
-		List<Diseases> output = new ArrayList<Diseases>();
+		output = new ArrayList<Diseases>();
 		
 		
-		ResultSet rs = stmt.executeQuery(selectSQL);
+		rs = stmt.executeQuery(selectSQL);
 	
 
 		while(rs.next())
@@ -87,6 +120,13 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 			}
 			
 			output.add(new Diseases(disName,disDescription, recommendationIds, limitsIds));
+		} 
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
 		
 		return output;
@@ -94,48 +134,56 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 
 	public Diseases getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
-        Statement stmt = conn.createStatement();
-	    
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+        Diseases output = null;    
 	
-		//Cross check if works
-        String selectSQL = "SELECT * FROM DISEASES d where diseaseName ="+ String.valueOf(id);
-		
-		
-		Diseases output = null;
-		
-		
-		ResultSet rs = stmt.executeQuery(selectSQL);
-	
+        try {
+        	
+		    conn = getConnection();
+		    stmt = conn.createStatement();
+		    
+        	String selectSQL = "SELECT * FROM DISEASES d where diseaseName ="+ String.valueOf(id);
+    		
+    		rs = stmt.executeQuery(selectSQL);
+    	
 
-	   if(rs.next())
-		{
-			String disName = rs.getString("DiseaseName");
-			String disDescription = rs.getString("DiseaseDescription");
-			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName ="+disName;
-			
-			List<Integer> recommendationIds = new ArrayList<Integer>();
-			
-			ResultSet rs1 = stmt.executeQuery(selectSQL2);
-			
-			while(rs1.next()) {
-				
-				recommendationIds.add(rs1.getInt("recommendationIds"));
-			}
-			
-            String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName ="+disName;
-			
-			List<Integer> limitsIds = new ArrayList<Integer>();
-			
-			ResultSet rs2 = stmt.executeQuery(selectSQL3);
-			
-			while(rs2.next()) {
-				
-				limitsIds.add(rs2.getInt("limitId"));
-			}
-			
-			output = new Diseases(disName,disDescription, recommendationIds, limitsIds);
+    	   if(rs.next())
+    		{
+    			String disName = rs.getString("DiseaseName");
+    			String disDescription = rs.getString("DiseaseDescription");
+    			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName ="+disName;
+    			
+    			List<Integer> recommendationIds = new ArrayList<Integer>();
+    			
+    			ResultSet rs1 = stmt.executeQuery(selectSQL2);
+    			
+    			while(rs1.next()) {
+    				
+    				recommendationIds.add(rs1.getInt("recommendationIds"));
+    			}
+    			
+                String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName ="+disName;
+    			
+    			List<Integer> limitsIds = new ArrayList<Integer>();
+    			
+    			ResultSet rs2 = stmt.executeQuery(selectSQL3);
+    			
+    			while(rs2.next()) {
+    				
+    				limitsIds.add(rs2.getInt("limitId"));
+    			}
+    			
+    			output = new Diseases(disName,disDescription, recommendationIds, limitsIds);
+    		}
+        } catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
 		}
-		
 		return output;
 	}
 }
