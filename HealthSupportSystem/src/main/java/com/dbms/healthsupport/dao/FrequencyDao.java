@@ -35,8 +35,8 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 	   try{ 
 		conn = getConnection();
 		stmt = conn.createStatement();
-		String insertSQL = " INSERT INTO FREQUENCY values ("
-				+ x.getFrequencyName() + "," 
+		String insertSQL = " INSERT INTO FREQUENCY values (\'"
+				+ x.getFrequencyName() + "\'," 
 				+ x.getDuration()
 				+ ")";
 		 
@@ -75,7 +75,7 @@ public class FrequencyDao implements DaoInterface<Frequency> {
          rs = stmt.executeQuery(selectSQL);
 		
 		if(rs.next()){
-			String frequencyDesc = rs.getString("frequencyDesc");
+			String frequencyDesc = rs.getString("frequencyName");
 			Integer duration = rs.getInt("duration");
 			
 			return new Frequency(frequencyDesc, duration);
