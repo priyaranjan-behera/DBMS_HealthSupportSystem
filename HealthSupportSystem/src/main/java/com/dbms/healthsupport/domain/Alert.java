@@ -10,10 +10,6 @@ public class Alert {
 	Integer limitId;
 	Integer recommendationId;
 	
-	
-
-	
-	
 	public Alert(Integer alertId, String alertType, String actionTaken, Long patientId, Integer limitId,
 			Integer recommendationId) {
 		super();
