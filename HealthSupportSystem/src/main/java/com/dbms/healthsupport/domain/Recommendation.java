@@ -2,7 +2,16 @@ package com.dbms.healthsupport.domain;
 
 public class Recommendation {
 	
-	public Recommendation(Integer recId, String frequencyName, Integer threshold, Integer observationSpecification) {
+
+	Integer recId;
+	String frequencyName;
+	Integer threshold;
+	String observationSpecification;
+
+	
+	
+	
+	public Recommendation(Integer recId, String frequencyName, Integer threshold, String observationSpecification) {
 		super();
 		this.recId = recId;
 		this.frequencyName = frequencyName;
@@ -10,11 +19,13 @@ public class Recommendation {
 		this.observationSpecification = observationSpecification;
 	}
 
-	Integer recId;
-	String frequencyName;
-	Integer threshold;
-	
-	Integer observationSpecification;
+	public String getObservationSpecification() {
+		return observationSpecification;
+	}
+
+	public void setObservationSpecification(String observationSpecification) {
+		this.observationSpecification = observationSpecification;
+	}
 
 	public Integer getRecId() {
 		return recId;
@@ -40,13 +51,6 @@ public class Recommendation {
 		this.threshold = threshold;
 	}
 
-	public Integer getObservationSpecification() {
-		return observationSpecification;
-	}
-
-	public void setObservationSpecification(Integer observationSpecification) {
-		this.observationSpecification = observationSpecification;
-	}
 	
 
 }
