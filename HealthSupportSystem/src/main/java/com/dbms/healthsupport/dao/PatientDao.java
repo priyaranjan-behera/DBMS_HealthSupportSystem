@@ -18,7 +18,7 @@ public class PatientDao implements DaoInterface<Patient> {
 	
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075");
 		
 	}
 	
@@ -37,9 +37,11 @@ public class PatientDao implements DaoInterface<Patient> {
 		    
 			String insertSQL = " INSERT INTO PATIENT values ("
 					+ x.getSsn() + "," 
-					+ x.getDob() + ","
+					+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + ",\'"
 					+ x.getGender()
-					+ ")";
+					+ "\')";
+			
+			 System.out.println("Query is: " + insertSQL);
 			 
 			rs = stmt.executeQuery(insertSQL);
 		}catch (Exception e) {
@@ -102,7 +104,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM PATIENT  WHERE ssn = " + (Long)ssn;
+			String selectSQL = "SELECT * FROM PATIENT  WHERE patientSSN = " + (Long)ssn;
 			rs = stmt.executeQuery(selectSQL);
 			
 
@@ -115,7 +117,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				People people=peopleDao.getDataById(ssn);
 				
 				//Only those health supporters that have auth date before current date should be retrieved.
-				String selectSQL1 = "SELECT * FROM PatientAssignedToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\"primary\"";
+				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\'primary\'";
 				ResultSet rs1 = stmt.executeQuery(selectSQL1);
 				Long primaryHealthSupporter=null;
 				if(rs1.next()){
@@ -123,7 +125,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				}
 				
 				
-				String selectSQL2 = "SELECT * FROM PatientAssignedToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\"secondary\"";
+				String selectSQL2 = "SELECT * FROM PatientToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\'secondary\'";
 				ResultSet rs2 = stmt.executeQuery(selectSQL2);
 				
 				List<Long> secondaryHealthSupporters=new ArrayList<Long>();
@@ -147,7 +149,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					recommendations.add(rs4.getInt("recommendationId"));
 				}
 				
-				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = " + (Long)ssn + "UNION" + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = " + (Long)ssn;
+				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = " + (Long)ssn + " UNION " + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = " + (Long)ssn;
 				ResultSet rs5 = stmt.executeQuery(selectSQL5);
 				
 				List<String> diseases=new ArrayList<String>();

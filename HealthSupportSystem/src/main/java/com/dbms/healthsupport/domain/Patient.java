@@ -41,6 +41,13 @@ public class Patient extends People {
 		this.observations = patient.getObservations();
 	}
 	
+	public Patient(People people, Date dob, String gender)
+	{
+		super(people);
+		this.dob = dob;
+		this.gender = gender;
+	}
+	
 
 	public Date getDob() {
 		return dob;
