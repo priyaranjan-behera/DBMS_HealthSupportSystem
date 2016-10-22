@@ -20,10 +20,6 @@ public class WellPatientHasMinorDiseaseDao{
 		
 	}
 	
-	/*
-	 * CREATE TABLE WellPatientHasMinorDisease ( PatientSSN Integer, DiseaseName varchar(30), PRIMARY KEY(PatientSSN, DiseaseName));
-	 * */
-
 	public void addDiseaseDiagnoses(WellPatient x, Diseases y) throws Exception {
 		// TODO Auto-generated method stub
 		

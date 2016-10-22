@@ -20,7 +20,7 @@ public class SickPatientHasMajorDiseaseDao  {
 		
 	}
 
-	public void addDiseaseDiagnoses(SickPatient x, Diseases y) throws Exception {
+	public void addDiseaseDiagnoses(Patient x, Diseases y) throws Exception {
 		// TODO Auto-generated method stub
 		
 
@@ -34,6 +34,7 @@ public class SickPatientHasMajorDiseaseDao  {
 			conn = getConnection();
 			
 			stmt = conn.createStatement();
+			
 		    
 			String insertSQL = " INSERT INTO SickHasMajorDisease values ("
 					+ x.getSsn() + ","
