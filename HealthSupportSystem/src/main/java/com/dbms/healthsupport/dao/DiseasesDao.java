@@ -32,10 +32,10 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 		conn = getConnection();
 		stmt = conn.createStatement();
 		
-		String insertSQL = " INSERT INTO DISEASES values ("
-				+ x.getDisName() + "," 
+		String insertSQL = " INSERT INTO DISEASES values (\'"
+				+ x.getDisName() + "\',\'" 
 				+ x.getDisDescription()
-				+ ")";
+				+ "\')";
 		 
         rs = stmt.executeQuery(insertSQL);
 		} catch(Exception e){
@@ -58,9 +58,9 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
         conn = getConnection();
         stmt = conn.createStatement();
         
-		String deleteSQL = " DELETE FROM DISEASES WHERE (DiseaseName="
+		String deleteSQL = " DELETE FROM DISEASES WHERE (DiseaseName=\'"
 				+ x.getDisName()
-				+ ")";
+				+ "\')";
         rs = stmt.executeQuery(deleteSQL);
 	    }catch(Exception e){
 			e.printStackTrace();
@@ -97,7 +97,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 		{
 			String disName = rs.getString("DiseaseName");
 			String disDescription = rs.getString("DiseaseDescription");
-			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName ="+disName;
+			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName =\'"+disName+"\'";
 			
 			List<Integer> recommendationIds = new ArrayList<Integer>();
 			
@@ -108,7 +108,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 				recommendationIds.add(rs1.getInt("recommendationIds"));
 			}
 			
-            String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName ="+disName;
+            String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName =\'"+disName+"\'";
 			
 			List<Integer> limitsIds = new ArrayList<Integer>();
 			
@@ -144,7 +144,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 		    conn = getConnection();
 		    stmt = conn.createStatement();
 		    
-        	String selectSQL = "SELECT * FROM DISEASES d where diseaseName ="+ String.valueOf(id);
+        	String selectSQL = "SELECT * FROM DISEASES d where diseaseName =\'"+ String.valueOf(id) +"\'";
     		
     		rs = stmt.executeQuery(selectSQL);
     	
@@ -153,7 +153,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
     		{
     			String disName = rs.getString("DiseaseName");
     			String disDescription = rs.getString("DiseaseDescription");
-    			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName ="+disName;
+    			String selectSQL2 = "SELECT * FROM RecommendationForDisease r where r.DiseaseName =\'"+disName+"\'";
     			
     			List<Integer> recommendationIds = new ArrayList<Integer>();
     			
@@ -164,7 +164,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
     				recommendationIds.add(rs1.getInt("recommendationIds"));
     			}
     			
-                String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName ="+disName;
+                String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName =\'"+disName+"\'";
     			
     			List<Integer> limitsIds = new ArrayList<Integer>();
     			
