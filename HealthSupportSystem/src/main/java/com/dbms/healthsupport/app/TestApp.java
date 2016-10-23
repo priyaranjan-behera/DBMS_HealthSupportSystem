@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import com.dbms.healthsupport.dao.DiseasesDao;
-import com.dbms.healthsupport.dao.FrequencyDao;
 import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
@@ -50,39 +48,29 @@ static void testHealthSupporter() throws Exception
 	healthSupporter = healthSupporterDao.getDataById(new Long(1));
 	
 	System.out.println("Name: "+ healthSupporter.getFirstName() +"Contact Number: " + healthSupporter.getContactNumber());
+		testUpdatePeople();
+		//testUpdateHealthSupporter();
+			}
 
-}
+	static void testUpdatePeople()throws Exception{
+		
+		PatientDao patientDao = new PatientDao();
+		PeopleDao peopleDao = new PeopleDao();
+		
+		People people = peopleDao.getDataById(new Long(1));
+		people.setAddress("avent ferry");
+		people.setFirstName("vivek");
+		people.setLastName("Ette");
+		
+		peopleDao.updatePeopleRow(people);
+		
+		
+	}
 	
-static void testFrequency() throws Exception
-{
-	FrequencyDao frequencyDao = new FrequencyDao();
-	
-	Frequency frequency = new Frequency("Weekly", 7);
-	//frequencyDao.insertRow(frequency);
-	
-	frequency = new Frequency("Daily", 1);
-	//frequencyDao.insertRow(frequency);
-	
-	System.out.println(frequencyDao.getDataById("Weekly").getFrequencyName());
-	System.out.println(frequencyDao.getDataById("Weekly").getDuration());
-}
+	static void testUpdateHealthSupporter(){
+		
+	}
 
-
-static void testDisease() throws Exception
-{
-	DiseasesDao diseasesDao = new DiseasesDao();
-
-	Diseases disease = new Diseases("Heart Disease","Heart Disease Description");
-	//diseasesDao.insertRow(disease);
-	
-	disease = new Diseases("HIV","HIV Description");
-	//diseasesDao.insertRow(disease);
-	
-	System.out.println(diseasesDao.getDataById("HIV").toString());
-	
-}
-	
-	
 static void testPatient() throws Exception
 {
 
