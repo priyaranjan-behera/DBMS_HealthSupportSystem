@@ -17,7 +17,7 @@ public class SickPatientHasMajorDiseaseDao  {
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -65,9 +65,12 @@ public class SickPatientHasMajorDiseaseDao  {
 			e.printStackTrace();
 		}
 		finally {
-			rs.close();
-			stmt.close();
-			conn.close();
+			if(rs != null)
+				rs.close();
+			if(stmt != null)
+				stmt.close();
+			if(conn != null)
+				conn.close();
 		}
 		
 	}

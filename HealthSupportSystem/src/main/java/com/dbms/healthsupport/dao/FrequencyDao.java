@@ -21,7 +21,7 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 	public static Connection getConnection() throws SQLException
 	{
 	 return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 

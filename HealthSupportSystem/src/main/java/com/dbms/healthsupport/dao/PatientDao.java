@@ -18,7 +18,7 @@ public class PatientDao implements DaoInterface<Patient> {
 	
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075");
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060");
 		
 	}
 	
@@ -34,7 +34,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM SICKPATIENT  WHERE patientSSN = " + (Long)ssn;
+			String selectSQL = "SELECT * FROM SICKPATIENT  WHERE patientSSN = \'" + (String)ssn+"\'";
 			rs = stmt.executeQuery(selectSQL);
 			
 			if(rs.next())
@@ -65,8 +65,8 @@ public class PatientDao implements DaoInterface<Patient> {
 			
 			stmt = conn.createStatement();
 		    
-			String insertSQL = " INSERT INTO PATIENT values ("
-					+ x.getSsn() + "," 
+			String insertSQL = " INSERT INTO PATIENT values (\'"
+					+ x.getSsn() + "\'," 
 					+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + ",\'"
 					+ x.getGender()
 					+ "\')";
@@ -99,9 +99,9 @@ public class PatientDao implements DaoInterface<Patient> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String deleteSQL = " DELETE FROM PATIENT WHERE (ssn="
+			String deleteSQL = " DELETE FROM PATIENT WHERE (ssn=\'"
 					+ x.getSsn()
-					+ ")";
+					+ "\')";
 			 
 			rs = stmt.executeQuery(deleteSQL);
 		}
@@ -126,7 +126,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String updateSQL = "UPDATE PATIENT SET dob ="+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + "," + "gender ="+ x.getGender() +" WHERE (ssn="+ x.getSsn() +")";
+			String updateSQL = "UPDATE PATIENT SET dob ="+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + "," + "gender ="+ x.getGender() +" WHERE (ssn=\'"+ x.getSsn() +"\')";
 		
 			stmt.executeUpdate(updateSQL);
 			
@@ -159,7 +159,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM PATIENT  WHERE patientSSN = " + String.valueOf(ssn);
+			String selectSQL = "SELECT * FROM PATIENT  WHERE patientSSN = \'" + String.valueOf(ssn)+"\'";
 			rs = stmt.executeQuery(selectSQL);
 			
 
@@ -172,7 +172,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				People people=peopleDao.getDataById(ssn);
 				
 				//Only those health supporters that have auth date before current date should be retrieved.
-				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = " + String.valueOf(ssn) + "AND primarySecondary =\'primary\'";
+				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = \'" + String.valueOf(ssn) + "\'AND primarySecondary =\'primary\'";
 				ResultSet rs1 = stmt.executeQuery(selectSQL1);
 				Long primaryHealthSupporter=null;
 				if(rs1.next()){
@@ -180,7 +180,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				}
 				
 				
-				String selectSQL2 = "SELECT * FROM PatientToHealthSupporter  WHERE PatientSSN = " +String.valueOf(ssn) + "AND primarySecondary =\'secondary\'";
+				String selectSQL2 = "SELECT * FROM PatientToHealthSupporter  WHERE PatientSSN = \'" +String.valueOf(ssn) + "\'AND primarySecondary =\'secondary\'";
 				ResultSet rs2 = stmt.executeQuery(selectSQL2);
 				
 				List<String> secondaryHealthSupporters=new ArrayList<String>();
@@ -188,7 +188,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					secondaryHealthSupporters.add(rs2.getString("HsSSN"));
 				}
 				
-				String selectSQL3 = "SELECT * FROM LimitsForPatient  WHERE PatientSSN = " + String.valueOf(ssn);
+				String selectSQL3 = "SELECT * FROM LimitsForPatient  WHERE PatientSSN = \'" + String.valueOf(ssn)+"\'";
 				ResultSet rs3 = stmt.executeQuery(selectSQL3);
 				
 				List<Integer> limits=new ArrayList<Integer>();
@@ -196,7 +196,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					limits.add(rs3.getInt("limitId"));
 				}
 				
-				String selectSQL4 = "SELECT * FROM RecommendationForPatient  WHERE PatientSSN = " + String.valueOf(ssn);
+				String selectSQL4 = "SELECT * FROM RecommendationForPatient  WHERE PatientSSN = \'" + String.valueOf(ssn)+"\'";
 				ResultSet rs4 = stmt.executeQuery(selectSQL4);
 				
 				List<Integer> recommendations=new ArrayList<Integer>();
@@ -204,20 +204,20 @@ public class PatientDao implements DaoInterface<Patient> {
 					recommendations.add(rs4.getInt("recommendationId"));
 				}
 				
-				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = " + String.valueOf(ssn)+ " UNION " + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = " + String.valueOf(ssn);
+				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = \'" + String.valueOf(ssn)+ "\' UNION " + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = \'" + String.valueOf(ssn) + "\'";
 				ResultSet rs5 = stmt.executeQuery(selectSQL5);
 				
 				List<String> diseases=new ArrayList<String>();
 				while(rs5.next()){
-					diseases.add(rs4.getString("diseaseName"));
+					diseases.add(rs5.getString("diseaseName"));
 				}
 				
-				String selectSQL6 = "SELECT * FROM Observation WHERE PatientSSN="+ ssn ;
+				String selectSQL6 = "SELECT * FROM Observation WHERE PatientSSN=\'"+ ssn + "\'";
 				ResultSet rs6 = stmt.executeQuery(selectSQL6);
 				
 				List<Integer> observations=new ArrayList<Integer>();
 				while(rs6.next()){
-					observations.add(rs4.getInt("observation"));
+					observations.add(rs6.getInt("observation"));
 				}
 				
 				

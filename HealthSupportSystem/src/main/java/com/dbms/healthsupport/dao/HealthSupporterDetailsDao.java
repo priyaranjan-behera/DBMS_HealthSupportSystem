@@ -20,7 +20,7 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -43,8 +43,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN="+patientSSN +
-				" AND HSSSN=" + HSSSN;
+		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
+				"\' AND HSSSN=\'" + (String)HSSSN+"\'";
 		 
 		
 		rs = stmt.executeQuery(selectSQL);
@@ -93,8 +93,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-				" AND PRIMARYSECONDARY = 'primary'";
+		String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
+				"\' AND PRIMARYSECONDARY = 'primary'";
 		 
 		
 		rs = stmt.executeQuery(selectSQL);
@@ -106,9 +106,9 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		}
 		
 		String insertSQL = "INSERT INTO PATIENTTOHEALTHSUPPORTER values("
-				+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ","+ "\'" + "primary"+ "\',"
-				+ (Long) HSSSN + ","
-				+ (Long) patientSSN+")";
+				+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ","+ "\'" + "primary"+ "\',\'"
+				+ (String) HSSSN + "\',\'"
+				+ (String) patientSSN+"\')";
 		
 		 
 		rs1 = stmt.executeQuery(insertSQL);
@@ -142,8 +142,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			con = getConnection();
 			stmt = con.createStatement();
 		    
-			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-					" AND PRIMARYSECONDARY = 'secondary'";
+			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
+					"\' AND PRIMARYSECONDARY = 'secondary'";
 			 
 			
 			rs = stmt.executeQuery(selectSQL);
@@ -154,9 +154,9 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			}
 			
 			String insertSQL = "INSERT INTO PATIENTTOHEALTHSUPPORTER values("
-					+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ",\'" + "secondary"+ "\',"
-					+ (Long) HSSSN+ ","
-					+ (Long) patientSSN+")";
+					+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ",\'" + "secondary"+ "\',\'"
+					+ (String) HSSSN+ "\',\'"
+					+ (String) patientSSN+"\')";
 			
 			 
 			rs1 = stmt.executeQuery(insertSQL);
@@ -193,9 +193,9 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String deleteSQL = " DELETE FROM PATIENT WHERE (HSSSN="
-				+ (Integer)HSSSN +" AND PATIENTSSN=" +(Integer)patientSSN
-				+ ")";
+		String deleteSQL = " DELETE FROM PATIENT WHERE (HSSSN=\'"
+				+ (String)HSSSN +"\' AND PATIENTSSN=\'" +(String)patientSSN
+				+ "\')";
 	 
 		
 		rs = stmt.executeQuery(deleteSQL);
@@ -232,8 +232,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		stmt = con.createStatement();
 	    
 		if(new PatientDao().isSick(patientSSN)){
-			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-					" AND PRIMARYSECONDARY = 'secondary'";
+			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
+					"\' AND PRIMARYSECONDARY = 'secondary'";
 			 
 			
 			rs = stmt.executeQuery(selectSQL);
@@ -241,8 +241,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			if (rs.next()){
 				String updateSQL = "UPDATE PATIENTTOHEALTHSUPPORTER "
 						+ "SET PRIMARYSECONDARY = 'primary' "
-						+ "WHERE PatientSSN="+(Long)patientSSN +
-						" AND PRIMARYSECONDARY = secondary";
+						+ "WHERE PatientSSN=\n"+(String)patientSSN +
+						"\n AND PRIMARYSECONDARY = secondary";
 				rs1 = stmt.executeQuery(updateSQL);
 			
 			}else{
@@ -254,9 +254,9 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		}
 		
 		
-		String deleteSQL = " DELETE FROM PATIENTTOHEALTHSUPPORTER WHERE (HSSSN="
-				+ (Long)HSSSN +" AND PATIENTSSN=" +(Long)patientSSN
-				+ ")";
+		String deleteSQL = " DELETE FROM PATIENTTOHEALTHSUPPORTER WHERE (HSSSN=\'"
+				+ (String)HSSSN +"\' AND PATIENTSSN=\'" +(String)patientSSN
+				+ "\')";
 	 
 		rs2 = stmt.executeQuery(deleteSQL);
 		rs2.close();

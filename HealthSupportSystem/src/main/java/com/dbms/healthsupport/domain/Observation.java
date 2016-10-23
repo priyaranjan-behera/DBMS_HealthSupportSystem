@@ -1,26 +1,47 @@
 package com.dbms.healthsupport.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Observation {
 
 	Integer observationId;
-	String observationValue;
 	Date observationTime;
 	Date recordedTime;
 	String patientId;
 	String observationSpecification;
+	List<ObservationMetricDetails> metricDetails;	
+
+
+
+
 	
-	public Observation(Integer observationId, String observationValue, Date observationTime, Date recordedTime,
-			String patientId, String observationSpecification) {
+	
+
+	public Observation(Integer observationId, Date observationTime, Date recordedTime, String patientId,
+			String observationSpecification, List<ObservationMetricDetails> metricDetails) {
 		super();
 		this.observationId = observationId;
-		this.observationValue = observationValue;
 		this.observationTime = observationTime;
 		this.recordedTime = recordedTime;
 		this.patientId = patientId;
 		this.observationSpecification = observationSpecification;
+		this.metricDetails = metricDetails;
 	}
+
+
+
+	public List<ObservationMetricDetails> getMetricDetails() {
+		return metricDetails;
+	}
+
+
+
+	public void setMetricDetails(List<ObservationMetricDetails> metricDetails) {
+		this.metricDetails = metricDetails;
+	}
+
+
 
 	public Integer getObservationId() {
 		return observationId;
@@ -28,14 +49,6 @@ public class Observation {
 
 	public void setObservationId(Integer observationId) {
 		this.observationId = observationId;
-	}
-
-	public String getObservationValue() {
-		return observationValue;
-	}
-
-	public void setObservationValue(String observationValue) {
-		this.observationValue = observationValue;
 	}
 
 	public Date getObservationTime() {
