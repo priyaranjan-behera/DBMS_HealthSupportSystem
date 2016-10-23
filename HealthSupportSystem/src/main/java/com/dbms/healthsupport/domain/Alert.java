@@ -6,11 +6,11 @@ public class Alert {
 	String alertType;
 	String actionTaken;
 	
-	Long patientId;
+	String patientId;
 	Integer limitId;
 	Integer recommendationId;
 	
-	public Alert(Integer alertId, String alertType, String actionTaken, Long patientId, Integer limitId,
+	public Alert(Integer alertId, String alertType, String actionTaken, String patientId, Integer limitId,
 			Integer recommendationId) {
 		super();
 		this.alertId = alertId;
@@ -21,7 +21,7 @@ public class Alert {
 		this.recommendationId = recommendationId;
 	}
 	
-	public Alert(Integer alertId, String alertType, String actionTaken, Long patientId, Integer limitId,
+	public Alert(Integer alertId, String alertType, String actionTaken, String patientId, Integer limitId,
 			Boolean isLimit) {
 		super();
 		this.alertId = alertId;
@@ -52,10 +52,10 @@ public class Alert {
 	public void setActionTaken(String actiontaken) {
 		this.actionTaken = actiontaken;
 	}
-	public Long getPatientId() {
+	public String getPatientId() {
 		return patientId;
 	}
-	public void setPatientId(Long patientId) {
+	public void setPatientId(String patientId) {
 		this.patientId = patientId;
 	}
 	public Integer getLimitId() {

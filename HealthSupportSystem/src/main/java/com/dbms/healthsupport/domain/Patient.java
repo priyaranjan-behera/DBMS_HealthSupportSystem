@@ -9,14 +9,14 @@ public class Patient extends People {
 	String gender;
 	
 	Long primaryHealthSupporter;
-	List<Long> secondaryHealthSupporters;
+	List<String> secondaryHealthSupporters;
 	List<Integer>recommendations;
 	List<Integer>limits; 
 	List<String> diseases;
 	List<Integer> observations;
 	
-	public Patient(Long ssn, String firstName, String lastName, String address, String password, Date dob,
-			String gender, Long primaryHealthSupporter, List<Long> secondaryHealthSupporters,
+	public Patient(String ssn, String firstName, String lastName, String address, String password, Date dob,
+			String gender, Long primaryHealthSupporter, List<String> secondaryHealthSupporters,
 			List<Integer> recommendations, List<Integer> limits, List<String> diseases, List<Integer> observations) {
 		super(ssn, firstName, lastName, address, password);
 		this.dob = dob;
@@ -79,12 +79,12 @@ public class Patient extends People {
 	}
 
 
-	public List<Long> getSecondaryHealthSupporters() {
+	public List<String> getSecondaryHealthSupporters() {
 		return secondaryHealthSupporters;
 	}
 
 
-	public void setSecondaryHealthSupporters(List<Long> secondaryHealthSupporters) {
+	public void setSecondaryHealthSupporters(List<String> secondaryHealthSupporters) {
 		this.secondaryHealthSupporters = secondaryHealthSupporters;
 	}
 

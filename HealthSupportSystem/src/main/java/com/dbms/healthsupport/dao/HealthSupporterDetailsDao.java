@@ -24,9 +24,6 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		
 	}
 
-	
-	
-
 	public HealthSupporterDetails getDataById(Object id) throws Exception {
 		return null;
 	}
@@ -46,15 +43,15 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-				" AND HSSSN=" + (Long)HSSSN;
+		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN="+patientSSN +
+				" AND HSSSN=" + HSSSN;
 		 
 		
 		rs = stmt.executeQuery(selectSQL);
 		
 		if (rs.next()){
 			Date authDate = rs.getDate("authorizationDate");
-			return new HealthSupporterDetails((Long)patientSSN, (Long)HSSSN, authDate);
+			return new HealthSupporterDetails(String.valueOf(patientSSN), String.valueOf(HSSSN), authDate);
 		}
 				
 		return output;

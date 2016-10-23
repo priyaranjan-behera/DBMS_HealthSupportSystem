@@ -4,27 +4,27 @@ import java.sql.Date;
 
 public class HealthSupporterDetails {
 
-	Long patientSSN;
-	Long healthSupporterSSN;
+	String patientSSN;
+	String healthSupporterSSN;
 	Date authDate;
 	
-	public HealthSupporterDetails(Long patientSSN, Long healthSupporterSSN, Date authDate) {
+	public HealthSupporterDetails(String patientSSN, String healthSupporterSSN, Date authDate) {
 		super();
 		this.patientSSN = patientSSN;
 		this.healthSupporterSSN = healthSupporterSSN;
 		this.authDate = authDate;
 	}
 	
-	public Long getPatientSSN() {
+	public String getPatientSSN() {
 		return patientSSN;
 	}
-	public void setPatientSSN(Long patientSSN) {
+	public void setPatientSSN(String patientSSN) {
 		this.patientSSN = patientSSN;
 	}
-	public Long getHealthSupporterSSN() {
+	public String getHealthSupporterSSN() {
 		return healthSupporterSSN;
 	}
-	public void setHealthSupporterSSN(Long healthSupporterSSN) {
+	public void setHealthSupporterSSN(String healthSupporterSSN) {
 		this.healthSupporterSSN = healthSupporterSSN;
 	}
 	public Date getAuthDate() {

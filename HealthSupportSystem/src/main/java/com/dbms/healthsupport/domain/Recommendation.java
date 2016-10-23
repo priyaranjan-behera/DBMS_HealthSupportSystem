@@ -8,9 +8,6 @@ public class Recommendation {
 	Integer threshold;
 	String observationSpecification;
 
-	
-	
-	
 	public Recommendation(Integer recId, String frequencyName, Integer threshold, String observationSpecification) {
 		super();
 		this.recId = recId;

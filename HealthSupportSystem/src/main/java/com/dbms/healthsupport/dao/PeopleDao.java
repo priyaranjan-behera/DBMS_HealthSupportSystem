@@ -46,7 +46,7 @@ public class PeopleDao implements DaoInterface<People> {
 
 		while(rs.next())
 		{
-			Long ssn = rs.getLong("ssn");
+			String ssn = rs.getString("ssn");
 			String fName = rs.getString("firstName");
 			String lName = rs.getString("lastName");
 			String address = rs.getString("address");
@@ -91,7 +91,7 @@ public class PeopleDao implements DaoInterface<People> {
 				String address = rs.getString("address");
 				String password = rs.getString("password");
 				
-				return new People((Long)ssn, fName, lName, address, password);
+				return new People(String.valueOf(ssn), fName, lName, address, password);
 			}
 			
 		}catch(Exception e)

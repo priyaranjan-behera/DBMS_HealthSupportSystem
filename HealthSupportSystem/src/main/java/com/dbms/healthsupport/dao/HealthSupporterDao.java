@@ -150,7 +150,7 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 		if(rs.next())
 		{
-			Long ssn = rs.getLong("ssn");
+			String ssn = rs.getString("ssn");
 			Long contactNumber = rs.getLong("contactNumber");
 			People people = peopleDao.getDataById(ssn);
 			output=new HealthSupporter(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), people.getPassword(), contactNumber, patients);

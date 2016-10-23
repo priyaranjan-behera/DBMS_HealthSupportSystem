@@ -2,14 +2,14 @@ package com.dbms.healthsupport.domain;
 
 public class People {
 
-	Long ssn;
+	String ssn;
 	String firstName;
 	String lastName;
 	String address;
 	String password; 
 	
 
-	public People(Long ssn, String firstName, String lastName, String address, String password) {
+	public People(String ssn, String firstName, String lastName, String address, String password) {
 		super();
 		this.ssn = ssn;
 		this.firstName = firstName;
@@ -29,11 +29,11 @@ public class People {
 	}
 
 
-	public Long getSsn() {
+	public String getSsn() {
 		return ssn;
 	}
 
-	public void setSsn(Long ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 

@@ -4,8 +4,13 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.dao.LimitsDao;
+import com.dbms.healthsupport.dao.ObservationDao;
+import com.dbms.healthsupport.dao.ObservationSpecDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
 import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
@@ -13,6 +18,9 @@ import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Limits;
+import com.dbms.healthsupport.domain.Observation;
+import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 import com.dbms.healthsupport.domain.WellPatient;
@@ -30,9 +38,42 @@ public class TestApp {
 		//testFrequency();
 		//testHealthSupporter();
 		//testLimits();
+		//testObservationSpec();
+		//testObservation();
 		//testSickPatientHasMajorDisease();
-		testWellPatientHasMinorDisease();
+		//testWellPatientHasMinorDisease();
 	}
+	
+static void testObservation() throws Exception
+{
+	ObservationDao observationDao = new ObservationDao();
+	
+	
+}
+	
+	
+static void testObservationSpec() throws Exception
+{
+	ObservationSpecDao observationSpecDao = new ObservationSpecDao();
+	List<String> metrics = new ArrayList<String>();
+	
+	metrics.add("systolic");
+	metrics.add("diastolic");
+	
+	ObservationSpec observationSpec = new ObservationSpec("Blood Pressure", "Blood Pressure Description", metrics);
+	
+	//observationSpecDao.insertData(observationSpec);
+	
+	observationSpec = observationSpecDao.getDataById("Blood Pressure");
+	
+	System.out.println("Observation Spec: " + observationSpec.getObservationName());
+	
+	
+	
+			
+}
+
+
 	
 
 static void testHealthSupporter() throws Exception
@@ -102,13 +143,13 @@ static void testPeople()
 {
 	try {
 		PeopleDao peopleDao = new PeopleDao();
-		People people = new People(new Long(1), "Sheldon", "Cooper", "2500 Sacramento", "password");
+		People people = new People("1", "Sheldon", "Cooper", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(2), "Leonard", "Hofstader", "2500 Sacramento", "password");
+		people = new People("2", "Leonard", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(3), "Penny", "Hofstader", "2500 Sacramento", "password");
+		people = new People("3", "Penny", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(4), "Ammy", "Farrahfowler", "2500 Sacramento", "password");
+		people = new People("4", "Ammy", "Farrahfowler", "2500 Sacramento", "password");
 		peopleDao.insertRow(people);
 		System.out.println(peopleDao.getDataById(new Long(1)).toString());
 	} catch (Exception e) {
