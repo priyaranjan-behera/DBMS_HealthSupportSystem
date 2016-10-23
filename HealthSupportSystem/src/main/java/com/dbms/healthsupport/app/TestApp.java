@@ -18,9 +18,29 @@ public class TestApp {
 
 	public static void main(String[] args) throws Exception{
 		//testPeople();
-		testPatient();
+		//testPatient();
+		testUpdatePeople();
+		//testUpdateHealthSupporter();
 			}
 
+	static void testUpdatePeople()throws Exception{
+		
+		PatientDao patientDao = new PatientDao();
+		PeopleDao peopleDao = new PeopleDao();
+		
+		People people = peopleDao.getDataById(new Long(1));
+		people.setAddress("avent ferry");
+		people.setFirstName("vivek");
+		people.setLastName("Ette");
+		
+		peopleDao.updatePeopleRow(people);
+		
+		
+	}
+	
+	static void testUpdateHealthSupporter(){
+		
+	}
 
 static void testPatient() throws Exception
 {
