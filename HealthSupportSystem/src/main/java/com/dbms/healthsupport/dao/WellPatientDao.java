@@ -31,7 +31,7 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 		Statement stmt = conn.createStatement();
 	    
 		String insertSQL = " INSERT INTO WELLPATIENT values ("
-				+ x.getSsn() + "," 
+				+ x.getSsn()
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);

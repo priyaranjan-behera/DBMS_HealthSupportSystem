@@ -37,16 +37,27 @@ public class SickPatientHasMajorDiseaseDao  {
 			stmt = conn.createStatement();
 			
 			//This will be a check for shifting well patient to sick patient
-			if(new PatientDao().isSick(x.getSsn())) {
-		    
+			if(new PatientDao().isSick(x.getSsn()) == false) {
+				
+			SickPatient sickPatient = new SickPatient(x);
+			SickPatientDao sickPatientDao = new SickPatientDao();
+			sickPatientDao.insertRow(sickPatient);
+			
 			String insertSQL = " INSERT INTO SickHasMajorDisease values ("
-					+ x.getSsn() + ","
+					+ x.getSsn() + ", \'" 
 					+ y.getDisName()
-					+ ")";
+					+ "\')";
 			
 			 System.out.println("Query is: " + insertSQL);
 			 
 			rs = stmt.executeQuery(insertSQL);
+			
+		    //Check if exists of well patient exists, if so delete
+			WellPatient wellPatient = new WellPatient(x);
+			WellPatientDao wellPatientDao = new WellPatientDao();
+			if(wellPatientDao.getDataById(wellPatient.getSsn()) != null) {
+				wellPatientDao.deleteRow(wellPatient);
+			}			
 			}
 			
 		}catch (Exception e) {
@@ -141,5 +152,8 @@ public class SickPatientHasMajorDiseaseDao  {
 			conn.close();
 		}
 	}
+	
+	
+	
 
 }

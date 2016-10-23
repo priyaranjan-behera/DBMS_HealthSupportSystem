@@ -30,7 +30,7 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 		
 	    
 		String insertSQL = " INSERT INTO SICKPATIENT values ("
-				+ x.getSsn() + "," 
+				+ x.getSsn()
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
