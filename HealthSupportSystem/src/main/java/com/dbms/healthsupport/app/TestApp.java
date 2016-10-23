@@ -114,13 +114,13 @@ static void testPeople()
 {
 	try {
 		PeopleDao peopleDao = new PeopleDao();
-		People people = new People(new Long(1), "Sheldon", "Cooper", "2500 Sacramento", "password");
+		People people = new People("1", "Sheldon", "Cooper", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(2), "Leonard", "Hofstader", "2500 Sacramento", "password");
+		people = new People("2", "Leonard", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(3), "Penny", "Hofstader", "2500 Sacramento", "password");
+		people = new People("3", "Penny", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(4), "Ammy", "Farrahfowler", "2500 Sacramento", "password");
+		people = new People("4", "Ammy", "Farrahfowler", "2500 Sacramento", "password");
 		peopleDao.insertRow(people);
 		System.out.println(peopleDao.getDataById(new Long(1)).toString());
 	} catch (Exception e) {

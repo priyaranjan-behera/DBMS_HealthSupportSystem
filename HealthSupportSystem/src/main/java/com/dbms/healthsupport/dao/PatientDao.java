@@ -134,7 +134,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM PATIENT  WHERE patientSSN = " + (Long)ssn;
+			String selectSQL = "SELECT * FROM PATIENT  WHERE patientSSN = " + String.valueOf(ssn);
 			rs = stmt.executeQuery(selectSQL);
 			
 
@@ -147,7 +147,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				People people=peopleDao.getDataById(ssn);
 				
 				//Only those health supporters that have auth date before current date should be retrieved.
-				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\'primary\'";
+				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = " + String.valueOf(ssn) + "AND primarySecondary =\'primary\'";
 				ResultSet rs1 = stmt.executeQuery(selectSQL1);
 				Long primaryHealthSupporter=null;
 				if(rs1.next()){
@@ -155,15 +155,15 @@ public class PatientDao implements DaoInterface<Patient> {
 				}
 				
 				
-				String selectSQL2 = "SELECT * FROM PatientToHealthSupporter  WHERE PatientSSN = " + (Long)ssn + "AND primarySecondary =\'secondary\'";
+				String selectSQL2 = "SELECT * FROM PatientToHealthSupporter  WHERE PatientSSN = " +String.valueOf(ssn) + "AND primarySecondary =\'secondary\'";
 				ResultSet rs2 = stmt.executeQuery(selectSQL2);
 				
-				List<Long> secondaryHealthSupporters=new ArrayList<Long>();
+				List<String> secondaryHealthSupporters=new ArrayList<String>();
 				while(rs2.next()){
-					secondaryHealthSupporters.add(rs2.getLong("HsSSN"));
+					secondaryHealthSupporters.add(rs2.getString("HsSSN"));
 				}
 				
-				String selectSQL3 = "SELECT * FROM LimitsForPatient  WHERE PatientSSN = " + (Long)ssn ;
+				String selectSQL3 = "SELECT * FROM LimitsForPatient  WHERE PatientSSN = " + String.valueOf(ssn);
 				ResultSet rs3 = stmt.executeQuery(selectSQL3);
 				
 				List<Integer> limits=new ArrayList<Integer>();
@@ -171,7 +171,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					limits.add(rs3.getInt("limitId"));
 				}
 				
-				String selectSQL4 = "SELECT * FROM RecommendationForPatient  WHERE PatientSSN = " + (Long)ssn;
+				String selectSQL4 = "SELECT * FROM RecommendationForPatient  WHERE PatientSSN = " + String.valueOf(ssn);
 				ResultSet rs4 = stmt.executeQuery(selectSQL4);
 				
 				List<Integer> recommendations=new ArrayList<Integer>();
@@ -179,7 +179,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					recommendations.add(rs4.getInt("recommendationId"));
 				}
 				
-				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = " + (Long)ssn + " UNION " + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = " + (Long)ssn;
+				String selectSQL5 = "SELECT * FROM WellPatientHasMinorDisease  WHERE PatientSSN = " + String.valueOf(ssn)+ " UNION " + "SELECT * FROM SickHasMajorDisease  WHERE PatientSSN = " + String.valueOf(ssn);
 				ResultSet rs5 = stmt.executeQuery(selectSQL5);
 				
 				List<String> diseases=new ArrayList<String>();
@@ -187,7 +187,7 @@ public class PatientDao implements DaoInterface<Patient> {
 					diseases.add(rs4.getString("diseaseName"));
 				}
 				
-				String selectSQL6 = "SELECT * FROM Observation WHERE PatientSSN="+ (Long)ssn ;
+				String selectSQL6 = "SELECT * FROM Observation WHERE PatientSSN="+ ssn ;
 				ResultSet rs6 = stmt.executeQuery(selectSQL6);
 				
 				List<Integer> observations=new ArrayList<Integer>();
@@ -196,7 +196,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				}
 				
 				
-				return new Patient((Long)ssn, people.getFirstName(), people.getLastName(), people.getAddress(), people.getPassword(), dob, gender, primaryHealthSupporter, secondaryHealthSupporters, recommendations, limits, diseases, observations);
+				return new Patient(String.valueOf(ssn), people.getFirstName(), people.getLastName(), people.getAddress(), people.getPassword(), dob, gender, primaryHealthSupporter, secondaryHealthSupporters, recommendations, limits, diseases, observations);
 			}
 
 		}catch (Exception e) {

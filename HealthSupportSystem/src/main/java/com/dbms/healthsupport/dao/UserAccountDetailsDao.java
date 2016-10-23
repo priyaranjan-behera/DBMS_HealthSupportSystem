@@ -95,7 +95,7 @@ public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
 
 		while(rs.next())
 		{
-			Long ssn = rs.getLong("SSN");
+			String ssn = rs.getString("SSN");
 			String password = rs.getString("password");
 			
 			output.add(new UserAccountDetails(ssn, password));
@@ -129,7 +129,7 @@ public class UserAccountDetailsDao implements DaoInterface<UserAccountDetails>{
 		{
 			String password = rs.getString("password");
 			
-			return new UserAccountDetails((Long)ssn,password);
+			return new UserAccountDetails(String.valueOf(ssn),password);
 		}
 		}catch(Exception e){
 			e.printStackTrace();
