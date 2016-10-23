@@ -17,7 +17,7 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 	public static Connection getConnection() throws SQLException
 	{
 		return DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075");
 		
 	}
 	
@@ -33,19 +33,19 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String insertSQL = " INSERT INTO OBSERVATIONSPEC values ("
-					+ x.getObservationName() + "," 
+			String insertSQL = " INSERT INTO OBSERVATIONSPEC values (\'"
+					+ x.getObservationName() + "\',\'" 
 					+ x.getDescription()
-					+ ")";
+					+ "\')";
 			
 			rs = stmt.executeQuery(insertSQL);
 			
 			for(String metric: x.getMetrics())
 			{
-				insertSQL = "INSERT INTO METRICINOBSSPEC values ("
-					+ metric + "," 
+				insertSQL = "INSERT INTO METRICINOBSSPEC values (\'"
+					+ metric + "\',\'" 
 					+ x.getObservationName()
-					+ ")";
+					+ "\')";
 				
 				rs = stmt.executeQuery(insertSQL);
 			}
@@ -75,9 +75,9 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String deleteSQL = " DELETE FROM OBSERVATIONSPEC WHERE (observationName="
+			String deleteSQL = " DELETE FROM OBSERVATIONSPEC WHERE (observationName=\'"
 					+ x.getObservationName()
-					+ ")";
+					+ "\')";
 			 
 			rs = stmt.executeQuery(deleteSQL);
 			
@@ -142,13 +142,16 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		ResultSet rs1 = null;
+		Statement stmt1 = null;
 		
 		try
 		{
 			conn = getConnection();
 			stmt = conn.createStatement();
+		    stmt1 = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM OBSERVATIONSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+			String selectSQL = "SELECT * FROM OBSERVATIONSPEC WHERE OBSERVATIONSPECNAME=\'"+(String)id+"\'";
 			 
 			ObservationSpec output =null;
 			
@@ -157,13 +160,13 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 
 			while(rs.next())
 			{
-				String observationName = rs.getString("observationName");
+				String observationName = rs.getString("observationSpecName");
 				String description = rs.getString("description");
 				
-				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPEC=)"+(String)id;
+				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE OBSERVATIONSPECNAME=\'"+(String)id+"\'";
 				 
 				List<String> metrics=new ArrayList<String>();
-				ResultSet rs1 = stmt.executeQuery(selectSQL1);
+				rs1 = stmt1.executeQuery(selectSQL1);
 				while(rs1.next()){
 					metrics.add(rs1.getString("METRICNAME"));
 				}
@@ -176,6 +179,8 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
+			rs1.close();
+			stmt1.close();
 			rs.close();
 			stmt.close();
 			conn.close();
