@@ -11,6 +11,11 @@ import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.SickPatient;
 import com.dbms.healthsupport.domain.WellPatient;
 
+//**************************************
+//Fixed: SSN query because SSN is String
+//**************************************
+
+
 public class WellPatientHasMinorDiseaseDao{
 	
 	
@@ -41,8 +46,8 @@ public class WellPatientHasMinorDiseaseDao{
 			WellPatientDao wellPatientDao = new WellPatientDao();
 			wellPatientDao.insertRow(wellPatient);
 			
-			String insertSQL = " INSERT INTO  WellPatientHasMinorDisease values ("
-					+ x.getSsn() + ", \'" 
+			String insertSQL = " INSERT INTO  WellPatientHasMinorDisease values (\'"
+					+ x.getSsn() + "\', \'" 
 					+ y.getDisName()
 					+ "\')";
 			
@@ -73,8 +78,8 @@ public class WellPatientHasMinorDiseaseDao{
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String deleteSQL = " DELETE FROM WellHasMinorDisease WHERE (PatientSSN="
-					+ x.getSsn()+ " AND DiseaseName="
+			String deleteSQL = " DELETE FROM WellHasMinorDisease WHERE (PatientSSN=\'"
+					+ x.getSsn()+ "\' AND DiseaseName="
 				    + y.getDisName()
 					+ ")";
 			 
@@ -103,7 +108,7 @@ public class WellPatientHasMinorDiseaseDao{
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String selectSQL = "SELECT * FROM WellHasMinorDisease WHERE PatientSSN = " + x.getSsn() +" AND DiseaseName="+y.getDisName();
+			String selectSQL = "SELECT * FROM WellHasMinorDisease WHERE PatientSSN = \'" + x.getSsn() +"\' AND DiseaseName="+y.getDisName();
 			rs = stmt.executeQuery(selectSQL);
 			
 
@@ -111,9 +116,9 @@ public class WellPatientHasMinorDiseaseDao{
 			{
 		    
 			String deleteSQL = " UPDATE WellHasMinorDisease SET (DiseaseName="
-				    + y.getDisName() + " WHERE PatientSSN=" 
+				    + y.getDisName() + " WHERE PatientSSN=\'" 
 					+ x.getSsn()
-					+ ")";
+					+ "\')";
 			 
 			rs = stmt.executeQuery(deleteSQL); 
 			} else{

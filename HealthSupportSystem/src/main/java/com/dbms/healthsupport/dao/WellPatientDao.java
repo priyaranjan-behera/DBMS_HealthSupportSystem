@@ -14,6 +14,11 @@ import com.dbms.healthsupport.domain.People;
 import com.dbms.healthsupport.domain.SickPatient;
 import com.dbms.healthsupport.domain.WellPatient;
 
+//**************************************
+//Fixed: SSN query because SSN is String
+//**************************************
+
+
 public class WellPatientDao implements DaoInterface<WellPatient> {
 
 	Connection conn;
@@ -30,9 +35,9 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
 	    
-		String insertSQL = " INSERT INTO WELLPATIENT values ("
+		String insertSQL = " INSERT INTO WELLPATIENT values (\'"
 				+ x.getSsn()
-				+ ")";
+				+ "\')";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
 		stmt.close();
@@ -60,13 +65,13 @@ public class WellPatientDao implements DaoInterface<WellPatient> {
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-		String selectSQL = "SELECT * FROM SICKPATIENT WHERE patientSSN = " + (Long)id; 
+		String selectSQL = "SELECT * FROM SICKPATIENT WHERE patientSSN = " + id; 
 		
 		rs = stmt.executeQuery(selectSQL);
 		
 		if(rs.next())
 		{
-			Long patientSSN = rs.getLong("patientSSN");
+			String patientSSN = rs.getString("patientSSN");
 			PatientDao patientDao = new PatientDao();
 			return new WellPatient(patientDao.getDataById(patientSSN));
 		}
