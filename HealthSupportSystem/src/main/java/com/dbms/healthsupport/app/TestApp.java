@@ -11,6 +11,12 @@ import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
+
+import com.dbms.healthsupport.dao.DiseasesDao;
+import com.dbms.healthsupport.dao.FrequencyDao;
+import com.dbms.healthsupport.dao.HealthSupporterDao;
+
+import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
 import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
@@ -42,14 +48,9 @@ public class TestApp {
 		//testObservation();
 		//testSickPatientHasMajorDisease();
 		//testWellPatientHasMinorDisease();
+	
+		testAllocateHSToPatient();
 	}
-	
-static void testObservation() throws Exception
-{
-	ObservationDao observationDao = new ObservationDao();
-	
-	
-}
 	
 	
 static void testObservationSpec() throws Exception
@@ -199,6 +200,21 @@ static void testWellPatientHasMinorDisease() {
  		
 		
 	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+static void testAllocateHSToPatient(){
+	try{
+		HealthSupporterDetailsDao hsddao=new HealthSupporterDetailsDao();
+		hsddao.assignHS(new Long(2),new Long(1),java.sql.Date.valueOf("1984-05-26"), true);
+		hsddao.assignHS(new Long(3),new Long(1),java.sql.Date.valueOf("1984-05-26"), true);
+		hsddao.assignHS(new Long(2),new Long(3),java.sql.Date.valueOf("1984-05-26"),false);
+		hsddao.removePrimaryHS(new Long(2),new Long(1));
+		//hsddao.removePrimaryHS(1, 5);
+		
+	}catch (Exception e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }

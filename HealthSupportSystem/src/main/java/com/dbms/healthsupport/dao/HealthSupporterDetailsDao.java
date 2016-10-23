@@ -71,14 +71,14 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 	return output;
 	}
 	
-	public void assignHS(Object patientSSN,Object HSSSN, boolean isprimary) throws Exception {
+	public void assignHS(Object patientSSN,Object HSSSN, Date d,boolean isprimary) throws Exception {
 		if(isprimary)
-			assignPrimaryHS(patientSSN,HSSSN);
+			assignPrimaryHS(patientSSN,HSSSN,d);
 		else
-			assignSecondaryHS(patientSSN,HSSSN);
+			assignSecondaryHS(patientSSN,HSSSN,d);
 	}
 
-	public void assignPrimaryHS(Object patientSSN, Object HSSSN) throws Exception {
+	public void assignPrimaryHS(Object patientSSN, Object HSSSN, Date d) throws Exception {
 		// TODO Auto-generated method stub
 
 		Connection con = null;
@@ -94,22 +94,21 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		stmt = con.createStatement();
 	    
 		String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-				" AND PRIMARYSECONDARY = primary";
+				" AND PRIMARYSECONDARY = 'primary'";
 		 
 		
 		rs = stmt.executeQuery(selectSQL);
 		
 		if (rs.next()){
+			System.out.println(rs.getInt("patientSSN"));
 			System.out.println("Primary Health Supporter has been assigned");
 			return ;
 		}
-		rs.close();
 		
 		String insertSQL = "INSERT INTO PATIENTTOHEALTHSUPPORTER values("
-				+ System.currentTimeMillis() + "," 
-				+ "\'" + "primary"+ "\',"
-				+ (Long) patientSSN+
-				+ (Long) HSSSN+")";
+				+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ","+ "\'" + "primary"+ "\',"
+				+ (Long) HSSSN + ","
+				+ (Long) patientSSN+")";
 		
 		 
 		rs1 = stmt.executeQuery(insertSQL);
@@ -119,15 +118,17 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			e.printStackTrace();
 		}
 		finally {
-			rs.close();
-			rs1.close();
+			if(rs!=null)
+				rs.close();
+			if(rs1!=null)
+				rs.close();
 			stmt.close();
 			con.close();
 			
 		}
 	}
 
-	public void assignSecondaryHS(Object patientSSN, Object HSSSN) throws Exception {
+	public void assignSecondaryHS(Object patientSSN, Object HSSSN, Date d) throws Exception {
 			// TODO Auto-generated method stub
 
 			Connection con = null;
@@ -142,7 +143,7 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			stmt = con.createStatement();
 		    
 			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-					" AND PRIMARYSECONDARY = secondary";
+					" AND PRIMARYSECONDARY = 'secondary'";
 			 
 			
 			rs = stmt.executeQuery(selectSQL);
@@ -153,10 +154,9 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			}
 			
 			String insertSQL = "INSERT INTO PATIENTTOHEALTHSUPPORTER values("
-					+ System.currentTimeMillis() + "," 
-					+ "\'" + "secondary"+ "\',"
-					+ (Long) patientSSN+
-					+ (Long) HSSSN+")";
+					+ "TO_DATE(\'"+d + "\',\'YYYY-MM-DD\')" + ",\'" + "secondary"+ "\',"
+					+ (Long) HSSSN+ ","
+					+ (Long) patientSSN+")";
 			
 			 
 			rs1 = stmt.executeQuery(insertSQL);
@@ -168,8 +168,10 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 				e.printStackTrace();
 			}
 			finally {
-				rs.close();
-				rs1.close();
+				if(rs!=null)
+					rs.close();
+				if(rs1!=null)
+					rs1.close();
 				stmt.close();
 				con.close();
 				
@@ -220,6 +222,8 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
 		
 		try
 		{
@@ -229,28 +233,33 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 	    
 		if(new PatientDao().isSick(patientSSN)){
 			String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN="+(Long)patientSSN +
-					" AND PRIMARYSECONDARY = secondary";
+					" AND PRIMARYSECONDARY = 'secondary'";
 			 
 			
 			rs = stmt.executeQuery(selectSQL);
+
+			if (rs.next()){
+				String updateSQL = "UPDATE PATIENTTOHEALTHSUPPORTER "
+						+ "SET PRIMARYSECONDARY = 'primary' "
+						+ "WHERE PatientSSN="+(Long)patientSSN +
+						" AND PRIMARYSECONDARY = secondary";
+				rs1 = stmt.executeQuery(updateSQL);
 			
-			if (!rs.next()){
+			}else{
 				System.out.println("Cannot remove primary supporter");
-				return ;
+				throw new Exception("Cannot remove primary supporter");
+			
 			}
-			String updateSQL = "UPDATE PATIENTTOHEALTHSUPPORTER "
-					+ "SET PRIMARYSECONDARY = 'primary' "
-					+ "WHERE PatientSSN="+(Long)patientSSN +
-					" AND PRIMARYSECONDARY = secondary";
-			rs = stmt.executeQuery(selectSQL);
+			
 		}
 		
 		
-		String deleteSQL = " DELETE FROM PATIENT WHERE (HSSSN="
-				+ (Integer)HSSSN +" AND PATIENTSSN=" +(Integer)patientSSN
+		String deleteSQL = " DELETE FROM PATIENTTOHEALTHSUPPORTER WHERE (HSSSN="
+				+ (Long)HSSSN +" AND PATIENTSSN=" +(Long)patientSSN
 				+ ")";
 	 
-		rs = stmt.executeQuery(deleteSQL);
+		rs2 = stmt.executeQuery(deleteSQL);
+		rs2.close();
 		
 		
 		}catch(Exception e)
@@ -258,7 +267,12 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 			e.printStackTrace();
 		}
 		finally {
-			rs.close();
+			if(rs!=null)
+				rs.close();
+			if(rs1!=null)
+				rs1.close();
+			if(rs2!=null)
+				rs2.close();
 			stmt.close();
 			con.close();
 			
