@@ -4,15 +4,23 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.dbms.healthsupport.dao.DiseasesDao;
 import com.dbms.healthsupport.dao.FrequencyDao;
 import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.dao.LimitsDao;
+import com.dbms.healthsupport.dao.ObservationDao;
+import com.dbms.healthsupport.dao.ObservationSpecDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Limits;
+import com.dbms.healthsupport.domain.Observation;
+import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
@@ -28,10 +36,45 @@ public class TestApp {
 		//testDisease();
 		//testFrequency();
 		//testHealthSupporter();
-		testLimits();
+		//testLimits();
+		//testObservationSpec();
+		//testObservation();
+		
 	}
 	
-static void test
+static void testObservation() throws Exception
+{
+	ObservationDao observationDao = new ObservationDao();
+	
+	
+}
+	
+	
+static void testObservationSpec() throws Exception
+{
+	ObservationSpecDao observationSpecDao = new ObservationSpecDao();
+	List<String> metrics = new ArrayList<String>();
+	
+	metrics.add("systolic");
+	metrics.add("diastolic");
+	
+	ObservationSpec observationSpec = new ObservationSpec("Blood Pressure", "Blood Pressure Description", metrics);
+	
+	//observationSpecDao.insertData(observationSpec);
+	
+	observationSpec = observationSpecDao.getDataById("Blood Pressure");
+	
+	System.out.println("Observation Spec: " + observationSpec.getObservationName());
+	
+	
+	
+			
+}
+
+
+static void testLimits()
+{
+}
 
 static void testHealthSupporter() throws Exception
 {
