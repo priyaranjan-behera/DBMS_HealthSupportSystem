@@ -1,20 +1,12 @@
 package com.dbms.healthsupport.app;
 
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.dbms.healthsupport.dao.HealthSupporterDao;
-import com.dbms.healthsupport.dao.LimitsDao;
-import com.dbms.healthsupport.dao.ObservationDao;
-import com.dbms.healthsupport.dao.ObservationSpecDao;
 
 import com.dbms.healthsupport.dao.DiseasesDao;
 import com.dbms.healthsupport.dao.FrequencyDao;
 import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.dao.ObservationSpecDao;
 
 import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
 import com.dbms.healthsupport.dao.PatientDao;
@@ -24,8 +16,6 @@ import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
-import com.dbms.healthsupport.domain.Limits;
-import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
@@ -52,6 +42,33 @@ public class TestApp {
 		testAllocateHSToPatient();
 	}
 	
+	static void testDisease() throws Exception
+	{
+		DiseasesDao diseasesDao = new DiseasesDao();
+
+		Diseases disease = new Diseases("Heart Disease","Heart Disease Description");
+		//diseasesDao.insertRow(disease);
+		
+		disease = new Diseases("HIV","HIV Description");
+		//diseasesDao.insertRow(disease);
+		
+		System.out.println(diseasesDao.getDataById("HIV").toString());
+		
+	}
+	
+	static void testFrequency() throws Exception
+	{
+		FrequencyDao frequencyDao = new FrequencyDao();
+		
+		Frequency frequency = new Frequency("Weekly", 7);
+		//frequencyDao.insertRow(frequency);
+		
+		frequency = new Frequency("Daily", 1);
+		//frequencyDao.insertRow(frequency);
+		
+		System.out.println(frequencyDao.getDataById("Weekly").getFrequencyName());
+		System.out.println(frequencyDao.getDataById("Weekly").getDuration());
+	}
 	
 static void testObservationSpec() throws Exception
 {
