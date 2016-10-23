@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.Diseases;
+import com.dbms.healthsupport.domain.SickPatient;
 import com.dbms.healthsupport.domain.WellPatient;
 
 public class WellPatientHasMinorDiseaseDao{
@@ -31,9 +32,14 @@ public class WellPatientHasMinorDiseaseDao{
 		
 		try
 		{
+			
 			conn = getConnection();
 			
 			stmt = conn.createStatement();
+			
+			WellPatient wellPatient = new WellPatient(x);
+			WellPatientDao wellPatientDao = new WellPatientDao();
+			wellPatientDao.insertRow(wellPatient);
 			
 			String insertSQL = " INSERT INTO  WellPatientHasMinorDisease values ("
 					+ x.getSsn() + ", \'" 
