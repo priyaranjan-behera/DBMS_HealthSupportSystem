@@ -15,6 +15,8 @@ import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
+import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
@@ -23,6 +25,7 @@ import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
+import com.dbms.healthsupport.domain.WellPatient;
 
 public class TestApp {
 
@@ -39,7 +42,8 @@ public class TestApp {
 		//testLimits();
 		//testObservationSpec();
 		//testObservation();
-		
+		//testSickPatientHasMajorDisease();
+		//testWellPatientHasMinorDisease();
 	}
 	
 static void testObservation() throws Exception
@@ -72,9 +76,7 @@ static void testObservationSpec() throws Exception
 }
 
 
-static void testLimits()
-{
-}
+	
 
 static void testHealthSupporter() throws Exception
 {
@@ -153,13 +155,13 @@ static void testPeople()
 {
 	try {
 		PeopleDao peopleDao = new PeopleDao();
-		People people = new People(new Long(1), "Sheldon", "Cooper", "2500 Sacramento", "password");
+		People people = new People("1", "Sheldon", "Cooper", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(2), "Leonard", "Hofstader", "2500 Sacramento", "password");
+		people = new People("2", "Leonard", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(3), "Penny", "Hofstader", "2500 Sacramento", "password");
+		people = new People("3", "Penny", "Hofstader", "2500 Sacramento", "password");
 		//peopleDao.insertRow(people);
-		people = new People(new Long(4), "Ammy", "Farrahfowler", "2500 Sacramento", "password");
+		people = new People("4", "Ammy", "Farrahfowler", "2500 Sacramento", "password");
 		peopleDao.insertRow(people);
 		System.out.println(peopleDao.getDataById(new Long(1)).toString());
 	} catch (Exception e) {
@@ -168,5 +170,54 @@ static void testPeople()
 	}
 }
 
+static void testSickPatientHasMajorDisease() { 
+	
+	try {
+		
+		SickPatientHasMajorDiseaseDao sickPatientHasMajorDiseaseDao = new SickPatientHasMajorDiseaseDao();
+
+		PeopleDao peopleDao = new PeopleDao();
+		
+		People people = peopleDao.getDataById(new Long(1));
+		Patient patient = new Patient(people, java.sql.Date.valueOf("1984-05-26"), "Male");
+		
+		
+		Diseases disease = new Diseases("HIV", "SLSLSLLSLSLSLLSLSLLSLSLLSLS");
+		
+		sickPatientHasMajorDiseaseDao.addDiseaseDiagnoses(patient, disease);
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+
+static void testWellPatientHasMinorDisease() {
+	
+     try {
+		
+    	WellPatientHasMinorDiseaseDao wellPatientHasMinorDiseaseDao = new WellPatientHasMinorDiseaseDao();
+
+ 		PeopleDao peopleDao = new PeopleDao();
+ 		
+ 		People people = peopleDao.getDataById(new Long(1));
+ 		Patient patient = new Patient(people, java.sql.Date.valueOf("1984-05-26"), "Male");
+ 		WellPatient wellPatient = new WellPatient(patient);
+ 		
+ 		Diseases disease = new Diseases("SICK", "SLSLSLLSLSLSLLSLSLLSLSLLSLS");
+ 		
+ 		wellPatientHasMinorDiseaseDao.addDiseaseDiagnoses(wellPatient, disease);
+ 		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+//TODO
+//Secondary list to single
+//SSN long, String
+//Exceptions
 
 }
