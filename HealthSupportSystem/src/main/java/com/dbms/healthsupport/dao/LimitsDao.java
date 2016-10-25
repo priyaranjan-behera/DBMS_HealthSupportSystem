@@ -93,8 +93,8 @@ public class LimitsDao implements DaoInterface<Limits>{
 		
 		while(rs.next()){
 			Integer limitID = rs.getInt("limitID");
-			Integer lowerlimit = rs.getInt("lowerlimit");
-			Integer upperlimit = rs.getInt("upperlimit");
+			String lowerlimit = rs.getString("lowerlimit");
+			String upperlimit = rs.getString("upperlimit");
 			String metricID = rs.getString("metricID");
 			String observationSpec = rs.getString("observationSpec");
 			
@@ -160,7 +160,8 @@ public class LimitsDao implements DaoInterface<Limits>{
 			stmt.close();
 			con.close();
 			
-		}	
+		}
+		
 		
 	}
 	

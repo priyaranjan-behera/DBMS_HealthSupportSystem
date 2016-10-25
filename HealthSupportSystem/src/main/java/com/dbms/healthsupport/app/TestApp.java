@@ -9,6 +9,7 @@ import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
 
 import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
+import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
@@ -17,6 +18,7 @@ import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationMetricDetails;
 import com.dbms.healthsupport.domain.ObservationSpec;
@@ -40,7 +42,9 @@ public class TestApp {
 		//testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
-		testAllocateHSToPatient();
+		//testAllocateHSToPatient();
+		testPersonalizedLimits();
+		
 	}
 
 	static void testObservation() throws Exception {
@@ -249,7 +253,24 @@ public class TestApp {
 		}
 	}
 	
-	
+	static void testPersonalizedLimits() {
+		
+		try {
+			Limits limits = new Limits(11212, "1", "10", "2", "3");
+
+			PeopleDao peopleDao = new PeopleDao();
+			People people = peopleDao.getDataById("1");
+			
+			LimitsDao limitDao = new LimitsDao();
+			limitDao.personalizedLimit(limits, people);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	// TODO
 	// Secondary list to single
