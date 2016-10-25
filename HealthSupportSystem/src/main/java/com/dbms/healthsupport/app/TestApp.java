@@ -9,23 +9,19 @@ import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
 
 import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
-import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
-import com.dbms.healthsupport.dao.RecommendationDao;
 import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
 import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
-import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationMetricDetails;
 import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
-import com.dbms.healthsupport.domain.Recommendation;
 import com.dbms.healthsupport.domain.WellPatient;
 
 public class TestApp {
@@ -41,35 +37,12 @@ public class TestApp {
 		// testFrequency();
 		// testHealthSupporter();
 		// testObservationSpec();
-		// testObservation();
+		//testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
-		//testAllocateHSToPatient();
-		testRecommendation();
-		// testAllocateHSToPatient();
-		 testLimit();
+		testAllocateHSToPatient();
 	}
 
-	static void testLimit() throws Exception {
-		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
-		LimitsDao limitsDao = new LimitsDao();
-		
-		ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
-
-		
-		int i=0;
-		for(String metric: observationSpec.getMetrics())
-		{
-			Limits limits = new Limits(++i, "120", "180", metric,observationSpec.getObservationName());
-			//limitsDao.insertRow(limits);
-		}
-		
-		Limits limits = limitsDao.getDataById(1);
-		
-		System.out.println("Limit for metric: " + limits.getMetricId() + " Upper Limit: " + limits.getUpperLimit() );
-		
-	}
-	
 	static void testObservation() throws Exception {
 		ObservationDao observationDao = new ObservationDao();
 		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
@@ -94,22 +67,6 @@ public class TestApp {
 			System.out.println("Metric: " + metricDetail.getMetricName() + " Value: " + metricDetail.getMetricValue());
 		}
 
-	}
-	
-	static void testRecommendation() throws Exception {
-		RecommendationDao recommendationDao = new RecommendationDao();
-//		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
-//		FrequencyDao frequencyDao =new FrequencyDao();
-//		
-//		ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
-//		Frequency frequency = new Frequency("Weekly", 7);
-//		
-		//recommendationDao.insertRow(new Recommendation(1, "Weekly", 2, "Blood Pressure"));
-		Recommendation r = recommendationDao.getDataById(1);
-		System.out.println(r.getFrequencyName());
-		System.out.println(r.getThreshold());
-		System.out.println(r.getObservationSpecification());
-		
 	}
 
 	static void testDisease() throws Exception {
@@ -291,6 +248,8 @@ public class TestApp {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	// TODO
 	// Secondary list to single

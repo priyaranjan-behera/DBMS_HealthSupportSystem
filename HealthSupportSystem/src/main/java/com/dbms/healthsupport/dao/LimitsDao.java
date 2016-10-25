@@ -21,7 +21,7 @@ public class LimitsDao implements DaoInterface<Limits>{
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
 		
 	}
 
@@ -41,14 +41,13 @@ public class LimitsDao implements DaoInterface<Limits>{
 		stmt = con.createStatement();
 	    
 		String insertSQL = " INSERT INTO LIMITS values ("
-				+ x.getLimitID() + ",\'" 
-				+ x.getLowerLimit() + "\',\'"
-				+ x.getUpperLimit() + "\',\'"
-				+ x.getObservationSpec() + "\',\'"
+				+ x.getLimitID() + "," 
+				+ x.getLowerLimit() + ","
+				+ x.getUpperLimit() + ","
+				+ x.getObservationSpec() + ","
 				+ x.getMetricId()
-				+ "\')";
+				+ ")";
 		 
-		System.out.println("Insert Query: " + insertSQL);
 		rs = stmt.executeQuery(insertSQL);
 		}catch(Exception e)
 		{
@@ -94,10 +93,10 @@ public class LimitsDao implements DaoInterface<Limits>{
 		
 		while(rs.next()){
 			Integer limitID = rs.getInt("limitID");
-			String lowerlimit = rs.getString("lowerlimit");
-			String upperlimit = rs.getString("upperlimit");
-			String metricID = rs.getString("metricName");
-			String observationSpec = rs.getString("observationSpecName");
+			Integer lowerlimit = rs.getInt("lowerlimit");
+			Integer upperlimit = rs.getInt("upperlimit");
+			String metricID = rs.getString("metricID");
+			String observationSpec = rs.getString("observationSpec");
 			
 			return new Limits(limitID, lowerlimit, upperlimit, metricID, observationSpec);
 			
@@ -117,5 +116,52 @@ public class LimitsDao implements DaoInterface<Limits>{
 		return null;
 	}
 
+	
+	public void personalizedLimit(Limits x, People y) throws SQLException {
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		stmt = con.createStatement();
+	    
+		String insertSQL = " INSERT INTO LIMITS values ("
+				+ x.getLimitID() + "," 
+				+ x.getLowerLimit() + ","
+				+ x.getUpperLimit() + ","
+				+ x.getObservationSpec() + ","
+				+ x.getMetricId()
+				+ ")";
+		 
+		rs = stmt.executeQuery(insertSQL);
+		
+
+		String insertSQL1 = " INSERT INTO PEOPLE values (\'"
+				+ y.getSsn() + "\',\'" 
+				+ y.getFirstName() + "\',\'"
+				+ y.getLastName() + "\',\'"
+				+ y.getAddress() + "\',\'"
+				+ y.getPassword()
+				+ "\')";
+		
+		System.out.println("Query: " + insertSQL1);
+		rs = stmt.executeQuery(insertSQL1);
+		
+		}catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		}	
+		
+	}
 	
 }
