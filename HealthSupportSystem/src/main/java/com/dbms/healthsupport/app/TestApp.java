@@ -12,6 +12,7 @@ import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
 import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.dao.RecommendationDao;
 import com.dbms.healthsupport.dao.SickPatientHasMajorDiseaseDao;
 import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
@@ -22,6 +23,7 @@ import com.dbms.healthsupport.domain.ObservationMetricDetails;
 import com.dbms.healthsupport.domain.ObservationSpec;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
+import com.dbms.healthsupport.domain.Recommendation;
 import com.dbms.healthsupport.domain.WellPatient;
 
 public class TestApp {
@@ -40,7 +42,8 @@ public class TestApp {
 		//testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
-		testAllocateHSToPatient();
+		//testAllocateHSToPatient();
+		testRecommendation();
 	}
 
 	static void testObservation() throws Exception {
@@ -67,6 +70,22 @@ public class TestApp {
 			System.out.println("Metric: " + metricDetail.getMetricName() + " Value: " + metricDetail.getMetricValue());
 		}
 
+	}
+	
+	static void testRecommendation() throws Exception {
+		RecommendationDao recommendationDao = new RecommendationDao();
+//		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
+//		FrequencyDao frequencyDao =new FrequencyDao();
+//		
+//		ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
+//		Frequency frequency = new Frequency("Weekly", 7);
+//		
+		//recommendationDao.insertRow(new Recommendation(1, "Weekly", 2, "Blood Pressure"));
+		Recommendation r = recommendationDao.getDataById(1);
+		System.out.println(r.getFrequencyName());
+		System.out.println(r.getThreshold());
+		System.out.println(r.getObservationSpecification());
+		
 	}
 
 	static void testDisease() throws Exception {

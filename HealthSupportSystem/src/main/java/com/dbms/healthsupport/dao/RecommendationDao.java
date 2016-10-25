@@ -19,7 +19,7 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -31,9 +31,9 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 	    
 		String insertSQL = " INSERT INTO RECOMMENDATION values ("
 				+ x.getRecId()+ ","
-				+ x.getThreshold()+ ","
-				+ x.getObservationSpecification()+ ","
-				+ x.getFrequencyName()
+				+ x.getThreshold()+ ",\'"
+				+ x.getObservationSpecification()+ "\',\'"
+				+ x.getFrequencyName()+"\'"
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
@@ -70,11 +70,11 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		if(rs.next())
 		{
 			Integer recommendationId = rs.getInt("recommendationId");
-			String frequencyId = rs.getString("frequencyId");
+			String frequencyName = rs.getString("frequencyName");
 			Integer threshold = rs.getInt("threshold");
 			String observationSpecName = rs.getString("observationSpecName");
 		 
-			return new Recommendation(recommendationId, frequencyId, threshold, observationSpecName);
+			return new Recommendation(recommendationId, frequencyName, threshold, observationSpecName);
 		}
 		}catch(Exception e)
 		{
