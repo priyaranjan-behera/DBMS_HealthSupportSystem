@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.Alert;
+import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 import com.dbms.healthsupport.domain.Recommendation;
 
@@ -39,8 +40,30 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		ResultSet rs = stmt.executeQuery(insertSQL);
 		stmt.close();
 		rs.close();
-		
-		
+	}
+
+	public void recommendationForPatient(Recommendation x, Patient p) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		Statement stmt = conn.createStatement();
+	    
+		String insertSQL = " INSERT INTO RECOMMENDATION values ("
+				+ x.getRecId()+ ","
+				+ x.getThreshold()+ ",\'"
+				+ x.getObservationSpecification()+ "\',\'"
+				+ x.getFrequencyName()+"\'"
+				+ ")";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		String insertSQL1 = " INSERT INTO RECOMMENDATIONFORPATIENT values (\'"
+				+ p.getSsn()+ "\',"
+				+ x.getRecId()
+				+ ")";
+		ResultSet rs2 = stmt.executeQuery(insertSQL1);
+		stmt.close();
+		rs.close();
+		rs2.close();
 	}
 
 	public void deleteRow(Recommendation x) throws Exception {
