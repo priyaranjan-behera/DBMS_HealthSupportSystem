@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class SignUpForm extends JFrame {
+public class HealthSupporterViewPatient extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class SignUpForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUpForm frame = new SignUpForm();
+					HealthSupporterViewPatient frame = new HealthSupporterViewPatient();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class SignUpForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SignUpForm() {
+	public HealthSupporterViewPatient() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
