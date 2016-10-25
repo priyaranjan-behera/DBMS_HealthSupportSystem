@@ -3,8 +3,8 @@ package com.dbms.healthsupport.domain;
 public class Limits {
 	
 	Integer limitID;
-	Integer lowerLimit;
-	Integer upperLimit;
+	String lowerLimit;
+	String upperLimit;
 	String metricId;
 	String observationSpec;
 	
@@ -14,18 +14,7 @@ public class Limits {
 	public void setLimitID(Integer limitID) {
 		this.limitID = limitID;
 	}
-	public Integer getLowerLimit() {
-		return lowerLimit;
-	}
-	public void setLowerLimit(Integer lowerLimit) {
-		this.lowerLimit = lowerLimit;
-	}
-	public Integer getUpperLimit() {
-		return upperLimit;
-	}
-	public void setUpperLimit(Integer upperLimit) {
-		this.upperLimit = upperLimit;
-	}
+
 	public String getMetricId() {
 		return metricId;
 	}
@@ -38,7 +27,19 @@ public class Limits {
 	public void setObservationSpec(String observationSpec) {
 		this.observationSpec = observationSpec;
 	}
-	public Limits(Integer limitID, Integer lowerLimit, Integer upperLimit, String metricId, String observationSpec) {
+	public String getLowerLimit() {
+		return lowerLimit;
+	}
+	public void setLowerLimit(String lowerLimit) {
+		this.lowerLimit = lowerLimit;
+	}
+	public String getUpperLimit() {
+		return upperLimit;
+	}
+	public void setUpperLimit(String upperLimit) {
+		this.upperLimit = upperLimit;
+	}
+	public Limits(Integer limitID, String lowerLimit, String upperLimit, String metricId, String observationSpec) {
 		super();
 		this.limitID = limitID;
 		this.lowerLimit = lowerLimit;
@@ -46,6 +47,7 @@ public class Limits {
 		this.metricId = metricId;
 		this.observationSpec = observationSpec;
 	}
+
 	
 	
 	
