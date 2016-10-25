@@ -21,7 +21,7 @@ public class LimitsDao implements DaoInterface<Limits>{
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -41,13 +41,14 @@ public class LimitsDao implements DaoInterface<Limits>{
 		stmt = con.createStatement();
 	    
 		String insertSQL = " INSERT INTO LIMITS values ("
-				+ x.getLimitID() + "," 
-				+ x.getLowerLimit() + ","
-				+ x.getUpperLimit() + ","
-				+ x.getObservationSpec() + ","
+				+ x.getLimitID() + ",\'" 
+				+ x.getLowerLimit() + "\',\'"
+				+ x.getUpperLimit() + "\',\'"
+				+ x.getObservationSpec() + "\',\'"
 				+ x.getMetricId()
-				+ ")";
+				+ "\')";
 		 
+		System.out.println("Insert Query: " + insertSQL);
 		rs = stmt.executeQuery(insertSQL);
 		}catch(Exception e)
 		{
@@ -93,10 +94,10 @@ public class LimitsDao implements DaoInterface<Limits>{
 		
 		while(rs.next()){
 			Integer limitID = rs.getInt("limitID");
-			Integer lowerlimit = rs.getInt("lowerlimit");
-			Integer upperlimit = rs.getInt("upperlimit");
-			String metricID = rs.getString("metricID");
-			String observationSpec = rs.getString("observationSpec");
+			String lowerlimit = rs.getString("lowerlimit");
+			String upperlimit = rs.getString("upperlimit");
+			String metricID = rs.getString("metricName");
+			String observationSpec = rs.getString("observationSpecName");
 			
 			return new Limits(limitID, lowerlimit, upperlimit, metricID, observationSpec);
 			

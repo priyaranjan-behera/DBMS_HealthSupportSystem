@@ -9,6 +9,7 @@ import com.dbms.healthsupport.dao.HealthSupporterDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
 
 import com.dbms.healthsupport.dao.HealthSupporterDetailsDao;
+import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.ObservationDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
@@ -18,6 +19,7 @@ import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationMetricDetails;
 import com.dbms.healthsupport.domain.ObservationSpec;
@@ -39,13 +41,35 @@ public class TestApp {
 		// testFrequency();
 		// testHealthSupporter();
 		// testObservationSpec();
-		//testObservation();
+		// testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
 		//testAllocateHSToPatient();
 		testRecommendation();
+		// testAllocateHSToPatient();
+		 testLimit();
 	}
 
+	static void testLimit() throws Exception {
+		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
+		LimitsDao limitsDao = new LimitsDao();
+		
+		ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
+
+		
+		int i=0;
+		for(String metric: observationSpec.getMetrics())
+		{
+			Limits limits = new Limits(++i, "120", "180", metric,observationSpec.getObservationName());
+			//limitsDao.insertRow(limits);
+		}
+		
+		Limits limits = limitsDao.getDataById(1);
+		
+		System.out.println("Limit for metric: " + limits.getMetricId() + " Upper Limit: " + limits.getUpperLimit() );
+		
+	}
+	
 	static void testObservation() throws Exception {
 		ObservationDao observationDao = new ObservationDao();
 		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
