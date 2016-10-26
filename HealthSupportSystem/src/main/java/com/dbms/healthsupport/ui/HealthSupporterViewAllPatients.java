@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class HealthSupporterViewAllPatients extends JFrame {
 
@@ -35,8 +37,20 @@ public class HealthSupporterViewAllPatients extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(29, 47, 392, 211);
+		contentPane.add(textArea);
+		
+		JButton btnExitSystem = new JButton("Exit System");
+		btnExitSystem.setBounds(304, 6, 117, 29);
+		contentPane.add(btnExitSystem);
+		
+		JButton btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(182, 6, 117, 29);
+		contentPane.add(btnGoBack);
 	}
 
 }
