@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 
 public class PatientProfile extends JFrame {
 
@@ -35,8 +36,20 @@ public class PatientProfile extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnViewPatientDetails = new JButton("View Patient Details");
+		btnViewPatientDetails.setBounds(29, 40, 276, 29);
+		contentPane.add(btnViewPatientDetails);
+		
+		JButton btnEditPatientDetails = new JButton("Edit Patient Details");
+		btnEditPatientDetails.setBounds(29, 115, 276, 29);
+		contentPane.add(btnEditPatientDetails);
+		
+		JButton btnExitSystem = new JButton("Exit System");
+		btnExitSystem.setBounds(29, 197, 276, 29);
+		contentPane.add(btnExitSystem);
 	}
 
 }

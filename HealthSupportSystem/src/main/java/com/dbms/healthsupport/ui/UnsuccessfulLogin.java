@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UnsuccessfulLogin extends JFrame {
 
@@ -35,8 +39,24 @@ public class UnsuccessfulLogin extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblUnsuccessfulLoginPlease = new JLabel("Unsuccessful Login! Please try again!");
+		lblUnsuccessfulLoginPlease.setBounds(62, 73, 302, 55);
+		contentPane.add(lblUnsuccessfulLoginPlease);
+		
+		JButton btnGoToLogin = new JButton("Go to Login");
+		btnGoToLogin.setBounds(187, 206, 117, 29);
+		contentPane.add(btnGoToLogin);
+		
+		JButton btnExit = new JButton("Exit System");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnExit.setBounds(316, 206, 117, 29);
+		contentPane.add(btnExit);
 	}
 
 }
