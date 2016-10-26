@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class HealthSupporterViewPatient extends JFrame {
+public class HealthSupporterViewAllPatients extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class HealthSupporterViewPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HealthSupporterViewPatient frame = new HealthSupporterViewPatient();
+					HealthSupporterViewAllPatients frame = new HealthSupporterViewAllPatients();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class HealthSupporterViewPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HealthSupporterViewPatient() {
+	public HealthSupporterViewAllPatients() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
