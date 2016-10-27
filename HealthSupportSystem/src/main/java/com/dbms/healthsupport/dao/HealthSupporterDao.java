@@ -1,5 +1,6 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -55,32 +56,25 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 	public void insertRow(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		try
-		{
+		CallableStatement stmt = null;
+
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"AddHealthSupporterProc\" (?,?,?,?,?,?)}");
 			
-		conn = getConnection();
-		
-		stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO HEALTHSUPPORTER values (\'"
-				+ x.getSsn() + "\'," 
-				+ x.getContactNumber()
-				+ ")";
-		 
-		System.out.println("Query: " + insertSQL);
-		rs = stmt.executeQuery(insertSQL);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally{
-			rs.close();
-			stmt.close();
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setLong("hs_contactnumber", x.getContactNumber());
+			stmt.setString("p_FirstName", x.getFirstName());
+			stmt.setString("p_LastName", x.getLastName());
+			stmt.setString("p_Address", x.getAddress());
+			stmt.setString("p_Password", x.getPassword());
+			stmt.executeUpdate();
+		}catch(Exception e){
+			throw e;
+		}finally {
 			conn.close();
+			stmt.close();
 		}
-		
 		
 	}
 
@@ -93,31 +87,33 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	public void updateRow(HealthSupporter x) throws Exception{
 		
-		Statement stmt = null;
 		Connection conn = null;
-		//ResultSet rs = null;
+		CallableStatement stmt = null;
 		
 		try{
-			
 			conn = getConnection();
-			stmt = conn.createStatement();
-			String updateSQL = "UPDATE HEALTHSUPPORTER SET contact ="+ x.getContactNumber() +" WHERE (ssn="+ x.getSsn() +")";
-		
-			stmt.executeUpdate(updateSQL);
+			stmt = conn.prepareCall("{call \"UpdateHealthSupporterProc\" (?,?,?,?,?,?)}");
 			
-			PeopleDao peopleDao= new PeopleDao();
-			People people = peopleDao.getDataById(x.getSsn());
-			peopleDao.updatePeopleRow(people);
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setLong("hs_contactnumber", x.getContactNumber());
+			stmt.setString("p_firstname", x.getFirstName());
+			stmt.setString("p_lastname", x.getLastName());
+			stmt.setString("p_address", x.getAddress());
+			stmt.setString("p_password", x.getPassword());
+
+			stmt.executeUpdate();
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
-			//rs.close();
-			stmt.close();
 			conn.close();
+			stmt.close();
 		}
+		
 	}
 	public HealthSupporter getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
@@ -136,14 +132,14 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		stmt = conn.createStatement();
 		stmt1 = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
+		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN=\'"+(String)id+"\'";
 		
 		rs = stmt.executeQuery(selectSQL);
 		
 		PeopleDao peopleDao = new PeopleDao();
 	
 		List<Long> patients=new ArrayList<Long>();
-		String selectSQL1="SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE HSSSN="+(Long)id;
+		String selectSQL1="SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE HSSSN=\'"+(String)id+"\'";
 		rs1 = stmt1.executeQuery(selectSQL1);
 		while(rs1.next()){
 			patients.add(rs1.getLong("PATIENTTSSN"));

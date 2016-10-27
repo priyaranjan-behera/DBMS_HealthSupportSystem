@@ -1,5 +1,7 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
+import oracle.sql.ARRAY;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.ObservationSpec;
+
+import oracle.sql.ArrayDescriptor;
 
 
 public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
@@ -23,7 +27,36 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 	
 	public void insertData(ObservationSpec x) throws Exception {
 	    
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"AddObservationSpecAndMetric\" (?)}");
+			
+			String array[] = null;
+			int count = 0;
+			for(String metric: x.getMetrics())
+			{
+				array[count] = metric;
+				count+=1;
+			}
+			ArrayDescriptor des = ArrayDescriptor.createDescriptor("ssharm17.\"Metric\"",conn);
+			ARRAY array_to_pass = new ARRAY(des,conn,array);
+			stmt.setString(1, x.getObservationName());
+			stmt.setString(2, x.getDescription());
+			stmt.setArray(3, array_to_pass);
 
+			stmt.executeUpdate();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			conn.close();
+			stmt.close();
+		}
+		/*
 		Connection conn = null;
 		ResultSet rs = null;
 		Statement stmt = null;
@@ -58,7 +91,7 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			stmt.close();
 			conn.close();
 		}
-				 
+			*/	 
 
 	}
 

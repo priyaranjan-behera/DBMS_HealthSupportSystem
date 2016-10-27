@@ -1,0 +1,9 @@
+CREATE PROCEDURE SSHARM17."AddOnlyHealthSupporterProc"(
+   hs_ssn             IN HEALTHSUPPORTER.SSN%TYPE,
+   hs_contactnumber   IN HEALTHSUPPORTER.CONTACTNUMBER%TYPE)
+AS
+BEGIN
+   INSERT INTO HEALTHSUPPORTER (SSN, CONTACTNUMBER)
+        VALUES (hs_ssn, hs_contactnumber);
+   COMMIT;
+END;

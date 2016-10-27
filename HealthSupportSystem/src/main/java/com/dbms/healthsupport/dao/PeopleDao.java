@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.CallableStatement;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
@@ -139,33 +139,26 @@ public class PeopleDao implements DaoInterface<People> {
 		// TODO Auto-generated method stub
 		
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		CallableStatement stmt = null;
 		
-		try
-		{
-
+		try{
 			conn = getConnection();
-		    stmt = conn.createStatement();
-		    
-			String insertSQL = " INSERT INTO PEOPLE values (\'"
-					+ x.getSsn() + "\',\'" 
-					+ x.getFirstName() + "\',\'"
-					+ x.getLastName() + "\',\'"
-					+ x.getAddress() + "\',\'"
-					+ x.getPassword()
-					+ "\')";
+			stmt = conn.prepareCall("{call \"AddPeopleProc\" (?,?,?,?,?)}");
 			
-			System.out.println("Query: " + insertSQL);
-			rs = stmt.executeQuery(insertSQL);
-		}catch (Exception e) {
-			// TODO: handle exception
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setString("p_FirstName", x.getFirstName());
+			stmt.setString("p_LastName", x.getLastName());
+			stmt.setString("p_Address", x.getAddress());
+			stmt.setString("p_Password", x.getPassword());
+			
+			stmt.executeUpdate();
+		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
-			rs.close();
-			stmt.close();
 			conn.close();
+			stmt.close();
 		}
+		
 		
 	}
 
