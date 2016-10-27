@@ -43,7 +43,7 @@ public class HealthSupporterDetailsDao implements DaoInterface<HealthSupporterDe
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String selectSQL = "SELECT * FROM PATIENTHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
+		String selectSQL = "SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE PatientSSN=\'"+(String)patientSSN +
 				"\' AND HSSSN=\'" + (String)HSSSN+"\'";
 		 
 		

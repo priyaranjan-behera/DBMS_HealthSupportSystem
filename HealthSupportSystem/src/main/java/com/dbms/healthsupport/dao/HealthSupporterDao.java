@@ -64,11 +64,12 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 		stmt = conn.createStatement();
 	    
-		String insertSQL = " INSERT INTO HEALTHSUPPORTER values ("
-				+ x.getSsn() + "," 
+		String insertSQL = " INSERT INTO HEALTHSUPPORTER values (\'"
+				+ x.getSsn() + "\'," 
 				+ x.getContactNumber()
 				+ ")";
 		 
+		System.out.println("Query: " + insertSQL);
 		rs = stmt.executeQuery(insertSQL);
 		}catch(Exception e)
 		{

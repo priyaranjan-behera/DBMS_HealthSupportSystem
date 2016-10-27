@@ -116,6 +116,7 @@ public class LoginPage extends JFrame {
 		btnBack.setBounds(118, 227, 117, 29);
 		contentPane.add(btnBack);
 		
+		
 		JButton btnExitApplication = new JButton("Exit System");
 		btnExitApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

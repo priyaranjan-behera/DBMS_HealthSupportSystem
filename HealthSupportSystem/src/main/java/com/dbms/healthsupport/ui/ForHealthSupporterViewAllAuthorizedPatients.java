@@ -2,16 +2,22 @@ package com.dbms.healthsupport.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -44,9 +50,16 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		btnExit.setBounds(327, 6, 117, 29);
 		contentPane.add(btnExit);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(48, 47, 381, 208);
-		contentPane.add(textArea);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 78, 432, 210);
+		contentPane.add(scrollPane);
+		
+		String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
+		DefaultTableModel defaultTableModel = new DefaultTableModel(col,0);
+		table = new JTable(defaultTableModel);
+		Object[] objs = {1, "Arsenal", 35, 11, 2, 2, 15, 30, 11, 19};
+		defaultTableModel.addRow(objs);
+	
+		scrollPane.setViewportView(table);
 	}
-
 }
