@@ -95,14 +95,14 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		
 		try{
 			conn = getConnection();
-			stmt = conn.prepareCall("{call \"UpdateHealthSupporterProc\" (?)}");
+			stmt = conn.prepareCall("{call \"UpdateHealthSupporterProc\" (?,?,?,?,?,?)}");
 			
-			stmt.setString(1, x.getSsn());
-			stmt.setLong(2, x.getContactNumber());
-			stmt.setString(3, x.getFirstName());
-			stmt.setString(4, x.getLastName());
-			stmt.setString(5, x.getAddress());
-			stmt.setString(6, x.getPassword());
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setLong("hs_contactnumber", x.getContactNumber());
+			stmt.setString("p_firstname", x.getFirstName());
+			stmt.setString("p_lastname", x.getLastName());
+			stmt.setString("p_address", x.getAddress());
+			stmt.setString("p_password", x.getPassword());
 
 			stmt.executeUpdate();
 			
@@ -132,14 +132,14 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		stmt = conn.createStatement();
 		stmt1 = conn.createStatement();
 	    
-		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
+		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN=\'"+(String)id+"\'";
 		
 		rs = stmt.executeQuery(selectSQL);
 		
 		PeopleDao peopleDao = new PeopleDao();
 	
 		List<Long> patients=new ArrayList<Long>();
-		String selectSQL1="SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE HSSSN="+(Long)id;
+		String selectSQL1="SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE HSSSN=\'"+(String)id+"\'";
 		rs1 = stmt1.executeQuery(selectSQL1);
 		while(rs1.next()){
 			patients.add(rs1.getLong("PATIENTTSSN"));

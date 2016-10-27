@@ -36,10 +36,10 @@ public class TestApp {
 
 	public static void main(String[] args) throws Exception {
 		 //testPeople();
-		 //testPatient();
+		// testPatient();
 		// testDisease();
 		// testFrequency();
-		testHealthSupporter();
+		//testHealthSupporter();
 		// testObservationSpec();
 		//testObservation();
 		// testSickPatientHasMajorDisease();
@@ -48,7 +48,9 @@ public class TestApp {
 		//testPersonalizedLimits();
 		//testRecommendation();
 		//testLimit();
-		
+		//testUpdatePeople();
+		//testUpdateHealthSupporter();
+		testUpdatePatient();
 	}
 
 	static void testObservation() throws Exception {
@@ -126,36 +128,58 @@ public class TestApp {
 		PeopleDao peopleDao = new PeopleDao();
 
 		People people = peopleDao.getDataById("6");
-		HealthSupporter healthSupporter = new HealthSupporter(people, new Long("9842158165"));
-
-		// healthSupporterDao.insertRow(healthSupporter);
-		healthSupporter = healthSupporterDao.getDataById(new Long(1));
+		HealthSupporter healthSupporter = new HealthSupporter(people, new Long("984215"));
+		healthSupporterDao.updateRow(healthSupporter);
+		 //healthSupporterDao.insertRow(healthSupporter);
+		//healthSupporter = healthSupporterDao.getDataById(new Long(1));
 
 		//System.out.println(
 			//	"Name: " + healthSupporter.getFirstName() + "Contact Number: " + healthSupporter.getContactNumber());
 
 		//testUpdatePeople();
-		// testUpdateHealthSupporter();
+		//testUpdateHealthSupporter();
 	}
 
 	static void testUpdatePeople() throws Exception {
 
-		PatientDao patientDao = new PatientDao();
 		PeopleDao peopleDao = new PeopleDao();
 
-		People people = peopleDao.getDataById("1");
+		People people = peopleDao.getDataById("6");
 		people.setAddress("avent ferry");
-		people.setFirstName("vivek");
-		people.setLastName("Ette");
+		people.setFirstName("viv");
+		people.setLastName("E");
+		people.setPassword("password");
 
 		peopleDao.updatePeopleRow(people);
 
 	}
 
-	static void testUpdateHealthSupporter() {
+	static void testUpdateHealthSupporter() throws Exception {
+		HealthSupporterDao healthsupporterDao = new HealthSupporterDao();
+		HealthSupporter healthsupporter = healthsupporterDao.getDataById("6");
+		healthsupporter.setContactNumber(1435);
+		healthsupporter.setAddress("ferry");
+		healthsupporter.setFirstName("ram");
+		healthsupporter.setLastName("shyam");
+		healthsupporter.setPassword("pass");
 
+		healthsupporterDao.updateRow(healthsupporter);
 	}
-
+	
+	static void testUpdatePatient() throws Exception {
+		
+		PatientDao patientDao = new PatientDao();
+		Patient patient = patientDao.getDataById("6");
+		patient.setGender("female");
+		patient.setDob(java.sql.Date.valueOf("1999-01-01"));
+		patient.setAddress("ferry");
+		patient.setFirstName("ram");
+		patient.setLastName("shyam");
+		patient.setPassword("pass");
+		
+		patientDao.updateRow(patient);
+		
+	}
 	static void testPatient() throws Exception {
 
 		// TODO Auto-generated method stub
@@ -187,7 +211,7 @@ public class TestApp {
 	static void testPeople() {
 		try {
 			PeopleDao peopleDao = new PeopleDao();
-			People people = new People("6", "Sheldon", "Cooper", "2500 Sacramento", "password");
+			People people = new People("7", "Sheldon", "Cooper", "2500 Sacramento", "password");
 			peopleDao.insertRow(people);
 			people = new People("2", "Leonard", "Hofstader", "2500 Sacramento", "password");
 			// peopleDao.insertRow(people);

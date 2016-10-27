@@ -119,13 +119,13 @@ public class PatientDao implements DaoInterface<Patient> {
 			stmt = conn.prepareCall("{call \"UpdatePatientProc\" (?,?,?)}");
 			
 			
-			stmt.setString("GENDER", x.getGender());
-			stmt.setDate("DOB", x.getDob());
-			stmt.setString("PATIENTSSN", x.getSsn());
-			stmt.setString(4,x.getFirstName());
-			stmt.setString(5,x.getLastName());
-			stmt.setString(6,x.getAddress());
-			stmt.setString(7,x.getPassword());
+			stmt.setString("p_gender", x.getGender());
+			stmt.setDate("p_dob", x.getDob());
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setString("p_firstname",x.getFirstName());
+			stmt.setString("p_lastname",x.getLastName());
+			stmt.setString("p_address",x.getAddress());
+			stmt.setString("p_address",x.getPassword());
 			
 			stmt.executeUpdate();
 		}catch(Exception e){

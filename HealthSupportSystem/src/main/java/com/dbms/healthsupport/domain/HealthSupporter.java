@@ -10,8 +10,8 @@ public class HealthSupporter extends People {
 	public Long getContactNumber() {
 		return contactNumber;
 	}
-	public void setContactNumber(Long contactNumber) {
-		this.contactNumber = contactNumber;
+	public void setContactNumber(long i) {
+		this.contactNumber = i;
 	}
 	public List<Long> getPatients() {
 		return patients;
