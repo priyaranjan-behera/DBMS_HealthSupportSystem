@@ -53,10 +53,6 @@ public class LoginPage extends JFrame {
 		lblDbmsProject.setBounds(6, 18, 139, 16);
 		contentPane.add(lblDbmsProject);
 		
-		JLabel lblLoginPage = new JLabel("Health Supporter Login");
-		lblLoginPage.setBounds(6, 46, 157, 16);
-		contentPane.add(lblLoginPage);
-		
 		textField = new JTextField();
 		textField.setBounds(6, 106, 199, 26);
 		contentPane.add(textField);
@@ -78,16 +74,43 @@ public class LoginPage extends JFrame {
 		passwordField.setBounds(6, 159, 199, 26);
 		contentPane.add(passwordField);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(6, 227, 117, 29);
-		contentPane.add(btnLogin);
-		
 		String[] profileInformation = { "Patient", "Health Supporter" };
 		
-		JComboBox comboBox = new JComboBox(profileInformation);
+		final JComboBox comboBox = new JComboBox(profileInformation);
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(6, 188, 199, 27);
 		contentPane.add(comboBox);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String profileInformationValue = comboBox.getSelectedItem().toString();
+				if(profileInformationValue.equalsIgnoreCase("Health Supporter")) {
+					
+					///Check if health supporter propper
+					
+					
+					//if okay
+					HealthSupporterLoggedIn healthSupporterLoggedIn = new HealthSupporterLoggedIn();
+					healthSupporterLoggedIn.setVisible(true);
+	
+					
+				} else if(profileInformationValue.equalsIgnoreCase("Patient")) {
+					
+					///Check if Patient propper
+					
+					
+					//if okay
+					PatientLoggedIn patientLoggedIn = new PatientLoggedIn();
+					patientLoggedIn.setVisible(true);
+ 					
+				} else {
+					System.exit(0);
+				}
+			}
+		});
+		btnLogin.setBounds(6, 227, 117, 29);
+		contentPane.add(btnLogin);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(118, 227, 117, 29);
@@ -96,6 +119,8 @@ public class LoginPage extends JFrame {
 		JButton btnExitApplication = new JButton("Exit System");
 		btnExitApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 			}
 		});
 		btnExitApplication.setBounds(234, 227, 139, 29);

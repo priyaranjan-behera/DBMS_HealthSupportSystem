@@ -48,6 +48,8 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnNewButton = new JButton("My Authorized Patients");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ForHealthSupporterViewAllAuthorizedPatients forHealthSupporterViewAllAuthorizedPatients  = new ForHealthSupporterViewAllAuthorizedPatients ();
+				forHealthSupporterViewAllAuthorizedPatients.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(236, 37, 194, 29);
@@ -76,6 +78,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnNewButton_2 = new JButton("Exit System");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		btnNewButton_2.setBounds(236, 229, 191, 29);
