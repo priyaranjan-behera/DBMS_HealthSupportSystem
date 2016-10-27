@@ -97,7 +97,7 @@ public class AlertDao implements DaoInterface<Alert> {
     			
     			Integer id = rs.getInt("alertId");
     			String alertType = rs.getString("alertType");
-    			Long patientSSN = rs.getLong("patientSSN");
+    			String patientSSN = rs.getString("patientSSN");
     			String alertAction = rs.getString("alertAction");
     			Integer limitId = rs.getInt("limitId");
 
@@ -135,7 +135,7 @@ public class AlertDao implements DaoInterface<Alert> {
 			if(rs.next())
 			{
 				String alertType = rs.getString("alertType");
-				Long patientSSN = rs.getLong("patientSSN");
+				String patientSSN = rs.getString("patientSSN");
 				String alertAction = rs.getString("alertAction");
 				Integer limitId = rs.getInt("limitId");
 				
@@ -148,7 +148,7 @@ public class AlertDao implements DaoInterface<Alert> {
 				if(rs.next())
 				{
 					String alertType = rs.getString("alertType");
-					Long patientSSN = rs.getLong("patientSSN");
+					String patientSSN = rs.getString("patientSSN");
 					String alertAction = rs.getString("alertAction");
 				
 					Integer recId = rs.getInt("recommendationId");

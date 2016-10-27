@@ -21,13 +21,27 @@ public class HealthSupporter extends People {
 	}
 	
 	
-	public HealthSupporter(Long ssn, String firstName, String lastName, String address,String password,Long contactNumber,List<Long> patients) {
+	public HealthSupporter(String ssn, String firstName, String lastName, String address,String password,Long contactNumber,List<Long> patients) {
 		super(ssn, firstName, lastName, address,password);
 		// TODO Auto-generated constructor stub
 		this.contactNumber=contactNumber;
 		this.patients=patients;
 	}    
 
+	
+	public HealthSupporter(People people, Long contactNumber) {
+		super(people);
+		// TODO Auto-generated constructor stub
+		this.contactNumber=contactNumber;
+	}  
+	
+
+	public HealthSupporter(People people, Long contactNumber, List<Long> patients) {
+		super(people);
+		// TODO Auto-generated constructor stub
+		this.contactNumber=contactNumber;
+		this.patients = patients;
+	}  
 	
 
 

@@ -6,8 +6,6 @@ public class Metric {
 	String name;
 	Integer metricType;
 	
-	
-	
 	public Metric(String observationSpecification, String name, Integer metricType) {
 		super();
 		this.observationSpecification = observationSpecification;

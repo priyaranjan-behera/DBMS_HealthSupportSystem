@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.dbms.healthsupport.domain.Observation;
+import com.dbms.healthsupport.domain.ObservationMetricDetails;
 
 public class ObservationDao implements DaoInterface<Observation> {
 	
@@ -17,7 +18,7 @@ public class ObservationDao implements DaoInterface<Observation> {
 	public static Connection getConnection() throws SQLException
 	{
 		return DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "pbehera", "200106212");
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060");
 		
 	}
 
@@ -34,7 +35,7 @@ public class ObservationDao implements DaoInterface<Observation> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			 String deleteSQL = " DELETE FROM OBSERVATION WHERE (observationSpecificationId="
+			 String deleteSQL = " DELETE FROM OBSERVATION WHERE (observationId="
 							+ x.getObservationId()
 							+ ")";
 					 
@@ -87,6 +88,8 @@ public class ObservationDao implements DaoInterface<Observation> {
 		Connection conn = null;
 		ResultSet rs = null;
 		Statement stmt = null;
+		ResultSet rs1 = null;
+		Statement stmt1 = null;
 		
 		try
 		{
@@ -95,12 +98,30 @@ public class ObservationDao implements DaoInterface<Observation> {
 		    
 			String insertSQL = " INSERT INTO OBSERVATION values ("
 					+ x.getObservationId() + "," 
-					+ x.getObservationValue() + ","
-					+ x.getObservationTime() + ","
-					+ x.getRecordedTime()
-					+ ")";
+					+ "TO_DATE(\'"+x.getObservationTime() + "\',\'YYYY-MM-DD\')" + ","
+					+ "TO_DATE(\'"+x.getRecordedTime() + "\',\'YYYY-MM-DD\')" + ",\'"
+					+ x.getPatientId()
+					+ "\')";
+			System.out.println("Query: " + insertSQL);
 			
 			rs = stmt.executeQuery(insertSQL);
+			
+			for(ObservationMetricDetails metricDetails: x.getMetricDetails())
+			{
+				stmt1 = conn.createStatement();
+			    
+				String insertSQL1 = " INSERT INTO OBSERVATIONDETAILS values ("
+						+ x.getObservationId() + ",\'" 
+						+ x.getObservationSpecification() + "\',\'"
+						+ metricDetails.getMetricName() + "\',\'"
+						+ metricDetails.getMetricValue() + "\'"
+						+ ")";
+				System.out.println("Query: " + insertSQL1);
+				rs1 = stmt1.executeQuery(insertSQL1);
+				
+				rs1.close();
+				stmt1.close();
+			}
 
 		}catch(Exception e)
 		{
@@ -108,7 +129,10 @@ public class ObservationDao implements DaoInterface<Observation> {
 		}finally {
 			rs.close();
 			stmt.close();
+			rs1.close();
+			stmt1.close();
 			conn.close();
+			
 		}
 		
 		
@@ -126,6 +150,8 @@ public class ObservationDao implements DaoInterface<Observation> {
 		Connection conn = null;
 		ResultSet rs = null;
 		Statement stmt = null;
+		ResultSet rs1 = null;
+		Statement stmt1 = null;
 		
 		try
 		{
@@ -137,22 +163,29 @@ public class ObservationDao implements DaoInterface<Observation> {
 			Observation output=null;
 			
 			rs = stmt.executeQuery(selectSQL);
-		
-
-			while(rs.next())
+			
+			stmt1 = conn.createStatement();
+			String selectSQL1 = "SELECT * FROM OBSERVATIONDETAILS WHERE OBSERVATIONID="+(Integer)id;
+			rs1 = stmt1.executeQuery(selectSQL1);
+			
+			List<ObservationMetricDetails> metricDetails = new ArrayList<ObservationMetricDetails>();
+			String observationSpec = null;
+			while(rs1.next())
 			{
-				int observationSpecificationId = rs.getInt("observationSpecificationId");
-				String observationValue = rs.getString("observationValue");
+				observationSpec = rs1.getString("observationSpecName");
+				String metricName = rs1.getString("metricName");
+				String metricValue = rs1.getString("observationValue");
+				metricDetails.add(new ObservationMetricDetails(metricName, metricValue));
+			}
+
+			if(rs.next())
+			{
+				int observationId = rs.getInt("observationId");
 				Date observationTime = rs.getDate("observationTime");
 				Date recordedTime = rs.getDate("recordedTime");
 				String patientSSN=rs.getString("PATIENTSSN");
-				String selectSQL1 = "SELECT * FROM OBSERVATIONDETAILS WHERE OBSERVATIONID="+(Integer)id;
-				String observationSpecName=null; 
-				ResultSet rs1 = stmt.executeQuery(selectSQL1);
-				while(rs1.next()){
-					observationSpecName=rs1.getString("OBSERVATIONSPECNAME");
-				}
-				output=new Observation(observationSpecificationId, observationValue, observationTime, recordedTime,patientSSN,observationSpecName);
+				
+				return new Observation(observationId, observationTime, recordedTime, patientSSN, observationSpec, metricDetails);
 			}
 			
 			return output;

@@ -19,7 +19,7 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -59,6 +59,8 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		ResultSet rs = null;
 		try
 		{
+			
+		conn = getConnection();
 		
 		stmt = conn.createStatement();
 	    
@@ -121,6 +123,8 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		Statement stmt1 = null;
+		ResultSet rs1 = null;
 		HealthSupporter output=null;
 		
 		try
@@ -129,6 +133,7 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		conn = getConnection();
 		
 		stmt = conn.createStatement();
+		stmt1 = conn.createStatement();
 	    
 		String selectSQL = "SELECT * FROM HEALTHSUPPORTER WHERE SSN="+(Long)id;
 		
@@ -137,33 +142,36 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		PeopleDao peopleDao = new PeopleDao();
 	
 		List<Long> patients=new ArrayList<Long>();
-		String selectSQL1="SELECT * FROM PATIENTASSIGNEDHEALTHSUPPORTER WHERE HSSN="+(Long)id;
-		ResultSet rs1 = stmt.executeQuery(selectSQL1);
+		String selectSQL1="SELECT * FROM PATIENTTOHEALTHSUPPORTER WHERE HSSSN="+(Long)id;
+		rs1 = stmt1.executeQuery(selectSQL1);
 		while(rs1.next()){
 			patients.add(rs1.getLong("PATIENTTSSN"));
 		}
 		
-		while(rs.next())
+		if(rs.next())
 		{
-			Long ssn = rs.getLong("ssn");
+			String ssn = rs.getString("ssn");
 			Long contactNumber = rs.getLong("contactNumber");
 			People people = peopleDao.getDataById(ssn);
 			output=new HealthSupporter(ssn, people.getFirstName(), people.getLastName(), people.getAddress(), people.getPassword(), contactNumber, patients);
+			return output;
 		}
 		
-		return output;
+		
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		finally {
+			rs1.close();
+			stmt1.close();
 			rs.close();
 			stmt.close();
 			conn.close();
 			
 		}
 		
-		return output;
+		return null;
 		
 		
 	}

@@ -17,7 +17,7 @@ public class PeopleDao implements DaoInterface<People> {
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 
@@ -46,7 +46,7 @@ public class PeopleDao implements DaoInterface<People> {
 
 		while(rs.next())
 		{
-			Long ssn = rs.getLong("ssn");
+			String ssn = rs.getString("ssn");
 			String fName = rs.getString("firstName");
 			String lName = rs.getString("lastName");
 			String address = rs.getString("address");
@@ -80,7 +80,7 @@ public class PeopleDao implements DaoInterface<People> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn = " + (Long)ssn;
+			String selectSQL = "SELECT * FROM PEOPLE  WHERE ssn =\'" + (String)ssn +"\'";
 			rs = stmt.executeQuery(selectSQL);
 			
 
@@ -91,7 +91,7 @@ public class PeopleDao implements DaoInterface<People> {
 				String address = rs.getString("address");
 				String password = rs.getString("password");
 				
-				return new People((Long)ssn, fName, lName, address, password);
+				return new People(String.valueOf(ssn), fName, lName, address, password);
 			}
 			
 		}catch(Exception e)
@@ -148,8 +148,8 @@ public class PeopleDao implements DaoInterface<People> {
 			conn = getConnection();
 		    stmt = conn.createStatement();
 		    
-			String insertSQL = " INSERT INTO PEOPLE values ("
-					+ x.getSsn() + ",\'" 
+			String insertSQL = " INSERT INTO PEOPLE values (\'"
+					+ x.getSsn() + "\',\'" 
 					+ x.getFirstName() + "\',\'"
 					+ x.getLastName() + "\',\'"
 					+ x.getAddress() + "\',\'"
@@ -179,10 +179,10 @@ public class PeopleDao implements DaoInterface<People> {
 			
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String updateSQL = "UPDATE PEOPLE SET firstName ="+ x.getFirstName() + "\',\'"
-					+ x.getLastName() + "\',\'"
-					+ x.getAddress() + "\',\'"
-					+ x.getPassword() + "," +" WHERE (ssn="+ x.getSsn() +")";
+			String updateSQL = "UPDATE PEOPLE SET firstName =\'"+ x.getFirstName() + 
+					"\',lastName=\'" + x.getLastName() +
+					"\',address=\'"+ x.getAddress() +
+					"\',password=\'" + x.getPassword() + "\'" +" WHERE (ssn=\'"+ x.getSsn() +"\')";
 		
 			stmt.executeUpdate(updateSQL);
 			
@@ -204,9 +204,9 @@ public class PeopleDao implements DaoInterface<People> {
 			conn = getConnection();
 			stmt = conn.createStatement();
 		    
-			String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn="
+			String deleteSQL = " DELETE FROM PEOPLE WHERE (ssn=\'"
 					+ x.getSsn()
-					+ ")";
+					+ "\')";
 			 
 			rs = stmt.executeQuery(deleteSQL);
 		}catch(Exception e)

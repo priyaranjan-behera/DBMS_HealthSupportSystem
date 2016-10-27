@@ -20,7 +20,7 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 	public static Connection getConnection() throws SQLException
 	{
 		return(DriverManager.getConnection
-				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "vette", "200107075"));
+				  ("jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01", "ssharm17", "200100060"));
 		
 	}
 	public void insertRow(SickPatient x) throws Exception {
@@ -30,7 +30,7 @@ public class SickPatientDao implements DaoInterface<SickPatient> {
 		
 	    
 		String insertSQL = " INSERT INTO SICKPATIENT values ("
-				+ x.getSsn() + "," 
+				+ x.getSsn()
 				+ ")";
 		 
 		ResultSet rs = stmt.executeQuery(insertSQL);
