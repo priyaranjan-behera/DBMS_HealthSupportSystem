@@ -1,5 +1,6 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -55,31 +56,25 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 	public void insertRow(HealthSupporter x) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		try
-		{
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"AddHealthSupporterProc\" (?,?,?,?,?,?)}");
 			
-		conn = getConnection();
-		
-		stmt = conn.createStatement();
-	    
-		String insertSQL = " INSERT INTO HEALTHSUPPORTER values ("
-				+ x.getSsn() + "," 
-				+ x.getContactNumber()
-				+ ")";
-		 
-		rs = stmt.executeQuery(insertSQL);
-		}catch(Exception e)
-		{
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setLong("hs_contactnumber", x.getContactNumber());
+			stmt.setString("p_FirstName", x.getFirstName());
+			stmt.setString("p_LastName", x.getLastName());
+			stmt.setString("p_Address", x.getAddress());
+			stmt.setString("p_Password", x.getPassword());
+			stmt.executeUpdate();
+		}catch(Exception e){
 			e.printStackTrace();
-		}
-		finally{
-			rs.close();
-			stmt.close();
+		}finally {
 			conn.close();
+			stmt.close();
 		}
-		
 		
 	}
 
@@ -92,31 +87,33 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	public void updateRow(HealthSupporter x) throws Exception{
 		
-		Statement stmt = null;
 		Connection conn = null;
-		//ResultSet rs = null;
+		CallableStatement stmt = null;
 		
 		try{
-			
 			conn = getConnection();
-			stmt = conn.createStatement();
-			String updateSQL = "UPDATE HEALTHSUPPORTER SET contact ="+ x.getContactNumber() +" WHERE (ssn="+ x.getSsn() +")";
-		
-			stmt.executeUpdate(updateSQL);
+			stmt = conn.prepareCall("{call \"UpdateHealthSupporterProc\" (?)}");
 			
-			PeopleDao peopleDao= new PeopleDao();
-			People people = peopleDao.getDataById(x.getSsn());
-			peopleDao.updatePeopleRow(people);
+			stmt.setString(1, x.getSsn());
+			stmt.setLong(2, x.getContactNumber());
+			stmt.setString(3, x.getFirstName());
+			stmt.setString(4, x.getLastName());
+			stmt.setString(5, x.getAddress());
+			stmt.setString(6, x.getPassword());
+
+			stmt.executeUpdate();
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
-			//rs.close();
-			stmt.close();
 			conn.close();
+			stmt.close();
 		}
+		
 	}
 	public HealthSupporter getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub

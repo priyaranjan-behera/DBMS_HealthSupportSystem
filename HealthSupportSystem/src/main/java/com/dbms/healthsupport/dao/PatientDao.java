@@ -1,5 +1,6 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -54,37 +55,29 @@ public class PatientDao implements DaoInterface<Patient> {
 	
 	public void insertRow(Patient x) throws Exception {
 		
-		Statement stmt = null;
 		Connection conn = null;
-		ResultSet rs = null;
+		CallableStatement stmt = null;
 		
-		
-		try
-		{
+		try{
 			conn = getConnection();
+			stmt = conn.prepareCall("{call \"AddPatientProc\" (?,?,?,?,?,?,?)}");
 			
-			stmt = conn.createStatement();
-		    
-			String insertSQL = " INSERT INTO PATIENT values (\'"
-					+ x.getSsn() + "\'," 
-					+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + ",\'"
-					+ x.getGender()
-					+ "\')";
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setDate("p_dob", x.getDob());
+			stmt.setString("p_gender", x.getGender());
+			stmt.setString("p_FirstName", x.getFirstName());
+			stmt.setString("p_LastName", x.getLastName());
+			stmt.setString("p_Address", x.getAddress());
+			stmt.setString("p_Password", x.getPassword());
 			
-			 System.out.println("Query is: " + insertSQL);
-			 
-			rs = stmt.executeQuery(insertSQL);
-		}catch (Exception e) {
-			// TODO: handle exception
+			stmt.executeUpdate();
+		}catch(Exception e){
 			e.printStackTrace();
-		}
-		finally {
-			rs.close();
-			stmt.close();
+		}finally {
 			conn.close();
+			stmt.close();
 		}
-		
-		
+			
 	}
 
 	public void deleteRow(Patient x) throws Exception {
@@ -118,6 +111,31 @@ public class PatientDao implements DaoInterface<Patient> {
 	}
 	public void updateRow(Patient x) throws Exception{
 		
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"UpdatePatientProc\" (?,?,?)}");
+			
+			
+			stmt.setString("GENDER", x.getGender());
+			stmt.setDate("DOB", x.getDob());
+			stmt.setString("PATIENTSSN", x.getSsn());
+			stmt.setString(4,x.getFirstName());
+			stmt.setString(5,x.getLastName());
+			stmt.setString(6,x.getAddress());
+			stmt.setString(7,x.getPassword());
+			
+			stmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			conn.close();
+			stmt.close();
+		}
+		
+		/*
 		Statement stmt = null;
 		Connection conn = null;
 		//ResultSet rs = null;
@@ -140,7 +158,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			//rs.close();
 			stmt.close();
 			conn.close();
-		}
+		}*/
 	}
 	public List<Patient> getAllData() throws Exception {
 		// TODO Auto-generated method stub
