@@ -45,22 +45,38 @@ public class Start extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				LoginPage callLoginPage = new LoginPage();
+				callLoginPage.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(189, 101, 117, 29);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Sign Up");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				SignUpForm signUpForm = new SignUpForm();
+				signUpForm.setVisible(true);
+			}
+		});
 		btnNewButton_1.setBounds(189, 166, 117, 29);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Exit System");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnNewButton_2.setBounds(189, 224, 117, 29);
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblHealthSystemDbms = new JLabel("Health System DBMS");
 		lblHealthSystemDbms.setBounds(180, 54, 191, 16);
 		contentPane.add(lblHealthSystemDbms);
+		
 	}
 
 }
