@@ -282,7 +282,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				
 				List<Integer> observations=new ArrayList<Integer>();
 				while(rs6.next()){
-					observations.add(rs6.getInt("observationid"));
+					observations.add(rs6.getInt("observationId"));
 				}
 				
 				

@@ -1,16 +1,25 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+
+import org.apache.ibatis.ognl.ObjectIndexedPropertyDescriptor;
 
 import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationMetricDetails;
+
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
+import oracle.sql.STRUCT;
+import oracle.sql.StructDescriptor;
 
 public class ObservationDao implements DaoInterface<Observation> {
 	
@@ -81,6 +90,68 @@ public class ObservationDao implements DaoInterface<Observation> {
 		
 		
 		
+	}
+	
+	
+	public Observation insertObservation(Observation x) throws Exception
+	{
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+			con = getConnection();
+			
+			StructDescriptor structDescriptor = StructDescriptor.createDescriptor("\"ObservationMetricDetails\"", con);
+			List<Object> metricDetails = new ArrayList<Object>();
+			for(ObservationMetricDetails metricDetail: x.getMetricDetails())
+			{
+				List<Object> list = new ArrayList<Object>();
+				list.add(metricDetail.getMetricName());
+				list.add(metricDetail.getMetricValue());
+				
+				STRUCT item = new STRUCT(structDescriptor, con, list.toArray());
+				metricDetails.add(item);
+			}
+			
+			ArrayDescriptor arrayDescriptor = ArrayDescriptor.createDescriptor("\"ObservationMetrics\"", con);
+		
+			ARRAY array = new ARRAY(arrayDescriptor, con, metricDetails.toArray());
+		
+		
+			stmt = con.prepareCall("{call \"AddObservation\" (?,?,?,?,?,?)}");
+		    
+
+			stmt.setDate(1, x.getObservationTime());
+			stmt.setDate(2, new java.sql.Date(new java.util.Date().getTime()));
+			stmt.setString(3, x.getPatientId());
+			stmt.setString(4, x.getObservationSpecification());
+			stmt.setArray(5, array);
+			stmt.registerOutParameter(6, java.sql.Types.INTEGER);
+			
+			stmt.executeQuery();
+			
+			
+			Integer observationId = stmt.getInt(6);
+			
+	
+			System.out.println("Returned observationId ID: " + observationId);
+			return new ObservationDao().getDataById(observationId);
+			
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			if(stmt != null)
+				stmt.close();
+			if(con != null)
+				con.close();
+			
+		}
+		
+
 	}
 
 	public void insertRow(Observation x) throws Exception {

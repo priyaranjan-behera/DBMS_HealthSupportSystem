@@ -1,5 +1,6 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import com.dbms.healthsupport.domain.Alert;
 import com.dbms.healthsupport.domain.Diseases;
+import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 import com.dbms.healthsupport.domain.Recommendation;
@@ -105,6 +107,145 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		}
 		
 	}
+	
+	public Recommendation insertGeneralRecommendation(Recommendation x) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		
+		stmt = con.prepareCall("{call \"AddGeneralRecommendation\" (?,?,?,?)}");
+	    
+		stmt.setString("observationSpecName", x.getObservationSpecification());
+		stmt.setString("frequencyName", x.getFrequencyName());
+		stmt.setLong("threshold", x.getThreshold());
+		stmt.registerOutParameter("recommendationId", java.sql.Types.INTEGER);
+		
+		stmt.executeQuery();
+		
+		
+		Integer recommendationId = stmt.getInt("recommendationId");
+		
+
+		System.out.println("Returned Recommendation ID: " + recommendationId);
+		return new RecommendationDao().getDataById(recommendationId);
+		
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			stmt.close();
+			con.close();
+			
+		}
+		
+		
+	}
+	
+	public Recommendation insertDiseaseRecommendation(Recommendation x, Diseases y) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+		
+			con = getConnection();
+			
+			stmt = con.prepareCall("{call \"AddDiseaseRecommendation\" (?,?,?,?,?)}");
+		 
+			stmt.setString("observationSpecName", x.getObservationSpecification());
+			stmt.setString("frequencyName", x.getFrequencyName());
+			stmt.setLong("threshold", x.getThreshold());
+			stmt.setString("diseaseName", y.getDisName());
+			stmt.registerOutParameter("recommendationId", java.sql.Types.INTEGER);
+			
+			
+			stmt.executeQuery();
+			
+
+			Integer recommendationId = stmt.getInt("recommendationId");
+			
+
+			System.out.println("Returned Recommendation ID: " + recommendationId);
+			return new RecommendationDao().getDataById(recommendationId);
+			
+	
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			stmt.close();
+			con.close();
+			
+		}
+		
+		
+	}
+	
+
+	
+
+	public Recommendation insertPatientRecommendation(Recommendation x, Patient y) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		
+		stmt = con.prepareCall("{call \"AddPatientRecommendation\" (?,?,?,?,?)}");
+	 
+
+		stmt.setString("observationSpecName", x.getObservationSpecification());
+		stmt.setString("frequencyName", x.getFrequencyName());
+		stmt.setLong("threshold", x.getThreshold());
+		stmt.setString("patientSSN", y.getSsn());
+		stmt.registerOutParameter("recommendationId", java.sql.Types.INTEGER);
+		
+		
+		
+		stmt.executeQuery();
+		
+
+		Integer recommendationId = stmt.getInt("recommendationId");
+		
+
+		System.out.println("Returned Recommendation ID: " + recommendationId);
+		return new RecommendationDao().getDataById(recommendationId);
+		
+		
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			stmt.close();
+			con.close();
+			
+		}
+		
+		
+	}
+
+
 
 	public void deleteRow(Recommendation x) throws Exception {
 		// TODO Auto-generated method stub

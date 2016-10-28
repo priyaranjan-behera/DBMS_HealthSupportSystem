@@ -43,17 +43,20 @@ public class TestApp {
 		//testHealthSupporter();
 		//testObservationSpec();
 		//testObservation();
+		// testObservationSpec();
+		testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
 		//testAllocateHSToPatient();
 		//testPersonalizedLimits();
-		//testRecommendation();
-		//testLimit();
+		// testRecommendation();
+		// testLimit();
 		//testUpdatePeople();
 		//testUpdateHealthSupporter();
 		//testUpdatePatient();
 		//testAssignDiseaseToPatient();
 		testAssignPrimaryHealthSupporter();
+		// testUpdatePatient();
 	}
 
 	static void testAssignDiseaseToPatient() throws Exception {
@@ -87,11 +90,9 @@ public class TestApp {
 		}
 
 		Observation observation = new Observation(1, java.sql.Date.valueOf("2016-10-20"),
-				java.sql.Date.valueOf("2016-10-21"), "1", observationSpec.getObservationName(), metricDetails);
+				java.sql.Date.valueOf("2016-10-21"), "P2", observationSpec.getObservationName(), metricDetails);
 
-		//observationDao.insertRow(observation);
-		
-		observation = observationDao.getDataById(1);
+		observation = observationDao.insertObservation(observation);
 		
 		System.out.println("Observation Record Time:" + observation.getObservationTime().toString());
 		for(ObservationMetricDetails metricDetail: observation.getMetricDetails())
@@ -179,7 +180,7 @@ public class TestApp {
 	static void testUpdateHealthSupporter() throws Exception {
 		HealthSupporterDao healthsupporterDao = new HealthSupporterDao();
 		HealthSupporter healthsupporter = healthsupporterDao.getDataById("6");
-		healthsupporter.setContactNumber(1435);
+		healthsupporter.setContactNumber(new Long(1435));
 		healthsupporter.setAddress("ferry");
 		healthsupporter.setFirstName("ram");
 		healthsupporter.setLastName("shyam");
@@ -331,38 +332,45 @@ public class TestApp {
 		 ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
 		 
 		 		
-		 int i=0;
 		 for(String metric: observationSpec.getMetrics())
 		 {
-		 Limits limits = new Limits(++i, "120", "180", metric,observationSpec.getObservationName());
-		 //limitsDao.insertRow(limits);
+		 Limits limits = new Limits(0, "120", "180", metric,observationSpec.getObservationName());
+		 Limits newLimit = limitsDao.insertGeneralLimit(limits);
+		 System.out.println("Created New General Limit: " + newLimit.getLimitID());
 		 }
-	
-		 Limits limits = limitsDao.getDataById(1);
-
-		 System.out.println("Limit for metric: " + limits.getMetricId() + " Upper Limit: " + limits.getUpperLimit() );
-	
+		 
+		 for(String metric: observationSpec.getMetrics())
+		 {
+		 Limits limits = new Limits(0, "120", "180", metric,observationSpec.getObservationName());
+		 Diseases diseases = new DiseasesDao().getDataById("HIV");
+		 Limits newLimit = limitsDao.insertDiseaseLimit(limits, diseases);
+		 System.out.println("Created New General Limit: " + newLimit.getLimitID());
+		 }
+		 
+		 for(String metric: observationSpec.getMetrics())
+		 {
+		 Limits limits = new Limits(0, "120", "180", metric,observationSpec.getObservationName());
+		 Patient patient = new PatientDao().getDataById("P2");
+		 Limits newLimit = limitsDao.insertPatientLimit(limits, patient);
+		 System.out.println("Created New General Limit: " + newLimit.getLimitID());
+		 }
+		
 		}
 	
 	static void testRecommendation() throws Exception {
-    RecommendationDao recommendationDao = new RecommendationDao();
-    ObservationSpecDao observationSpecDao = new ObservationSpecDao();
-    //		FrequencyDao frequencyDao =new FrequencyDao();
-    //		
-    //		ObservationSpec observationSpec = observationSpecDao.getDataById("Blood Pressure");
-    //		Frequency frequency = new Frequency("Weekly", 7);
-    //		
-    	//recommendationDao.insertRow(new Recommendation(1, "Weekly", 2, "Blood Pressure"));
-    	Recommendation r = recommendationDao.getDataById(1);
-    	System.out.println(r.getFrequencyName());
-    	System.out.println(r.getThreshold());
-    	System.out.println(r.getObservationSpecification());
+	    RecommendationDao recommendationDao = new RecommendationDao();
+		
+    	Recommendation recommendation = new Recommendation(1, "Weekly", 2, "Blood Pressure");
+    	recommendationDao.insertGeneralRecommendation(recommendation);
+    	Diseases diseases = new DiseasesDao().getDataById("HIV");
+    	System.out.println("Disease Name: " + diseases.getDisName());
+    	recommendationDao.insertDiseaseRecommendation(recommendation,diseases);
+    	Patient patient = new PatientDao().getDataById("P2");
+    	System.out.println("PatientSSN: " + patient.getSsn());
+    	recommendationDao.insertPatientRecommendation(recommendation, patient);
+  
  
 	}
 
-	// TODO
-	// Secondary list to single
-	// SSN long, String
-	// Exceptions
 
 }

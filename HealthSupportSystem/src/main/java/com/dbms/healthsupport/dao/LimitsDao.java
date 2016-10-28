@@ -1,5 +1,6 @@
 package com.dbms.healthsupport.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.List;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.Limits;
+import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
 
@@ -32,24 +34,25 @@ public class LimitsDao implements DaoInterface<Limits>{
 		// TODO Auto-generated method stub
 
 		Connection con = null;
-		Statement stmt = null;
+		CallableStatement stmt = null;
 		ResultSet rs = null;
 		
 		try
 		{
 		
 		con = getConnection();
-		stmt = con.createStatement();
+		
+		stmt = con.prepareCall("{call \"AddGeneralLimit\" (?,?,?,?,?)}");
 	    
-		String insertSQL = " INSERT INTO LIMITS values ("
-				+ x.getLimitID() + "," 
-				+ x.getLowerLimit() + ","
-				+ x.getUpperLimit() + ","
-				+ x.getObservationSpec() + ","
-				+ x.getMetricId()
-				+ ")";
-		 
-		rs = stmt.executeQuery(insertSQL);
+		stmt.setString("observationSpecName", x.getObservationSpec());
+		stmt.setString("metricName", x.getMetricId());
+		stmt.setString("upperLimit", x.getUpperLimit());
+		stmt.setString("lowerLimit", x.getLowerLimit());
+		stmt.registerOutParameter("limitId", java.sql.Types.INTEGER);
+		
+		stmt.executeUpdate();
+		
+		
 		}catch(Exception e)
 		{
 		e.printStackTrace();
@@ -66,39 +69,134 @@ public class LimitsDao implements DaoInterface<Limits>{
 		
 	}
 	
-	public void insertDiseaseSpecificLimit(Limits x, Diseases y) throws Exception
-	{
-		LimitsDao limitsDao = new LimitsDao();
-		limitsDao.insertRow(x);
-		
+	public Limits insertGeneralLimit(Limits x) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
 		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		CallableStatement stmt = null;
 		
 		try
 		{
 		
 		con = getConnection();
-		stmt = con.createStatement();
+		
+		stmt = con.prepareCall("{call \"AddGeneralLimit\" (?,?,?,?,?)}");
 	    
-		String insertSQL = " INSERT INTO LIMITSFORDISEASE values (\'"
-				+ y.getDisName() + "\'," 
-				+ x.getLimitID()
-				+ ")";
-		 
-		System.out.println("Insert Query: " + insertSQL);
-		rs = stmt.executeQuery(insertSQL);
+		stmt.setString("observationSpecName", x.getObservationSpec());
+		stmt.setString("metricName", x.getMetricId());
+		stmt.setString("upperLimit", x.getUpperLimit());
+		stmt.setString("lowerLimit", x.getLowerLimit());
+		stmt.registerOutParameter("limitId", java.sql.Types.INTEGER);
+		
+		stmt.executeQuery();
+		
+		
+		Integer limitId = stmt.getInt("limitId");
+		
+
+		System.out.println("Returned Limit ID: " + limitId);
+		return new LimitsDao().getDataById(limitId);
+		
+		
 		}catch(Exception e)
 		{
-		e.printStackTrace();
+		throw e;
 		}
 		finally {
-			rs.close();
 			stmt.close();
 			con.close();
 			
 		}
+		
+		
 	}
+	
+	public Limits insertDiseaseLimit(Limits x, Diseases y) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+		
+			con = getConnection();
+			
+			stmt = con.prepareCall("{call \"AddDiseaseLimit\" (?,?,?,?,?,?)}");
+		 
+			stmt.setString("observationSpecName", x.getObservationSpec());
+			stmt.setString("metricName", x.getMetricId());
+			stmt.setString("upperLimit", x.getUpperLimit());
+			stmt.setString("lowerLimit", x.getLowerLimit());
+			stmt.setString("diseaseName", y.getDisName());
+			stmt.registerOutParameter("limitId", java.sql.Types.INTEGER);
+			
+			stmt.executeQuery();
+			
+			Integer limitId = stmt.getInt("limitId");
+			
+			return new LimitsDao().getDataById(limitId);
+				
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			stmt.close();
+			con.close();
+			
+		}
+		
+		
+	}
+	
+
+	
+
+	public Limits insertPatientLimit(Limits x, Patient y) throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		CallableStatement stmt = null;
+		
+		try
+		{
+		
+		con = getConnection();
+		
+		stmt = con.prepareCall("{call \"AddPatientLimit\" (?,?,?,?,?,?)}");
+	 
+		stmt.setString("observationSpecName", x.getObservationSpec());
+		stmt.setString("metricName", x.getMetricId());
+		stmt.setString("upperLimit", x.getUpperLimit());
+		stmt.setString("lowerLimit", x.getLowerLimit());
+		stmt.setString("patientName", y.getSsn());
+		stmt.registerOutParameter("limitId", java.sql.Types.INTEGER);
+		
+		stmt.executeQuery();
+		
+		Integer limitId = stmt.getInt("limitId");
+		
+		return new LimitsDao().getDataById(limitId);
+		
+		
+		}catch(Exception e)
+		{
+		throw e;
+		}
+		finally {
+			stmt.close();
+			con.close();
+			
+		}
+		
+		
+	}
+
 
 	public void deleteRow(Limits x) throws Exception {
 		// TODO Auto-generated method stub
@@ -122,7 +220,7 @@ public class LimitsDao implements DaoInterface<Limits>{
 		con = getConnection();
 		stmt = con.createStatement();
 	    
-		String selectSQL = "SELECT * FROM LIMITS";
+		String selectSQL = "SELECT * FROM LIMITS WHERE limitID = "+id;
 		
 		rs = stmt.executeQuery(selectSQL);
 		
@@ -130,8 +228,8 @@ public class LimitsDao implements DaoInterface<Limits>{
 			Integer limitID = rs.getInt("limitID");
 			String lowerlimit = rs.getString("lowerlimit");
 			String upperlimit = rs.getString("upperlimit");
-			String metricID = rs.getString("metricID");
-			String observationSpec = rs.getString("observationSpec");
+			String metricID = rs.getString("metricName");
+			String observationSpec = rs.getString("observationSpecName");
 			
 			return new Limits(limitID, lowerlimit, upperlimit, metricID, observationSpec);
 			
