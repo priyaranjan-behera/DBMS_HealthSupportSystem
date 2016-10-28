@@ -53,7 +53,8 @@ public class TestApp {
 		//testUpdateHealthSupporter();
 		//testUpdatePatient();
 		//testAssignDiseaseToPatient();
-		testAssignPrimaryHealthSupporter();
+		//testAssignPrimaryHealthSupporter();
+		testAssignSecondaryHealthSupporter();
 	}
 
 	static void testAssignDiseaseToPatient() throws Exception {
@@ -75,6 +76,16 @@ public class TestApp {
 		patientDao.AssignPrimaryHealthSupporter(healthSupporterDetails);
 		
 	}
+	
+static void testAssignSecondaryHealthSupporter() throws Exception {
+		
+		PatientDao patientDao = new PatientDao();
+		HealthSupporterDetails healthSupporterDetails = new HealthSupporterDetails("P3","P2", java.sql.Date.valueOf("2016-10-20"));
+		
+		patientDao.AssignSecondaryHealthSupporter(healthSupporterDetails);
+		
+	}
+
 	static void testObservation() throws Exception {
 		ObservationDao observationDao = new ObservationDao();
 		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
