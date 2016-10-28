@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dbms.healthsupport.domain.Diseases;
+import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.HealthSupporterDetails;
 import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
@@ -72,7 +75,7 @@ public class PatientDao implements DaoInterface<Patient> {
 			
 			stmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			conn.close();
 			stmt.close();
@@ -116,7 +119,7 @@ public class PatientDao implements DaoInterface<Patient> {
 		
 		try{
 			conn = getConnection();
-			stmt = conn.prepareCall("{call \"UpdatePatientProc\" (?,?,?)}");
+			stmt = conn.prepareCall("{call \"UpdatePatientProc\" (?,?,?,?,?,?,?)}");
 			
 			
 			stmt.setString("p_gender", x.getGender());
@@ -125,41 +128,85 @@ public class PatientDao implements DaoInterface<Patient> {
 			stmt.setString("p_firstname",x.getFirstName());
 			stmt.setString("p_lastname",x.getLastName());
 			stmt.setString("p_address",x.getAddress());
-			stmt.setString("p_address",x.getPassword());
+			stmt.setString("p_password",x.getPassword());
 			
 			stmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			conn.close();
 			stmt.close();
 		}
 		
-		/*
-		Statement stmt = null;
+		
+	}
+	
+	public void AssignDiseaseToPatient(Patient x, Diseases y) throws Exception {
 		Connection conn = null;
-		//ResultSet rs = null;
+		CallableStatement stmt = null;
 		
 		try{
-			
 			conn = getConnection();
-			stmt = conn.createStatement();
-			String updateSQL = "UPDATE PATIENT SET dob ="+ "TO_DATE(\'"+x.getDob() + "\',\'YYYY-MM-DD\')" + "," + "gender ="+ x.getGender() +" WHERE (ssn=\'"+ x.getSsn() +"\')";
-		
-			stmt.executeUpdate(updateSQL);
+			stmt = conn.prepareCall("{call \"AssignDiseaseToPatient\" (?,?)}");
 			
-			PeopleDao peopleDao= new PeopleDao();
-			People people = peopleDao.getDataById(x.getSsn());
-			peopleDao.updatePeopleRow(people);
 			
+			stmt.setString("p_ssn", x.getSsn());
+			stmt.setString("d_name", y.getDisName());
+			
+			stmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
-			//rs.close();
-			stmt.close();
 			conn.close();
-		}*/
+			stmt.close();
+		}
+		
 	}
+	public void AssignPrimaryHealthSupporter (HealthSupporterDetails z) throws Exception{
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"assignPrimarySupporter\" (?,?,?)}");
+			
+			
+			stmt.setString("patientSSN", z.getPatientSSN());
+			stmt.setString("hsSSN", z.getHealthSupporterSSN());
+			stmt.setDate("authorizationDate", z.getAuthDate());
+			
+			stmt.executeQuery();
+		}catch(Exception e){
+			throw e;
+		}finally {
+			conn.close();
+			stmt.close();
+		}
+	}
+	
+	public void AssignSecondaryHealthSupporter (HealthSupporterDetails z) throws Exception{
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"assignSecondarySupporter\" (?,?,?)}");
+			
+			
+			stmt.setString("patientSSN", z.getPatientSSN());
+			stmt.setString("hsSSN", z.getHealthSupporterSSN());
+			stmt.setDate("authorizationDate", z.getAuthDate());
+			
+			stmt.executeQuery();
+		}catch(Exception e){
+			throw e;
+		}finally {
+			conn.close();
+			stmt.close();
+		}
+	}
+	
+	
 	public List<Patient> getAllData() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -235,7 +282,7 @@ public class PatientDao implements DaoInterface<Patient> {
 				
 				List<Integer> observations=new ArrayList<Integer>();
 				while(rs6.next()){
-					observations.add(rs6.getInt("observation"));
+					observations.add(rs6.getInt("observationid"));
 				}
 				
 				

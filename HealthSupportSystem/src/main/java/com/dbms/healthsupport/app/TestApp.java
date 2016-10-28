@@ -19,6 +19,7 @@ import com.dbms.healthsupport.dao.WellPatientHasMinorDiseaseDao;
 import com.dbms.healthsupport.domain.Diseases;
 import com.dbms.healthsupport.domain.Frequency;
 import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.HealthSupporterDetails;
 import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.Observation;
 import com.dbms.healthsupport.domain.ObservationMetricDetails;
@@ -40,7 +41,7 @@ public class TestApp {
 		// testDisease();
 		// testFrequency();
 		//testHealthSupporter();
-		// testObservationSpec();
+		//testObservationSpec();
 		//testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
@@ -50,9 +51,30 @@ public class TestApp {
 		//testLimit();
 		//testUpdatePeople();
 		//testUpdateHealthSupporter();
-		testUpdatePatient();
+		//testUpdatePatient();
+		//testAssignDiseaseToPatient();
+		testAssignPrimaryHealthSupporter();
 	}
 
+	static void testAssignDiseaseToPatient() throws Exception {
+		
+		PatientDao patientDao = new PatientDao();
+		DiseasesDao diseasesDao = new DiseasesDao();
+		
+		Patient patient = patientDao.getDataById("P3");
+		Diseases diseases = diseasesDao.getDataById("HIV");
+		
+		patientDao.AssignDiseaseToPatient(patient, diseases);
+	}
+	
+	static void testAssignPrimaryHealthSupporter() throws Exception {
+		
+		PatientDao patientDao = new PatientDao();
+		HealthSupporterDetails healthSupporterDetails = new HealthSupporterDetails("P4","P3", java.sql.Date.valueOf("2016-10-20"));
+		
+		patientDao.AssignPrimaryHealthSupporter(healthSupporterDetails);
+		
+	}
 	static void testObservation() throws Exception {
 		ObservationDao observationDao = new ObservationDao();
 		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
@@ -109,16 +131,16 @@ public class TestApp {
 		ObservationSpecDao observationSpecDao = new ObservationSpecDao();
 		List<String> metrics = new ArrayList<String>();
 
-		metrics.add("systolic");
-		metrics.add("diastolic");
+		metrics.add("sys");
+		metrics.add("dia");
 
-		ObservationSpec observationSpec = new ObservationSpec("Blood Pressure", "Blood Pressure Description", metrics);
+		ObservationSpec observationSpec = new ObservationSpec("Blood Pres", "Blood Pres Desc", metrics);
 
 		observationSpecDao.insertData(observationSpec);
 
-		observationSpec = observationSpecDao.getDataById("Blood Pressure");
+		//observationSpec = observationSpecDao.getDataById("Blood Pressure");
 
-		System.out.println("Observation Spec: " + observationSpec.getObservationName());
+		//System.out.println("Observation Spec: " + observationSpec.getObservationName());
 
 	}
 

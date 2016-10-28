@@ -153,7 +153,7 @@ public class PeopleDao implements DaoInterface<People> {
 			
 			stmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			conn.close();
 			stmt.close();
@@ -180,7 +180,7 @@ public class PeopleDao implements DaoInterface<People> {
 			stmt.executeUpdate(updateSQL);
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			//rs.close();
 			stmt.close();

@@ -161,7 +161,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
     			
     			while(rs1.next()) {
     				
-    				recommendationIds.add(rs1.getInt("recommendationIds"));
+    				recommendationIds.add(rs1.getInt("recommendationId"));
     			}
     			
                 String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName =\'"+disName+"\'";
@@ -178,7 +178,7 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
     			output = new Diseases(disName,disDescription, recommendationIds, limitsIds);
     		}
         } catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			rs.close();
 			stmt.close();

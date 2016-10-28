@@ -32,17 +32,17 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 		
 		try{
 			conn = getConnection();
-			stmt = conn.prepareCall("{call \"AddObservationSpecAndMetric\" (?)}");
+			stmt = conn.prepareCall("{call \"AddObservationSpecAndMetric\" (?,?,?)}");
 			
-			String array[] = null;
+			List<String> list = new ArrayList<String>();
 			int count = 0;
 			for(String metric: x.getMetrics())
 			{
-				array[count] = metric;
-				count+=1;
+				list.add(metric);
+				count=count+1;
 			}
-			ArrayDescriptor des = ArrayDescriptor.createDescriptor("ssharm17.\"Metric\"",conn);
-			ARRAY array_to_pass = new ARRAY(des,conn,array);
+			ArrayDescriptor des = ArrayDescriptor.createDescriptor("SSHARM17.\"Metric\"",conn);
+			ARRAY array_to_pass = new ARRAY(des,conn,list.toArray());
 			stmt.setString(1, x.getObservationName());
 			stmt.setString(2, x.getDescription());
 			stmt.setArray(3, array_to_pass);
@@ -51,47 +51,12 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 			
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			conn.close();
 			stmt.close();
 		}
-		/*
-		Connection conn = null;
-		ResultSet rs = null;
-		Statement stmt = null;
-		
-		try
-		{	
-			conn = getConnection();
-			stmt = conn.createStatement();
-		    
-			String insertSQL = " INSERT INTO OBSERVATIONSPEC values (\'"
-					+ x.getObservationName() + "\',\'" 
-					+ x.getDescription()
-					+ "\')";
-			
-			rs = stmt.executeQuery(insertSQL);
-			
-			for(String metric: x.getMetrics())
-			{
-				insertSQL = "INSERT INTO METRICINOBSSPEC values (\'"
-					+ metric + "\',\'" 
-					+ x.getObservationName()
-					+ "\')";
-				
-				rs = stmt.executeQuery(insertSQL);
-			}
-
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}finally {
-			rs.close();
-			stmt.close();
-			conn.close();
-		}
-			*/	 
+	 
 
 	}
 

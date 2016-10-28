@@ -108,7 +108,7 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 			
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			conn.close();
 			stmt.close();
