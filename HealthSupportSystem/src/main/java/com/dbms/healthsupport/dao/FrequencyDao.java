@@ -59,7 +59,36 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 
 	public List<Frequency> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+	   try{ 
+		conn = getConnection();
+		stmt = conn.createStatement();
+		String selectSQL = "SELECT * FROM FREQUENCY";
+         rs = stmt.executeQuery(selectSQL);
+		
+         List<Frequency> frequencies = new ArrayList<Frequency>();
+		while(rs.next()){
+			String frequencyDesc = rs.getString("frequencyName");
+			Integer duration = rs.getInt("duration");
+			
+			frequencies.add(new Frequency(frequencyDesc, duration));
+			
+		}
+		
+	   return frequencies;
+	   } catch(Exception e){
+			throw e;
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+	   
+		
 	}
 
 	public Frequency getDataById(Object id) throws Exception {
@@ -81,7 +110,7 @@ public class FrequencyDao implements DaoInterface<Frequency> {
 			return new Frequency(frequencyDesc, duration);
 			
 		}} catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			rs.close();
 			stmt.close();
