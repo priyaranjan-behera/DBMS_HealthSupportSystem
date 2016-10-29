@@ -76,12 +76,19 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		Statement stmt = null;
+		Statement stmt1 = null;
+		Statement stmt2 = null;
 		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		
 		List<Diseases> output = null;
 		
 	    try {
 		conn = getConnection();
 		stmt = conn.createStatement();
+		stmt1 = conn.createStatement();
+		stmt2 = conn.createStatement();
 		
 		//String selectSQL = "SELECT * FROM DISEASES d, RecommendationForDisease r, LimitsForDisease l where d.DiseaseName = r.DiseaseName AND l.DiseaseName = r.DiseaseName";
 		String selectSQL = "SELECT * FROM DISEASES d";
@@ -101,18 +108,18 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 			
 			List<Integer> recommendationIds = new ArrayList<Integer>();
 			
-			ResultSet rs1 = stmt.executeQuery(selectSQL2);
+			rs1 = stmt1.executeQuery(selectSQL2);
 			
 			while(rs1.next()) {
 				
-				recommendationIds.add(rs1.getInt("recommendationIds"));
+				recommendationIds.add(rs1.getInt("recommendationId"));
 			}
 			
             String selectSQL3 = "SELECT * FROM LimitsForDisease l where l.DiseaseName =\'"+disName+"\'";
 			
 			List<Integer> limitsIds = new ArrayList<Integer>();
 			
-			ResultSet rs2 = stmt.executeQuery(selectSQL3);
+			rs2 = stmt2.executeQuery(selectSQL3);
 			
 			while(rs2.next()) {
 				
@@ -127,6 +134,8 @@ public class DiseasesDao implements	DaoInterface<Diseases> {
 			rs.close();
 			stmt.close();
 			conn.close();
+			rs1.close();
+			rs2.close();
 		}
 		
 		return output;

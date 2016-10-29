@@ -91,7 +91,7 @@ public class LoginPage extends JFrame {
 					
 					
 					//if okay
-					HealthSupporterLoggedIn healthSupporterLoggedIn = new HealthSupporterLoggedIn();
+					HealthSupporterLoggedIn healthSupporterLoggedIn = new HealthSupporterLoggedIn(textField.getText());
 					healthSupporterLoggedIn.setVisible(true);
 	
 					

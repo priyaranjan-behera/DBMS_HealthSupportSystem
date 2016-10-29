@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class HealthSupporterLoggedIn extends JFrame {
 
 	private JPanel contentPane;
+	private String HSSSN;
 
 	/**
 	 * Launch the application.
@@ -21,7 +22,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HealthSupporterLoggedIn frame = new HealthSupporterLoggedIn();
+					HealthSupporterLoggedIn frame = new HealthSupporterLoggedIn("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +34,8 @@ public class HealthSupporterLoggedIn extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HealthSupporterLoggedIn() {
+	public HealthSupporterLoggedIn(String currHSSSN) {
+		this.HSSSN = currHSSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -48,7 +50,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnNewButton = new JButton("My Authorized Patients");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ForHealthSupporterViewAllAuthorizedPatients forHealthSupporterViewAllAuthorizedPatients  = new ForHealthSupporterViewAllAuthorizedPatients ();
+				ForHealthSupporterViewAllAuthorizedPatients forHealthSupporterViewAllAuthorizedPatients  = new ForHealthSupporterViewAllAuthorizedPatients (HSSSN);
 				forHealthSupporterViewAllAuthorizedPatients.setVisible(true);
 			}
 		});
