@@ -35,7 +35,7 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ForHealthSupporterAddAsASecondaryHS frame = new ForHealthSupporterAddAsASecondaryHS();
+					ForHealthSupporterAddAsASecondaryHS frame = new ForHealthSupporterAddAsASecondaryHS("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -97,9 +97,9 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 				// TODO Auto-generated method stub
 				HealthSupporterDetails healthSupporterDetails = new HealthSupporterDetails(textField.getText(), HSSSN, java.sql.Date.valueOf(txtYyyymmdd.getText()));
 				try {
-					new PatientDao().AssignPrimaryHealthSupporter(healthSupporterDetails);
+					new PatientDao().AssignSecondaryHealthSupporter(healthSupporterDetails);
 					JOptionPane.showMessageDialog(ForHealthSupporterAddAsASecondaryHS.this,
-						    "Added HS: " + healthSupporterDetails.getHealthSupporterSSN() + "as Secondary Supporter for: " + healthSupporterDetails.getPatientSSN());
+						    "Added HS: " + healthSupporterDetails.getHealthSupporterSSN() + " as Secondary Supporter for: " + healthSupporterDetails.getPatientSSN());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(ForHealthSupporterAddAsASecondaryHS.this,
