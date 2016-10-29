@@ -12,6 +12,7 @@ import com.dbms.healthsupport.domain.ObservationSpec;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,8 @@ public class AddDiseaseLimit extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+	private List<ObservationSpec> obspeclist;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +55,7 @@ public class AddDiseaseLimit extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		List<ObservationSpec> obspeclist = null;
+		this.obspeclist = null;
 		
 		ObservationSpecDao osd=new ObservationSpecDao();
 		try {
@@ -77,46 +80,12 @@ public class AddDiseaseLimit extends JFrame {
 		comboBox.setBounds(100, 42, 32, 24);
 		contentPane.add(comboBox);
 		
-		comboBox.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				String role = (String) comboBox.getSelectedItem();
-				try
-				{
-					if(role.equals("Patient"))
-					{
-						lblNewLabel_4.hide();
-						textField_2.hide();
-						lblDob.show();
-						txtYyyymmdd.show();
-						lblGender.show();
-						comboBox_1.show();
-					}
-					else if (role.equals("Health Supporter"))
-					{
-						lblDob.hide();
-						txtYyyymmdd.hide();
-						lblGender.hide();
-						comboBox_1.hide();
-						lblNewLabel_4.show();
-						textField_2.show();
-					}
-					
-
-				}catch (Exception exp) {
-					// TODO: handle exception
-				}
-				
-			}
-		});
-		
-
 		
 		JLabel lblMetricName = new JLabel("Metric Name");
 		lblMetricName.setBounds(64, 147, 70, 15);
 		contentPane.add(lblMetricName);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(200, 147, 32, 24);
 		contentPane.add(comboBox_1);
 		
@@ -137,5 +106,34 @@ public class AddDiseaseLimit extends JFrame {
 		textField_1.setBounds(179, 250, 114, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-	}
+
+		
+		comboBox.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String obsspec = (String) comboBox.getSelectedItem();
+				try
+				{
+					DefaultComboBoxModel dcm = new DefaultComboBoxModel();
+					comboBox_1.setModel( dcm );
+					
+					for( ObservationSpec obspec : obspeclist ) {
+					    if(obspec.getObservationName().equals(obspec)){
+							for(String metric:obspec.getMetrics())
+								dcm.addElement(metric);
+							break;
+					    }
+					}
+					
+
+				}catch (Exception exp) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
+		
+
+		
+		}
 }
