@@ -5,7 +5,7 @@ import java.util.List;
 public class HealthSupporter extends People {
 	
 	Long contactNumber;
-	List<Long> patients;
+	List<String> patients;
 	
 	public Long getContactNumber() {
 		return contactNumber;
@@ -13,15 +13,15 @@ public class HealthSupporter extends People {
 	public void setContactNumber(long i) {
 		this.contactNumber = i;
 	}
-	public List<Long> getPatients() {
+	public List<String> getPatients() {
 		return patients;
 	}
-	public void setPatients(List<Long> patients) {
+	public void setPatients(List<String> patients) {
 		this.patients = patients;
 	}
 	
 	
-	public HealthSupporter(String ssn, String firstName, String lastName, String address,String password,Long contactNumber,List<Long> patients) {
+	public HealthSupporter(String ssn, String firstName, String lastName, String address,String password,Long contactNumber,List<String> patients) {
 		super(ssn, firstName, lastName, address,password);
 		// TODO Auto-generated constructor stub
 		this.contactNumber=contactNumber;
@@ -36,7 +36,7 @@ public class HealthSupporter extends People {
 	}  
 	
 
-	public HealthSupporter(People people, Long contactNumber, List<Long> patients) {
+	public HealthSupporter(People people, Long contactNumber, List<String> patients) {
 		super(people);
 		// TODO Auto-generated constructor stub
 		this.contactNumber=contactNumber;

@@ -206,6 +206,51 @@ public class PatientDao implements DaoInterface<Patient> {
 		}
 	}
 	
+	public void deleteSecondaryHealthSupporter (String hsSSN, String patientSSN) throws Exception{
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"deleteSecondarySupporter\" (?,?)}");
+			
+			
+			stmt.setString("patientSSN", patientSSN);
+			stmt.setString("hsSSN", hsSSN);
+			
+			stmt.executeQuery();
+		}catch(Exception e){
+			throw e;
+		}finally {
+			conn.close();
+			stmt.close();
+		}
+	}
+
+	
+	public void deletePrimaryHealthSupporter (String hsSSN, String patientSSN) throws Exception{
+		Connection conn = null;
+		CallableStatement stmt = null;
+		
+		try{
+			conn = getConnection();
+			stmt = conn.prepareCall("{call \"deletePrimarySupporter\" (?,?)}");
+			
+			
+			stmt.setString("patientSSN", patientSSN);
+			stmt.setString("hsSSN", hsSSN);
+			
+			stmt.executeQuery();
+		}catch(Exception e){
+			throw e;
+		}finally {
+			if(conn != null)
+				conn.close();
+			if(conn != null)
+				stmt.close();
+		}
+	}
+	
 	
 	public List<Patient> getAllData() throws Exception {
 		// TODO Auto-generated method stub
