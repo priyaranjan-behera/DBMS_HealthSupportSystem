@@ -24,7 +24,7 @@ public class People {
 		this.firstName = people.getFirstName();
 		this.lastName = people.getLastName();
 		this.address = people.getAddress();
-		this.password = people.getAddress();
+		this.password = people.getPassword();
 		
 	}
 
