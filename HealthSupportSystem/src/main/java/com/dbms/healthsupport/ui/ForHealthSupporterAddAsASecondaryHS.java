@@ -8,9 +8,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.dbms.healthsupport.dao.PatientDao;
+import com.dbms.healthsupport.domain.HealthSupporterDetails;
 
 public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 
@@ -20,6 +24,9 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnGoBack;
+	private JLabel lblAuthorizationDate;
+	private JTextField txtYyyymmdd;
+	private String HSSSN;
 
 	/**
 	 * Launch the application.
@@ -40,14 +47,14 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ForHealthSupporterAddAsASecondaryHS() {
+	public ForHealthSupporterAddAsASecondaryHS(String HealthSupporterSSN) {
+		this.HSSSN= HealthSupporterSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		
 		textField = new JTextField();
 		textField.setBounds(19, 53, 130, 26);
@@ -73,6 +80,37 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 		btnGoBack = new JButton("Go Back");
 		btnGoBack.setBounds(208, 227, 117, 29);
 		contentPane.add(btnGoBack);
+		
+		lblAuthorizationDate = new JLabel("Authorization Date ");
+		lblAuthorizationDate.setBounds(19, 140, 70, 15);
+		contentPane.add(lblAuthorizationDate);
+		
+		txtYyyymmdd = new JTextField();
+		txtYyyymmdd.setText("YYYY-MM-DD");
+		txtYyyymmdd.setBounds(130, 163, 114, 19);
+		contentPane.add(txtYyyymmdd);
+		txtYyyymmdd.setColumns(10);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				HealthSupporterDetails healthSupporterDetails = new HealthSupporterDetails(textField.getText(), HSSSN, java.sql.Date.valueOf(txtYyyymmdd.getText()));
+				try {
+					new PatientDao().AssignPrimaryHealthSupporter(healthSupporterDetails);
+					JOptionPane.showMessageDialog(ForHealthSupporterAddAsASecondaryHS.this,
+						    "Added HS: " + healthSupporterDetails.getHealthSupporterSSN() + "as Secondary Supporter for: " + healthSupporterDetails.getPatientSSN());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(ForHealthSupporterAddAsASecondaryHS.this,
+						    e.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+			}
+		});
 	}
 
 }

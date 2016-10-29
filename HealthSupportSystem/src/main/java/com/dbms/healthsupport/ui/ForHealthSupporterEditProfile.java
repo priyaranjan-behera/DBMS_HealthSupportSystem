@@ -142,7 +142,7 @@ public class ForHealthSupporterEditProfile extends JFrame {
 		final JTextArea textArea = new JTextArea();
 		textArea.setBounds(185, 260, 210, 52);
 		textArea.setText(healthSupporter.getAddress());
-		textArea.setWrapStyleWord(word);
+		textArea.setWrapStyleWord(true);
 		contentPane.add(textArea);
 		
 		JButton btnExit = new JButton("Exit");
@@ -158,6 +158,7 @@ public class ForHealthSupporterEditProfile extends JFrame {
 				HealthSupporter healthSupporter = new HealthSupporter(people, Long.parseLong(textField_2.getText()));
 				try {
 					healthSupporterDao.updateRow(healthSupporter);
+					JOptionPane.showMessageDialog(ForHealthSupporterEditProfile.this, "Health Supporter Updated");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(ForHealthSupporterEditProfile.this,
