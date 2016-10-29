@@ -179,6 +179,8 @@ public class EditPatientDetails extends JFrame {
 				PeopleDao peopleDao = new PeopleDao();
 				try {
 					peopleDao.updatePeopleRow(people);
+					JOptionPane.showMessageDialog(EditPatientDetails.this,
+						    "Details updated");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(EditPatientDetails.this,
 						    e1.getMessage(),

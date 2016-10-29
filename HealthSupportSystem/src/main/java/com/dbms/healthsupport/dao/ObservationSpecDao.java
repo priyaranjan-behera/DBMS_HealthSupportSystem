@@ -130,7 +130,55 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 
 	public List<ObservationSpec> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+			
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+		Statement stmt1 = null;
+		List<ObservationSpec> res=new ArrayList<ObservationSpec>();
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    stmt1 = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM OBSERVATIONSPEC";
+			 
+			ObservationSpec output =null;
+			
+			rs = stmt.executeQuery(selectSQL);
+		
+
+			while(rs.next())
+			{
+				String observationName = rs.getString("observationSpecName");
+				String description = rs.getString("description");
+				
+				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC";
+				 
+				List<String> metrics=new ArrayList<String>();
+				rs1 = stmt1.executeQuery(selectSQL1);
+				while(rs1.next()){
+					metrics.add(rs1.getString("METRICNAME"));
+				}
+				
+				res.add(new ObservationSpec(observationName,description,metrics));
+			}
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally{
+			rs1.close();
+			stmt1.close();
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		return res;
+
 	}
 
 	public ObservationSpec getDataById(Object id) throws Exception {
