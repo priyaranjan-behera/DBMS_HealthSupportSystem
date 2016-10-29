@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.dbms.healthsupport.dao.DiseasesDao;
+import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.ObservationSpecDao;
+import com.dbms.healthsupport.dao.PatientDao;
+import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.ObservationSpec;
 
 import javax.swing.JLabel;
@@ -21,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTextField;
+import javax.swing.JButton;
 public class AddDiseaseLimit extends JFrame {
 
 	private JPanel contentPane;
@@ -29,6 +34,9 @@ public class AddDiseaseLimit extends JFrame {
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
 	private List<ObservationSpec> obspeclist;
+	private JButton btnCreateLimit;
+	private JLabel lblCreateLimitFor;
+	String diseaseName;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +44,7 @@ public class AddDiseaseLimit extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddDiseaseLimit frame = new AddDiseaseLimit();
+					AddDiseaseLimit frame = new AddDiseaseLimit("HIV");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +56,8 @@ public class AddDiseaseLimit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddDiseaseLimit() {
+	public AddDiseaseLimit(String currDiseaseName) {
+		this.diseaseName = currDiseaseName;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -69,15 +78,15 @@ public class AddDiseaseLimit extends JFrame {
 		
 		List<String> specNames=new ArrayList<String>();
 		for(ObservationSpec obspec: obspeclist){
-			specNames.add(getName());
+			specNames.add(obspec.getObservationName());
 		}
 		
 		Label label = new Label("Observation Spec");
 		label.setBounds(34, 42, 68, 21);
 		contentPane.add(label);
 		
-		comboBox = new JComboBox(specNames.toArray(new String[specNames.size()]));
-		comboBox.setBounds(100, 42, 32, 24);
+		comboBox = new JComboBox(specNames.toArray());
+		comboBox.setBounds(100, 42, 100, 24);
 		contentPane.add(comboBox);
 		
 		
@@ -86,7 +95,7 @@ public class AddDiseaseLimit extends JFrame {
 		contentPane.add(lblMetricName);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(200, 147, 32, 24);
+		comboBox_1.setBounds(200, 147, 100, 24);
 		contentPane.add(comboBox_1);
 		
 		JLabel lblNewLabel = new JLabel("upper limit");
@@ -106,6 +115,14 @@ public class AddDiseaseLimit extends JFrame {
 		textField_1.setBounds(179, 250, 114, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		
+		btnCreateLimit = new JButton("Create Limit");
+		btnCreateLimit.setBounds(305, 105, 117, 25);
+		contentPane.add(btnCreateLimit);
+		
+		lblCreateLimitFor = new JLabel("Create Limit For: " + currDiseaseName);
+		lblCreateLimitFor.setBounds(179, 29, 70, 15);
+		contentPane.add(lblCreateLimitFor);
 
 		
 		comboBox.addActionListener(new ActionListener() {
@@ -117,17 +134,35 @@ public class AddDiseaseLimit extends JFrame {
 					DefaultComboBoxModel dcm = new DefaultComboBoxModel();
 					comboBox_1.setModel( dcm );
 					
-					for( ObservationSpec obspec : obspeclist ) {
-					    if(obspec.getObservationName().equals(obspec)){
-							for(String metric:obspec.getMetrics())
+					ObservationSpec observationSpec = new ObservationSpecDao().getDataById(obsspec);
+					
+							for(String metric:observationSpec.getMetrics())
 								dcm.addElement(metric);
-							break;
-					    }
-					}
 					
 
 				}catch (Exception exp) {
 					// TODO: handle exception
+				}
+				
+			}
+		});
+		
+		btnCreateLimit.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try
+				{
+					Limits limits = new LimitsDao().insertDiseaseLimit(new Limits(0, textField_1.getText(), textField.getText(), comboBox_1.getSelectedItem().toString(), comboBox.getSelectedItem().toString()), new DiseasesDao().getDataById(diseaseName) );
+					JOptionPane.showMessageDialog(AddDiseaseLimit.this,
+						    "Limits ID: " + limits.getLimitID());
+				}
+				catch (Exception exp) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(AddDiseaseLimit.this,
+						    exp.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
 				}
 				
 			}
