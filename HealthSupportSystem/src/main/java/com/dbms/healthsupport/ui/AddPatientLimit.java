@@ -25,7 +25,7 @@ import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.domain.Limits;
 import com.dbms.healthsupport.domain.ObservationSpec;
 
-public class InsertPatientLimit extends JFrame {
+public class AddPatientLimit extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -44,7 +44,7 @@ public class InsertPatientLimit extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InsertPatientLimit frame = new InsertPatientLimit("");
+					AddPatientLimit frame = new AddPatientLimit("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +56,7 @@ public class InsertPatientLimit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InsertPatientLimit(String patientSSN1) {
+	public AddPatientLimit(String patientSSN1) {
 			
 		this.patientSSN = patientSSN1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +71,7 @@ public class InsertPatientLimit extends JFrame {
 		try {
 			obspeclist = osd.getAllData();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(InsertPatientLimit.this,
+			JOptionPane.showMessageDialog(AddPatientLimit.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -155,12 +155,12 @@ public class InsertPatientLimit extends JFrame {
 				try
 				{
 					Limits limits = new LimitsDao().insertPatientLimit(new Limits(0, textField_1.getText(), textField.getText(), comboBox_1.getSelectedItem().toString(), comboBox.getSelectedItem().toString()), new PatientDao().getDataById(patientSSN) );
-					JOptionPane.showMessageDialog(InsertPatientLimit.this,
+					JOptionPane.showMessageDialog(AddPatientLimit.this,
 						    "Limits ID: " + limits.getLimitID());
 				}
 				catch (Exception exp) {
 					// TODO: handle exception
-					JOptionPane.showMessageDialog(InsertPatientLimit.this,
+					JOptionPane.showMessageDialog(AddPatientLimit.this,
 						    exp.getMessage(),
 						    "Inane warning",
 						    JOptionPane.WARNING_MESSAGE);
