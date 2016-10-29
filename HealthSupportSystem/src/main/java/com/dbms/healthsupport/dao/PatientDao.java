@@ -336,7 +336,7 @@ public class PatientDao implements DaoInterface<Patient> {
 
 		}catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			rs.close();
