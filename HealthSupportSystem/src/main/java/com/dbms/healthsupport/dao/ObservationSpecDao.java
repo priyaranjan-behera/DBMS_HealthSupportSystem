@@ -25,7 +25,7 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 		
 	}
 	
-	public void insertData(ObservationSpec x) throws Exception {
+	public void insertObservationSpec(ObservationSpec x) throws Exception {
 	    
 		Connection conn = null;
 		CallableStatement stmt = null;
@@ -155,7 +155,7 @@ public class ObservationSpecDao implements DaoInterface<ObservationSpec>{
 				String observationName = rs.getString("observationSpecName");
 				String description = rs.getString("description");
 				
-				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC";
+				String selectSQL1 = "SELECT * FROM METRICINOBSSPEC WHERE observationSpecName=\'"+observationName+"\'";
 				 
 				List<String> metrics=new ArrayList<String>();
 				rs1 = stmt1.executeQuery(selectSQL1);
