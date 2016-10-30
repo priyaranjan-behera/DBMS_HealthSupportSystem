@@ -2,6 +2,8 @@ package com.dbms.healthsupport.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,9 +25,7 @@ import javax.swing.JTable;
 public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private JTable table_1;
-
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +33,7 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ForHealthSupporterViewAllAuthorizedPatients frame = new ForHealthSupporterViewAllAuthorizedPatients("P3");
+					ForHealthSupporterViewAllAuthorizedPatients frame = new ForHealthSupporterViewAllAuthorizedPatients("P2");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -89,12 +89,77 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnEditPatientProfile = new JButton("Edit Patient Profile");
-		btnEditPatientProfile.setBounds(24, 24, 117, 25);
+		btnEditPatientProfile.setBounds(24, 25, 117, 25);
 		contentPane.add(btnEditPatientProfile);
 		
 		JButton btnManagePatient = new JButton("Manage Patient");
 		btnManagePatient.setBounds(184, 25, 117, 25);
 		contentPane.add(btnManagePatient);
 		
+		JButton btnEditOwnProfile = new JButton("Edit own profile");
+		btnEditOwnProfile.setBounds(84, 0, 117, 25);
+		contentPane.add(btnEditOwnProfile);
+		
+		btnEditPatientProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					int row=table_1.getSelectedRow();
+					if(row==-1){
+						JOptionPane.showMessageDialog(ForHealthSupporterViewAllAuthorizedPatients.this,
+							    "Select a patient to edit");
+					}else{
+						String Table_click = (table_1.getModel().getValueAt(row, 0).toString());
+						//Integer alertId = Integer.parseInt(Table_click);
+						String patientSSN=Table_click;
+						System.out.println(patientSSN);
+						EditPatientDetails epd = new EditPatientDetails(patientSSN);
+						epd.setVisible(true);
+					
+					}
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(ForHealthSupporterViewAllAuthorizedPatients.this,
+						    e2.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				
+				}
+				//EditPatientDetails epd = new EditPatientDetails("P2");
+				//epd.setVisible(true);
+			}
+		});
+
+	
+	
+		btnManagePatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					int row=table_1.getSelectedRow();
+					if(row==-1){
+						JOptionPane.showMessageDialog(ForHealthSupporterViewAllAuthorizedPatients.this,
+							    "Select a patient to edit");
+					}else{
+						String Table_click = (table_1.getModel().getValueAt(row, 0).toString());
+						//Integer alertId = Integer.parseInt(Table_click);
+						String patientSSN=Table_click;
+						System.out.println(patientSSN);
+						HSManagesPatientDashBoard epd = new HSManagesPatientDashBoard(patientSSN);
+						epd.setVisible(true);
+					
+					}
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(ForHealthSupporterViewAllAuthorizedPatients.this,
+						    e2.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				
+				}
+				//EditPatientDetails epd = new EditPatientDetails("P2");
+				//epd.setVisible(true);
+			}
+		});
+
+	
+	
+	
 	}
 }

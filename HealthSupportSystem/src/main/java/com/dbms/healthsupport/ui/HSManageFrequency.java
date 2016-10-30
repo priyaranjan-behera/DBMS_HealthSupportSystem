@@ -44,6 +44,7 @@ public class HSManageFrequency extends JFrame {
 		JButton btnViewFrequency = new JButton("View/Insert Frequency");
 		btnViewFrequency.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ViewFrequency(currHSSSN).setVisible(true);
 			}
 		});
 		btnViewFrequency.setBounds(146, 24, 165, 29);
@@ -68,6 +69,7 @@ public class HSManageFrequency extends JFrame {
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(166, 230, 117, 29);
@@ -76,6 +78,7 @@ public class HSManageFrequency extends JFrame {
 		JButton btnNewButton_1 = new JButton("Exit System");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		btnNewButton_1.setBounds(294, 230, 117, 29);
