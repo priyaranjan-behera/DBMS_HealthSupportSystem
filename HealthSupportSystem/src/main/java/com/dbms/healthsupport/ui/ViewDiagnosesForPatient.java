@@ -161,7 +161,7 @@ public class ViewDiagnosesForPatient extends JFrame {
 				else
 				{
 					String Table_click = (table_1.getModel().getValueAt(row, 0).toString());
-					new SeeDiseaseRecommendationForPatient(Table_click).setVisible(true);
+					new SeeDiseaseRecommendationForPatient(Table_click, patientSSN).setVisible(true);
 				}
 				
 			}
