@@ -66,6 +66,24 @@ public class PatientProfile extends JFrame {
 		});
 		btnNewButton.setBounds(29, 156, 276, 29);
 		contentPane.add(btnNewButton);
+		
+		btnViewPatientDetails.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ViewPatientDetails(patientSSN).setVisible(true);;
+			}
+		});
+		
+		btnEditPatientDetails.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new EditPatientDetails(patientSSN).setVisible(true);;
+			}
+		});
 	}
 
 }
