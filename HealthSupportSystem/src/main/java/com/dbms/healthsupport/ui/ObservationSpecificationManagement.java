@@ -107,6 +107,11 @@ public class ObservationSpecificationManagement extends JFrame {
 		contentPane.add(btnClearAlert);
 		
 		JButton btnAddObservationSpecification = new JButton("Add Observation Specification");
+		btnAddObservationSpecification.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AddObservationSpec().setVisible(true);
+			}
+		});
 		btnAddObservationSpecification.setBounds(6, 214, 234, 25);
 		contentPane.add(btnAddObservationSpecification);
 		
