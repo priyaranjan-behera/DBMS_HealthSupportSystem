@@ -54,6 +54,11 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(192, 80, 117, 29);
 		contentPane.add(btnExit);
 		
@@ -97,6 +102,11 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		contentPane.add(btnManagePatient);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HealthSupporterLoggedIn(HSSSN).setVisible(true);
+			}
+		});
 		btnBack.setBounds(204, 22, 117, 29);
 		contentPane.add(btnBack);
 		

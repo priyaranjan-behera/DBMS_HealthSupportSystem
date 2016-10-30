@@ -41,7 +41,7 @@ public class AddPatientByHealthSupporter extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddPatientByHealthSupporter frame = new AddPatientByHealthSupporter();
+					AddPatientByHealthSupporter frame = new AddPatientByHealthSupporter("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class AddPatientByHealthSupporter extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddPatientByHealthSupporter() {
+	public AddPatientByHealthSupporter(String HSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 400);
 		contentPane = new JPanel();
@@ -130,7 +130,7 @@ public class AddPatientByHealthSupporter extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Start().setVisible(true);
+				new HealthSupporterLoggedIn(HSSSN).setVisible(true);
 				
 			}
 		});

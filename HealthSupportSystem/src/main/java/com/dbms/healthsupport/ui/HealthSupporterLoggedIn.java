@@ -76,7 +76,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new AddPatientByHealthSupporter().setVisible(true);
+				new AddPatientByHealthSupporter(currHSSSN).setVisible(true);
 				
 			}
 		});
