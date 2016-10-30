@@ -20,6 +20,7 @@ Install software packages:
 [**ER Diagram**](https://github.com/priyaranjan-behera/DBMS_HealthSupportSystem/blob/Documents/Documents/ER%20Diagram%20Health%20Support.pdf) <br/>
 [**Entities and Relationships**](https://github.com/priyaranjan-behera/DBMS_HealthSupportSystem/blob/Documents/Documents/ProjectMilestone1Report.pdf) <br/>
 [**Constraints, FDs**](https://github.com/priyaranjan-behera/DBMS_HealthSupportSystem/blob/Documents/Documents/ProjectMilestone2Table.pdf) <br/>
+[**Create Table Queries**](https://github.com/priyaranjan-behera/DBMS_HealthSupportSystem/blob/Documents/Documents/CreateTables.pdf) <br/>
 
 
 
