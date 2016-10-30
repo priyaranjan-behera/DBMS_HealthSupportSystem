@@ -270,6 +270,30 @@ public class LimitsDao implements DaoInterface<Limits>{
 		}
 	}
 
+
+	public void deletePatientLimitsRow(Limits x,Patient p) throws Exception {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+	    
+	    try {
+        conn = getConnection();
+        stmt = conn.createStatement();
+        
+		String deleteSQL = " DELETE FROM LimitsForPatient l WHERE (l.limitId="
+				+ x.getLimitID() + "AND l.patientSSN = \'"
+				+ p.getSsn()+ "\')";
+        rs = stmt.executeQuery(deleteSQL);
+	    }catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+	}
+
+
 	public List<Limits> getAllData() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
