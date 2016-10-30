@@ -86,7 +86,7 @@ public class HealthSupporterManagePatient extends JFrame {
 		String[] columnNames = {"RecommendationId", "Observation Spec", "Frequency", "Threshold"};
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 67, 300, 50);
+		scrollPane.setBounds(38, 85, 300, 50);
 		contentPane.add(scrollPane);
 		table = new JTable(recommendationDetails, columnNames);
 		scrollPane.setViewportView(table);
@@ -132,15 +132,15 @@ public class HealthSupporterManagePatient extends JFrame {
 		scrollPane_1.setViewportView(table_1);
 		
 		JButton btnNewButton = new JButton("Manage Patient Alerts");
-		btnNewButton.setBounds(38, 48, 117, 25);
+		btnNewButton.setBounds(267, 233, 162, 25);
 		contentPane.add(btnNewButton);
 		
 		JButton btnAddPatientLimit = new JButton("Add Patient Limit");
-		btnAddPatientLimit.setBounds(178, 48, 117, 25);
+		btnAddPatientLimit.setBounds(178, 48, 214, 25);
 		contentPane.add(btnAddPatientLimit);
 		
 		JButton btnAddPatientRecommendation = new JButton("Add Patient Recommendation");
-		btnAddPatientRecommendation.setBounds(333, 67, 117, 25);
+		btnAddPatientRecommendation.setBounds(6, 233, 249, 25);
 		contentPane.add(btnAddPatientRecommendation);
 	}
 }

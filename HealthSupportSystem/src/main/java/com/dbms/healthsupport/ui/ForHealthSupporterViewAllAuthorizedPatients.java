@@ -47,18 +47,18 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 	 */
 	public ForHealthSupporterViewAllAuthorizedPatients(String HSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(327, 22, 117, 29);
+		btnExit.setBounds(192, 80, 117, 29);
 		contentPane.add(btnExit);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 63, 432, 210);
+		scrollPane.setBounds(6, 147, 432, 210);
 		contentPane.add(scrollPane);
 		HealthSupporter healthSupporter = null;
 		String[][] patientData = null; 
@@ -89,12 +89,16 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnEditPatientProfile = new JButton("Edit Patient Profile");
-		btnEditPatientProfile.setBounds(24, 25, 117, 25);
+		btnEditPatientProfile.setBounds(6, 24, 166, 25);
 		contentPane.add(btnEditPatientProfile);
 		
 		JButton btnManagePatient = new JButton("Manage Patient");
-		btnManagePatient.setBounds(184, 25, 117, 25);
+		btnManagePatient.setBounds(24, 82, 131, 25);
 		contentPane.add(btnManagePatient);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(204, 22, 117, 29);
+		contentPane.add(btnBack);
 		
 		
 		btnEditPatientProfile.addActionListener(new ActionListener() {

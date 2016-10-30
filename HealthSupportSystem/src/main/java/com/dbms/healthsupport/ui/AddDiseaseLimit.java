@@ -37,6 +37,7 @@ public class AddDiseaseLimit extends JFrame {
 	private JButton btnCreateLimit;
 	private JLabel lblCreateLimitFor;
 	String diseaseName;
+	private JButton btnBack;
 	/**
 	 * Launch the application.
 	 */
@@ -117,7 +118,7 @@ public class AddDiseaseLimit extends JFrame {
 		textField_1.setColumns(10);
 		
 		btnCreateLimit = new JButton("Create Limit");
-		btnCreateLimit.setBounds(192, 233, 117, 25);
+		btnCreateLimit.setBounds(94, 245, 117, 25);
 		contentPane.add(btnCreateLimit);
 		
 		lblCreateLimitFor = new JLabel("Create Limit For: " + currDiseaseName);
@@ -132,6 +133,10 @@ public class AddDiseaseLimit extends JFrame {
 		});
 		btnExit.setBounds(327, 243, 117, 29);
 		contentPane.add(btnExit);
+		
+		btnBack = new JButton("Back");
+		btnBack.setBounds(210, 243, 117, 29);
+		contentPane.add(btnBack);
 
 		
 		comboBox.addActionListener(new ActionListener() {

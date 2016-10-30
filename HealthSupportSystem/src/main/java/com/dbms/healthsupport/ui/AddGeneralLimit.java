@@ -36,6 +36,7 @@ public class AddGeneralLimit extends JFrame {
 	private JButton btnCreateLimit;
 	private JLabel lblCreateLimitFor;
 	private JButton btnExit;
+	private JButton btnBack;
 	
 	/**
 	 * Launch the application.
@@ -82,46 +83,46 @@ public class AddGeneralLimit extends JFrame {
 		}
 		
 		Label label = new Label("Observation Spec");
-		label.setBounds(34, 42, 68, 21);
+		label.setBounds(34, 42, 146, 21);
 		contentPane.add(label);
 		
 		comboBox = new JComboBox(specNames.toArray());
-		comboBox.setBounds(100, 42, 100, 24);
+		comboBox.setBounds(239, 42, 100, 24);
 		contentPane.add(comboBox);
 		
 		
 		JLabel lblMetricName = new JLabel("Metric Name");
-		lblMetricName.setBounds(64, 147, 70, 15);
+		lblMetricName.setBounds(34, 93, 114, 15);
 		contentPane.add(lblMetricName);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(200, 147, 100, 24);
+		comboBox_1.setBounds(201, 89, 100, 24);
 		contentPane.add(comboBox_1);
 		
 		JLabel lblNewLabel = new JLabel("upper limit");
-		lblNewLabel.setBounds(64, 233, 70, 15);
+		lblNewLabel.setBounds(34, 145, 70, 15);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(179, 231, 114, 19);
+		textField.setBounds(179, 142, 114, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblLowerLimit = new JLabel("lower limit");
-		lblLowerLimit.setBounds(64, 250, 70, 15);
+		lblLowerLimit.setBounds(34, 188, 70, 15);
 		contentPane.add(lblLowerLimit);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(179, 250, 114, 19);
+		textField_1.setBounds(179, 173, 114, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		btnCreateLimit = new JButton("Create Limit");
-		btnCreateLimit.setBounds(305, 105, 117, 25);
+		btnCreateLimit.setBounds(63, 229, 117, 25);
 		contentPane.add(btnCreateLimit);
 		
 		lblCreateLimitFor = new JLabel("Create General Limit");
-		lblCreateLimitFor.setBounds(179, 29, 70, 15);
+		lblCreateLimitFor.setBounds(32, 46, 70, 15);
 		contentPane.add(lblCreateLimitFor);
 		
 		btnExit = new JButton("Exit");
@@ -132,6 +133,10 @@ public class AddGeneralLimit extends JFrame {
 		});
 		btnExit.setBounds(327, 227, 117, 29);
 		contentPane.add(btnExit);
+		
+		btnBack = new JButton("Back");
+		btnBack.setBounds(198, 227, 117, 29);
+		contentPane.add(btnBack);
 
 		
 		comboBox.addActionListener(new ActionListener() {
