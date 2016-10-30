@@ -59,8 +59,21 @@ public class TestApp {
 		//testAssignSecondaryHealthSupporter();
 		//testAssignPrimaryHealthSupporter();
 		// testUpdatePatient();
-		testLogin();
+		// testLogin();
+		testLimitGeneral();
+		testRecGeneral();
 	}
+	
+	static void testLimitGeneral() throws Exception
+	{
+		System.out.println("Size: " + new LimitsDao().getGeneralLimits().size());
+	}
+	
+	static void testRecGeneral() throws Exception
+	{
+		System.out.println("Size: " + new RecommendationDao().getGeneralRecommendations().size());
+	}
+	
 	
 	static void testLogin() throws Exception
 	{

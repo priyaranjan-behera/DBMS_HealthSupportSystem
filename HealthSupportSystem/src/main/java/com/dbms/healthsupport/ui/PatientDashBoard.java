@@ -56,7 +56,7 @@ public class PatientDashBoard extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SeeRecommendationForPatient frame = new SeeRecommendationForPatient(PatientSSN);
+				SeePatientRecommendationForPatient frame = new SeePatientRecommendationForPatient(PatientSSN);
 				frame.setVisible(true);
 			}
 		});
@@ -65,7 +65,7 @@ public class PatientDashBoard extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SeeLimitForPatient frame = new SeeLimitForPatient(PatientSSN);
+				SeePatientLimitForPatient frame = new SeePatientLimitForPatient(PatientSSN);
 				frame.setVisible(true);
 			}
 		});

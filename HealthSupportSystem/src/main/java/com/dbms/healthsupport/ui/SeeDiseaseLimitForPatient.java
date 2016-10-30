@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.dbms.healthsupport.dao.AlertDao;
+import com.dbms.healthsupport.dao.DiseasesDao;
 import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.RecommendationDao;
@@ -24,10 +25,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class SeeLimitForHealthSupporter extends JFrame {
+public class SeeDiseaseLimitForPatient extends JFrame {
 
 	private JPanel contentPane;
-	String patientSSN;
+	String diseaseName;;
 	private JTable table;
 
 	/**
@@ -37,7 +38,7 @@ public class SeeLimitForHealthSupporter extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeLimitForHealthSupporter frame = new SeeLimitForHealthSupporter("P2");
+					SeeDiseaseLimitForPatient frame = new SeeDiseaseLimitForPatient("HIV");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +50,8 @@ public class SeeLimitForHealthSupporter extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeLimitForHealthSupporter(String currPatientSSN) {
-		this.patientSSN = currPatientSSN;
+	public SeeDiseaseLimitForPatient(String currDiseaseName) {
+		this.diseaseName = currDiseaseName;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,7 +65,7 @@ public class SeeLimitForHealthSupporter extends JFrame {
 		
 		try
 		{
-			List<Integer> limits = new PatientDao().getDataById(currPatientSSN).getLimits();
+			List<Integer> limits = new DiseasesDao().getDataById(currDiseaseName).getLimits();
 		
 			limitDetails = new String[limits.size()][];
 		
@@ -80,7 +81,7 @@ public class SeeLimitForHealthSupporter extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(SeeLimitForHealthSupporter.this,
+			JOptionPane.showMessageDialog(SeeDiseaseLimitForPatient.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -95,19 +96,5 @@ public class SeeLimitForHealthSupporter extends JFrame {
 		
 		table = new JTable(limitDetails, columnNames);
 		scrollPane.setViewportView(table);
-		
-		JButton btnAddNewLimit = new JButton("Add New LImit");
-		btnAddNewLimit.setBounds(157, 211, 150, 25);
-		contentPane.add(btnAddNewLimit);
-		
-		btnAddNewLimit.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				new AddPatientLimit(patientSSN).setVisible(true);
-				
-			}
-		});
 	}
 }

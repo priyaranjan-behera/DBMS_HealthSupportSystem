@@ -10,9 +10,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class HSManageMetaData extends JFrame {
+public class PatientHealthIndicators extends JFrame {
 
 	private JPanel contentPane;
+	String patientSSN; 
 
 	/**
 	 * Launch the application.
@@ -21,7 +22,7 @@ public class HSManageMetaData extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HSManageMetaData frame = new HSManageMetaData("P4");
+					PatientHealthIndicators frame = new PatientHealthIndicators("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +34,8 @@ public class HSManageMetaData extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HSManageMetaData(String currHSSSN) {
+	public PatientHealthIndicators(String currPatientSSN) {
+		this.patientSSN=currPatientSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -41,37 +43,28 @@ public class HSManageMetaData extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Manage Disease");
+		JButton btnNewButton = new JButton("See General Limits");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ManageDisease().setVisible(true);
+				new SeeGeneralLimitForPatient().setEnabled(true);
 			}
 		});
 		btnNewButton.setBounds(131, 30, 216, 29);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Manage Frequency");
+		JButton btnNewButton_1 = new JButton("See General Reco");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HSManageFrequency(currHSSSN).setVisible(true);
+				new SeeGeneralRecommendationForPatients().setEnabled(true);
 			}
 		});
 		btnNewButton_1.setBounds(131, 74, 216, 29);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Manage Observation Specification");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ObservationSpecificationManagement().setVisible(true);
-			}
-		});
-		btnNewButton_2.setBounds(131, 120, 216, 29);
-		contentPane.add(btnNewButton_2);
-		
 		JButton btnNewButton_3 = new JButton("Back");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HSManageMetaData(currHSSSN).setVisible(true);
+				new PatientLoggedIn(patientSSN).setEnabled(true);
 			}
 		});
 		btnNewButton_3.setBounds(198, 229, 117, 29);
@@ -86,7 +79,7 @@ public class HSManageMetaData extends JFrame {
 		btnNewButton_4.setBounds(327, 229, 117, 29);
 		contentPane.add(btnNewButton_4);
 		
-		JButton btnManageGeneralLimits = new JButton("Manage General Limits");
+		JButton btnManageGeneralLimits = new JButton("My Personal Limits");
 		btnManageGeneralLimits.setBounds(25, 180, 200, 25);
 		contentPane.add(btnManageGeneralLimits);
 		
@@ -95,13 +88,13 @@ public class HSManageMetaData extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeeGeneralLimitForHealthSupporter().setEnabled(true);
+				new SeePatientLimitForPatient(patientSSN).setEnabled(true);
 				
 			}
 		});
 		
-		JButton btnManageGeneralRecommendation = new JButton("Manage General Recom");
-		btnManageGeneralRecommendation.setBounds(244, 180, 200, 25);
+		JButton btnManageGeneralRecommendation = new JButton("My Personal Reco");
+		btnManageGeneralRecommendation.setBounds(244, 180, 180, 25);
 		contentPane.add(btnManageGeneralRecommendation);
 		
 		btnManageGeneralRecommendation.addActionListener(new ActionListener() {
@@ -109,7 +102,7 @@ public class HSManageMetaData extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeeGeneralRecommendationForHealthSupporter().setEnabled(true);
+				new SeePatientRecommendationForPatient(patientSSN).setEnabled(true);
 			}
 		});
 	}

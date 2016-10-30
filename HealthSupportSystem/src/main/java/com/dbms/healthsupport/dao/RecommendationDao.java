@@ -44,6 +44,33 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 		stmt.close();
 		rs.close();
 	}
+	
+	public List<Integer> getGeneralRecommendations() throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		Statement stmt = conn.createStatement();
+		
+		List<Integer> list = new ArrayList<>();
+	    
+		String insertSQL = " SELECT RecommendationID FROM RECOMMENDATION WHERE RecommendationID NOT IN "
+				+ "(SELECT RecommendationID from RecommendationForPatient) AND RecommendationID NOT IN "
+				+ "(SELECT RecommendationID from RecommendationForDisease)";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		
+		while(rs.next())
+		{
+			list.add(rs.getInt("RecommendationId"));
+		}
+		
+		if(stmt != null)
+			stmt.close();
+		if(rs != null)
+			rs.close();
+		
+		return list;
+	}
 
 	public void recommendationForPatient(Recommendation x, Patient p) throws Exception {
 		// TODO Auto-generated method stub

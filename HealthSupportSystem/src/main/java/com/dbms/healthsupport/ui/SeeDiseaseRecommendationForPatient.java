@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.dbms.healthsupport.dao.AlertDao;
+import com.dbms.healthsupport.dao.DiseasesDao;
 import com.dbms.healthsupport.dao.LimitsDao;
 import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.RecommendationDao;
@@ -24,10 +25,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class SeeRecommendationForPatient extends JFrame {
+public class SeeDiseaseRecommendationForPatient extends JFrame {
 
 	private JPanel contentPane;
-	String patientSSN;
+	String diseaseName;
 	private JTable table;
 
 	/**
@@ -37,7 +38,7 @@ public class SeeRecommendationForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeRecommendationForPatient frame = new SeeRecommendationForPatient("P2");
+					SeeDiseaseRecommendationForPatient frame = new SeeDiseaseRecommendationForPatient("HIV");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +50,8 @@ public class SeeRecommendationForPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeRecommendationForPatient(String currPatientSSN) {
-		this.patientSSN = currPatientSSN;
+	public SeeDiseaseRecommendationForPatient(String currDiseaseName) {
+		this.diseaseName = currDiseaseName;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,7 +65,7 @@ public class SeeRecommendationForPatient extends JFrame {
 		
 		try
 		{
-			List<Integer> recommendations = new PatientDao().getDataById(currPatientSSN).getRecommendations();
+			List<Integer> recommendations = new DiseasesDao().getDataById(diseaseName).getRecommendations();
 		
 			recommendationDetails = new String[recommendations.size()][];
 		
@@ -80,7 +81,7 @@ public class SeeRecommendationForPatient extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(SeeRecommendationForPatient.this,
+			JOptionPane.showMessageDialog(SeeDiseaseRecommendationForPatient.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -95,6 +96,5 @@ public class SeeRecommendationForPatient extends JFrame {
 		
 		table = new JTable(recommendationDetails, columnNames);
 		scrollPane.setViewportView(table);
-
 	}
 }

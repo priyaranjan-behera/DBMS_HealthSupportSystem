@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class SeeLimitForPatient extends JFrame {
+public class SeePatientLimitForHealthSupporter extends JFrame {
 
 	private JPanel contentPane;
 	String patientSSN;
@@ -37,7 +37,7 @@ public class SeeLimitForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeLimitForPatient frame = new SeeLimitForPatient("P2");
+					SeePatientLimitForHealthSupporter frame = new SeePatientLimitForHealthSupporter("P2");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class SeeLimitForPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeLimitForPatient(String currPatientSSN) {
+	public SeePatientLimitForHealthSupporter(String currPatientSSN) {
 		this.patientSSN = currPatientSSN;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +80,7 @@ public class SeeLimitForPatient extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(SeeLimitForPatient.this,
+			JOptionPane.showMessageDialog(SeePatientLimitForHealthSupporter.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -95,6 +95,19 @@ public class SeeLimitForPatient extends JFrame {
 		
 		table = new JTable(limitDetails, columnNames);
 		scrollPane.setViewportView(table);
-
+		
+		JButton btnAddNewLimit = new JButton("Add New LImit");
+		btnAddNewLimit.setBounds(157, 211, 150, 25);
+		contentPane.add(btnAddNewLimit);
+		
+		btnAddNewLimit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddPatientLimit(patientSSN).setVisible(true);
+				
+			}
+		});
 	}
 }

@@ -24,10 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class SeeRecommendationForHealthSupporter extends JFrame {
+public class SeeGeneralRecommendationForHealthSupporter extends JFrame {
 
 	private JPanel contentPane;
-	String patientSSN;
 	private JTable table;
 
 	/**
@@ -37,7 +36,7 @@ public class SeeRecommendationForHealthSupporter extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeRecommendationForHealthSupporter frame = new SeeRecommendationForHealthSupporter("P2");
+					SeeGeneralRecommendationForHealthSupporter frame = new SeeGeneralRecommendationForHealthSupporter();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +48,7 @@ public class SeeRecommendationForHealthSupporter extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeRecommendationForHealthSupporter(String currPatientSSN) {
-		this.patientSSN = currPatientSSN;
+	public SeeGeneralRecommendationForHealthSupporter() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,7 +62,7 @@ public class SeeRecommendationForHealthSupporter extends JFrame {
 		
 		try
 		{
-			List<Integer> recommendations = new PatientDao().getDataById(currPatientSSN).getRecommendations();
+			List<Integer> recommendations = new RecommendationDao().getGeneralRecommendations();
 		
 			recommendationDetails = new String[recommendations.size()][];
 		
@@ -80,7 +78,7 @@ public class SeeRecommendationForHealthSupporter extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(SeeRecommendationForHealthSupporter.this,
+			JOptionPane.showMessageDialog(SeeGeneralRecommendationForHealthSupporter.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -105,7 +103,7 @@ public class SeeRecommendationForHealthSupporter extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new AddPatientRecommendation(patientSSN).setVisible(true);
+				new AddGeneralRecommendation().setVisible(true);
 				
 			}
 		});

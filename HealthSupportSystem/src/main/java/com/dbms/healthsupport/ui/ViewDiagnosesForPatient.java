@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 public class ViewDiagnosesForPatient extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private String patientSSN;
 	private JTable table_1;
 
@@ -128,6 +127,18 @@ public class ViewDiagnosesForPatient extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
+				int row = table_1.getSelectedRow();
+				if(row == -1)
+				{
+					JOptionPane.showMessageDialog(ViewDiagnosesForPatient.this,
+						    "Select a row to see details");
+				}
+				else
+				{
+					String Table_click = (table_1.getModel().getValueAt(row, 0).toString());
+					new SeeDiseaseLimitForPatient(Table_click).setVisible(true);
+				}
+				
 			}
 		});
 		
@@ -140,6 +151,18 @@ public class ViewDiagnosesForPatient extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				int row = table_1.getSelectedRow();
+				if(row == -1)
+				{
+					JOptionPane.showMessageDialog(ViewDiagnosesForPatient.this,
+						    "Select a row to see details");
+				}
+				else
+				{
+					String Table_click = (table_1.getModel().getValueAt(row, 0).toString());
+					new SeeDiseaseRecommendationForPatient(Table_click).setVisible(true);
+				}
 				
 			}
 		});

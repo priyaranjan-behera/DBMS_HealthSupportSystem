@@ -107,11 +107,11 @@ public class ManageDisease extends JFrame {
 		btnAddDisease.setBounds(105, 205, 109, 27);
 		contentPane.add(btnAddDisease);
 		
-		JButton btnAddLimit = new JButton("Add Limit");
+		JButton btnAddLimit = new JButton("Manage Limit");
 		btnAddLimit.setBounds(105, 230, 109, 25);
 		contentPane.add(btnAddLimit);
 		
-		JButton btnAddRecommendation = new JButton("Add Recommendation");
+		JButton btnAddRecommendation = new JButton("Manage Recommendation");
 		btnAddRecommendation.setBounds(245, 230, 117, 25);
 		contentPane.add(btnAddRecommendation);
 		
@@ -126,18 +126,19 @@ public class ManageDisease extends JFrame {
 			
 			public void actionPerformed(ActionEvent e){
 				try{
-					int row = table.getSelectedRow();
-					if(row==-1){
-						JOptionPane.showMessageDialog(ManageDisease.this,
-							    "Select a row to add limit");
-					}
-					else{
-						String Table_click = (table.getModel().getValueAt(row, 0).toString());
-						//Integer alertId = Integer.parseInt(Table_click);
-						String diseaseName=Table_click;
-						AddDiseaseLimit frame = new AddDiseaseLimit(diseaseName);
-						frame.setVisible(true);
-					}
+					
+				
+						int row = table.getSelectedRow();
+						if(row == -1)
+						{
+							JOptionPane.showMessageDialog(ManageDisease.this,
+								    "Select a row to see details");
+						}
+						else
+						{
+							String Table_click = (table.getModel().getValueAt(row, 0).toString());
+							new SeeDiseaseLimitForHealthSupporter(Table_click).setVisible(true);
+						}
 				}catch(Exception e2){
 					JOptionPane.showMessageDialog(ManageDisease.this,
 						    e2.getMessage(),
@@ -153,16 +154,15 @@ public class ManageDisease extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					int row = table.getSelectedRow();
-					if(row==-1){
+					if(row == -1)
+					{
 						JOptionPane.showMessageDialog(ManageDisease.this,
-							    "Select a row to add Recommendation");
+							    "Select a row to see details");
 					}
-					else{
+					else
+					{
 						String Table_click = (table.getModel().getValueAt(row, 0).toString());
-						//Integer alertId = Integer.parseInt(Table_click);
-						String diseaseName=Table_click;
-						AddDiseaseRecommendation frame = new AddDiseaseRecommendation(diseaseName);
-						frame.setVisible(true);
+						new SeeDiseaseRecommendationForHealthSupporter(Table_click).setVisible(true);
 					}
 				}catch(Exception e2){
 					JOptionPane.showMessageDialog(ManageDisease.this,

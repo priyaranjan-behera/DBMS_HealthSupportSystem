@@ -69,6 +69,33 @@ public class LimitsDao implements DaoInterface<Limits>{
 		
 	}
 	
+	public List<Integer> getGeneralLimits() throws Exception {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		Statement stmt = conn.createStatement();
+		
+		List<Integer> list = new ArrayList<>();
+	    
+		String insertSQL = " SELECT LimitID FROM Limits WHERE LimitId NOT IN "
+				+ "(SELECT LimitId from LimitsForPatient) AND LimitId NOT IN "
+				+ "(SELECT LimitId from LimitsForDisease)";
+		 
+		ResultSet rs = stmt.executeQuery(insertSQL);
+		
+		while(rs.next())
+		{
+			list.add(rs.getInt("limitId"));
+		}
+		
+		if(stmt != null)
+			stmt.close();
+		if(rs != null)
+			rs.close();
+		
+		return list;
+	}
+	
 	public Limits insertGeneralLimit(Limits x) throws Exception {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
