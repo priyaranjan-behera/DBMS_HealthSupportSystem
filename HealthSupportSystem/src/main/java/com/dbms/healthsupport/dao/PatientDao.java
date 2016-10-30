@@ -254,7 +254,52 @@ public class PatientDao implements DaoInterface<Patient> {
 	
 	public List<Patient> getAllData() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String selectSQL = "SELECT * FROM PATIENT";
+			rs = stmt.executeQuery(selectSQL);
+			
+			List<Patient> patients = new ArrayList<>();
+
+			while(rs.next())
+			{
+				Date dob = rs.getDate("DOB");
+				String gender = rs.getString("gender");
+				String ssn = rs.getString("PatientSSN");
+				
+				PeopleDao peopleDao =new PeopleDao();
+				People people=peopleDao.getDataById(ssn);
+				
+				Patient patient = new Patient(people, dob, gender);
+				
+				
+				patients.add(patient);
+			}
+			
+			return patients;
+
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+		finally {
+			if(rs != null)
+			rs.close();
+			if(stmt != null)
+			stmt.close();
+			if(conn != null)
+			conn.close();
+		}
+		
+		
 	}
 
 	public Patient getDataById(Object ssn) throws Exception {

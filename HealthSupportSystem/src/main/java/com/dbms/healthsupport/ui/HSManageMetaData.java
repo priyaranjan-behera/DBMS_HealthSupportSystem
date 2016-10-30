@@ -44,7 +44,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton = new JButton("Manage Disease");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HSManageDisease(currHSSSN).setVisible(true);
+				new ManageDisease().setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(131, 30, 216, 29);
@@ -59,10 +59,10 @@ public class HSManageMetaData extends JFrame {
 		btnNewButton_1.setBounds(131, 97, 216, 29);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Manage Observation");
+		JButton btnNewButton_2 = new JButton("Manage Observation Specification");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HSManageObservation(currHSSSN).setVisible(true);
+				new ObservationSpecificationManagement().setVisible(true);
 			}
 		});
 		btnNewButton_2.setBounds(131, 168, 216, 29);

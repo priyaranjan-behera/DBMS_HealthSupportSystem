@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class EditPatientDetails extends JFrame {
+public class EditPatientDetailsForHS extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -51,7 +51,7 @@ public class EditPatientDetails extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditPatientDetails frame = new EditPatientDetails("P1");
+					EditPatientDetailsForHS frame = new EditPatientDetailsForHS("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,14 +63,14 @@ public class EditPatientDetails extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditPatientDetails(String patientSSN) {
+	public EditPatientDetailsForHS(String patientSSN) {
 		this.patientSSN = patientSSN;
 		PatientDao patientdao=new PatientDao();
 		Patient patient=null;
 		try {
 			patient=patientdao.getDataById(patientSSN);
 		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(EditPatientDetails.this,
+			JOptionPane.showMessageDialog(EditPatientDetailsForHS.this,
 				    e1.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -134,6 +134,13 @@ public class EditPatientDetails extends JFrame {
 		comboBox_1.setSelectedItem(patient.getGender());
 		contentPane.add(comboBox_1);
 		
+		
+//		textField_4 = new JTextField();
+//		textField_4.setBounds(206, 199, 130, 26);
+//		textField_4.setText(patient.getGender());
+//		contentPane.add(textField_4);
+//		textField_4.setColumns(10);
+		
 		lblPatientCategory = new JLabel("Patient Category");
 		lblPatientCategory.setBounds(22, 251, 103, 16);
 		contentPane.add(lblPatientCategory);
@@ -146,7 +153,7 @@ public class EditPatientDetails extends JFrame {
 				textField_5.setText("Well Patient");
 			}
 		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(EditPatientDetails.this,
+			JOptionPane.showMessageDialog(EditPatientDetailsForHS.this,
 				    e1.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -174,10 +181,10 @@ public class EditPatientDetails extends JFrame {
 				PeopleDao peopleDao = new PeopleDao();
 				try {
 					peopleDao.updatePeopleRow(people);
-					JOptionPane.showMessageDialog(EditPatientDetails.this,
+					JOptionPane.showMessageDialog(EditPatientDetailsForHS.this,
 						    "Details updated");
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(EditPatientDetails.this,
+					JOptionPane.showMessageDialog(EditPatientDetailsForHS.this,
 						    e1.getMessage(),
 						    "Inane warning",
 						    JOptionPane.WARNING_MESSAGE);
@@ -185,7 +192,7 @@ public class EditPatientDetails extends JFrame {
 				try {
 					patientDao.updateRow(patient);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(EditPatientDetails.this,
+					JOptionPane.showMessageDialog(EditPatientDetailsForHS.this,
 						    e1.getMessage(),
 						    "Inane warning",
 						    JOptionPane.WARNING_MESSAGE);
@@ -217,7 +224,6 @@ public class EditPatientDetails extends JFrame {
 		btnBack_1 = new JButton("Back");
 		btnBack_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PatientProfile(patientSSN).setVisible(true);
 			}
 		});
 		btnBack_1.setBounds(101, 379, 117, 29);

@@ -47,6 +47,16 @@ public class HealthSupporterLoggedIn extends JFrame {
 		btnViewAllPatients.setBounds(28, 37, 162, 29);
 		contentPane.add(btnViewAllPatients);
 		
+		btnViewAllPatients.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ForHealthSupporterViewAllPatients(currHSSSN).setVisible(true);
+				
+			}
+		});
+		
 		JButton btnNewButton = new JButton("My Authorized Patients");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -61,21 +71,15 @@ public class HealthSupporterLoggedIn extends JFrame {
 		btnAddPatient.setBounds(28, 78, 162, 29);
 		contentPane.add(btnAddPatient);
 		
-		JButton btnVieweditMyProfile = new JButton("View My Profile");
-		btnVieweditMyProfile.addActionListener(new ActionListener() {
+		btnAddPatient.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddPatientByHealthSupporter().setVisible(true);
+				
 			}
 		});
-		btnVieweditMyProfile.setBounds(28, 119, 155, 29);
-		contentPane.add(btnVieweditMyProfile);
-		
-		JButton btnNewButton_1 = new JButton("View/Clear Alerts");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(236, 78, 194, 29);
-		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Exit System");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -86,12 +90,13 @@ public class HealthSupporterLoggedIn extends JFrame {
 		btnNewButton_2.setBounds(236, 229, 191, 29);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Edit Profile");
+		JButton btnNewButton_3 = new JButton("View/Edit Profile");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ForHealthSupporterEditProfile(HSSSN).setVisible(true);
 			}
 		});
-		btnNewButton_3.setBounds(245, 119, 185, 29);
+		btnNewButton_3.setBounds(246, 78, 185, 29);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Back");
@@ -105,10 +110,39 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnManageMetadata = new JButton("Manage Metadata");
 		btnManageMetadata.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(HSSSN).setVisible(true);
 			}
 		});
-		btnManageMetadata.setBounds(28, 168, 162, 29);
+		btnManageMetadata.setBounds(141, 119, 162, 29);
 		contentPane.add(btnManageMetadata);
+		
+		JButton btnBecomePrimarySupporter = new JButton("Become Primary Supporter");
+		btnBecomePrimarySupporter.setBounds(45, 160, 160, 25);
+		contentPane.add(btnBecomePrimarySupporter);
+		
+		btnBecomePrimarySupporter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ForHealthSupporterAddPatientAsAPrimaryHealthSupporter(HSSSN).setVisible(true);;
+				
+			}
+		});
+		
+		JButton btnBecomeSecondarySupporter = new JButton("Become Secondary Supporter");
+		btnBecomeSecondarySupporter.setBounds(264, 160, 160, 25);
+		contentPane.add(btnBecomeSecondarySupporter);
+		
+		btnBecomeSecondarySupporter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ForHealthSupporterAddAsASecondaryHS(HSSSN).setVisible(true);
+				
+			}
+		});
 	}
 
 }

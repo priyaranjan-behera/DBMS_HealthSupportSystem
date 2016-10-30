@@ -99,5 +99,15 @@ public class SeeLimitForHealthSupporter extends JFrame {
 		JButton btnAddNewLimit = new JButton("Add New LImit");
 		btnAddNewLimit.setBounds(157, 211, 150, 25);
 		contentPane.add(btnAddNewLimit);
+		
+		btnAddNewLimit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddPatientLimit(patientSSN).setVisible(true);
+				
+			}
+		});
 	}
 }

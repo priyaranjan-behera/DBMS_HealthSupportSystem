@@ -96,9 +96,6 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 		btnManagePatient.setBounds(184, 25, 117, 25);
 		contentPane.add(btnManagePatient);
 		
-		JButton btnEditOwnProfile = new JButton("Edit own profile");
-		btnEditOwnProfile.setBounds(84, 0, 117, 25);
-		contentPane.add(btnEditOwnProfile);
 		
 		btnEditPatientProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,7 +109,7 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 						//Integer alertId = Integer.parseInt(Table_click);
 						String patientSSN=Table_click;
 						System.out.println(patientSSN);
-						EditPatientDetails epd = new EditPatientDetails(patientSSN);
+						EditPatientDetailsForHS epd = new EditPatientDetailsForHS(patientSSN);
 						epd.setVisible(true);
 					
 					}

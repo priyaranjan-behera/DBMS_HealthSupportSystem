@@ -50,22 +50,6 @@ public class HSManageFrequency extends JFrame {
 		btnViewFrequency.setBounds(146, 24, 165, 29);
 		contentPane.add(btnViewFrequency);
 		
-		JButton btnEditFrequency = new JButton("Edit Frequency");
-		btnEditFrequency.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnEditFrequency.setBounds(146, 79, 165, 29);
-		contentPane.add(btnEditFrequency);
-		
-		JButton btnDeleteFrequency = new JButton("Delete Frequency");
-		btnDeleteFrequency.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnDeleteFrequency.setBounds(146, 137, 152, 29);
-		contentPane.add(btnDeleteFrequency);
-		
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

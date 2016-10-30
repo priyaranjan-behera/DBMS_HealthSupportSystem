@@ -61,7 +61,7 @@ public class ViewDiagnosesForPatient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblMyDiagnoses = new JLabel("My Diagnoses");
+		JLabel lblMyDiagnoses = new JLabel("My Diagnoses : " + patientSSN);
 		lblMyDiagnoses.setBounds(27, 17, 126, 16);
 		contentPane.add(lblMyDiagnoses);
 		
@@ -122,9 +122,28 @@ public class ViewDiagnosesForPatient extends JFrame {
 		btnSeeLimits.setBounds(27, 248, 117, 25);
 		contentPane.add(btnSeeLimits);
 		
+		btnSeeLimits.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		JButton btnSeeRecommendation = new JButton("See Recommendation");
 		btnSeeRecommendation.setBounds(27, 292, 165, 25);
 		contentPane.add(btnSeeRecommendation);
+		
+		btnSeeRecommendation.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
 		lblPatientId.setBounds(25, 45, 219, 15);

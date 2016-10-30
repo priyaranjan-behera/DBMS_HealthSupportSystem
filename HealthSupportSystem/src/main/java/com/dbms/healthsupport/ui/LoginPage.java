@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.dao.PatientDao;
 import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Patient;
 import com.dbms.healthsupport.domain.People;
 
 import javax.swing.JLabel;
@@ -94,6 +98,8 @@ public class LoginPage extends JFrame {
 				{
 				String profileInformationValue = comboBox.getSelectedItem().toString();
 				People people = new PeopleDao().getDataById(textField.getText());
+				if(!people.getPassword().equals(passwordField.getText()))
+					throw new Exception("Incorrect Password");
 				new PeopleDao().logUsage(people);
 				if(profileInformationValue.equalsIgnoreCase("Health Supporter")) {
 					
@@ -101,6 +107,9 @@ public class LoginPage extends JFrame {
 					
 					
 					//if okay
+					HealthSupporter healthSupporter = new HealthSupporterDao().getDataById(textField.getText());
+					if(healthSupporter == null)
+						throw new Exception("Incorrect Password");
 					HealthSupporterLoggedIn healthSupporterLoggedIn = new HealthSupporterLoggedIn(textField.getText());
 					healthSupporterLoggedIn.setVisible(true);
 	
@@ -108,7 +117,9 @@ public class LoginPage extends JFrame {
 				} else if(profileInformationValue.equalsIgnoreCase("Patient")) {
 					
 					///Check if Patient propper
-					
+					Patient patient = new PatientDao().getDataById(textField.getText());
+					if(patient == null)
+						throw new Exception("Incorrect PAssword");
 					
 					//if okay
 					PatientLoggedIn patientLoggedIn = new PatientLoggedIn(textField.getText());
