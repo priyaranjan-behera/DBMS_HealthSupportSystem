@@ -38,7 +38,7 @@ public class SeeGeneralLimitForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeGeneralLimitForPatient frame = new SeeGeneralLimitForPatient();
+					SeeGeneralLimitForPatient frame = new SeeGeneralLimitForPatient("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class SeeGeneralLimitForPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeGeneralLimitForPatient() {
+	public SeeGeneralLimitForPatient(String ssn) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -97,6 +97,11 @@ public class SeeGeneralLimitForPatient extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		btnNewButton = new JButton("Go Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ViewDiagnosesForPatient(ssn).setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(155, 217, 117, 29);
 		contentPane.add(btnNewButton);
 		
