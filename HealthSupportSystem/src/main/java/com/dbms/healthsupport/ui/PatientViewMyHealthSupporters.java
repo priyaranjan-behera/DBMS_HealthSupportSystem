@@ -23,7 +23,7 @@ public class PatientViewMyHealthSupporters extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientViewMyHealthSupporters frame = new PatientViewMyHealthSupporters();
+					PatientViewMyHealthSupporters frame = new PatientViewMyHealthSupporters("P2");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class PatientViewMyHealthSupporters extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PatientViewMyHealthSupporters() {
+	public PatientViewMyHealthSupporters(String patientSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
