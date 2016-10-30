@@ -1,6 +1,8 @@
 package com.dbms.healthsupport.ui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -26,7 +28,7 @@ public class ObservationSpecificationManagement extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ObservationSpecificationManagement frame = new ObservationSpecificationManagement();
+					ObservationSpecificationManagement frame = new ObservationSpecificationManagement("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +40,7 @@ public class ObservationSpecificationManagement extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ObservationSpecificationManagement() {
+	public ObservationSpecificationManagement(String HSSSN) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -96,6 +98,11 @@ public class ObservationSpecificationManagement extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnClearAlert = new JButton("Back");
+		btnClearAlert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(HSSSN).setVisible(true);
+			}
+		});
 		btnClearAlert.setBounds(252, 214, 117, 25);
 		contentPane.add(btnClearAlert);
 		
@@ -104,6 +111,11 @@ public class ObservationSpecificationManagement extends JFrame {
 		contentPane.add(btnAddObservationSpecification);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(6, 243, 117, 29);
 		contentPane.add(btnExit);
 		

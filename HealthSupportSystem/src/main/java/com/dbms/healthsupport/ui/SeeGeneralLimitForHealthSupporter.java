@@ -36,7 +36,7 @@ public class SeeGeneralLimitForHealthSupporter extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeGeneralLimitForHealthSupporter frame = new SeeGeneralLimitForHealthSupporter();
+					SeeGeneralLimitForHealthSupporter frame = new SeeGeneralLimitForHealthSupporter("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class SeeGeneralLimitForHealthSupporter extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeGeneralLimitForHealthSupporter() {
+	public SeeGeneralLimitForHealthSupporter(String HSSN) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -99,10 +99,20 @@ public class SeeGeneralLimitForHealthSupporter extends JFrame {
 		contentPane.add(btnAddNewLimit);
 		
 		JButton btnGoBack = new JButton("Go Back");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(HSSN).setVisible(true);
+			}
+		});
 		btnGoBack.setBounds(196, 208, 117, 29);
 		contentPane.add(btnGoBack);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(325, 208, 117, 29);
 		contentPane.add(btnExit);
 		

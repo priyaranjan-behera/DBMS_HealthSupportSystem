@@ -37,7 +37,7 @@ public class ManageDisease extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ManageDisease frame = new ManageDisease();
+					ManageDisease frame = new ManageDisease("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class ManageDisease extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManageDisease() {
+	public ManageDisease(String HSSN) {
 //		this.patientSSN = currPatientSSN;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,10 +116,22 @@ public class ManageDisease extends JFrame {
 		contentPane.add(btnAddRecommendation);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(HSSN).setVisible(true);
+				
+			}
+		});
 		btnBack.setBounds(301, 193, 117, 29);
 		contentPane.add(btnBack);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			}
+		});
 		btnExit.setBounds(291, 228, 117, 29);
 		contentPane.add(btnExit);
 		

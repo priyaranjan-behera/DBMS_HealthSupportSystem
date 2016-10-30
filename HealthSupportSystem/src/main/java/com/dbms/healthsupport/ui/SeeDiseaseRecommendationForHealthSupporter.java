@@ -102,10 +102,20 @@ public class SeeDiseaseRecommendationForHealthSupporter extends JFrame {
 		contentPane.add(btnAddNewLimit);
 		
 		JButton btnGoBack = new JButton("Go Back");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnGoBack.setBounds(200, 205, 117, 29);
 		contentPane.add(btnGoBack);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(327, 205, 117, 29);
 		contentPane.add(btnExit);
 		

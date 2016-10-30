@@ -83,6 +83,11 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		btnGoBack = new JButton("Go Back");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HealthSupporterLoggedIn(HealthSupporterSSN).setVisible(true);
+			}
+		});
 		btnGoBack.setBounds(208, 227, 117, 29);
 		contentPane.add(btnGoBack);
 		
