@@ -21,7 +21,7 @@ public class PatientLoggedIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientLoggedIn frame = new PatientLoggedIn("");
+					PatientLoggedIn frame = new PatientLoggedIn("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnAlerts = new JButton("Alerts");
 		btnAlerts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter();
+				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter(patientSSN);
 				patientAlert.setVisible(true);
 			}
 		});
