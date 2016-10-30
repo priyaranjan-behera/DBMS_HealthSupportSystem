@@ -71,7 +71,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton_3 = new JButton("Back");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HSManageMetaData(currHSSSN).setVisible(true);
+				new HealthSupporterLoggedIn(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton_3.setBounds(198, 229, 117, 29);

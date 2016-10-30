@@ -102,6 +102,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnNewButton_4 = new JButton("Back");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new LoginPage().setVisible(true);
 			}
 		});
 		btnNewButton_4.setBounds(48, 229, 162, 29);
