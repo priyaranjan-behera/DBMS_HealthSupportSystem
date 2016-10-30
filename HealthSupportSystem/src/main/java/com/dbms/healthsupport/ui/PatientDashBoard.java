@@ -51,6 +51,18 @@ public class PatientDashBoard extends JFrame{
 		lblManageAlertsRecommendations.setBounds(141, 70, 70, 15);
 		contentPane.add(lblManageAlertsRecommendations);
 		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(144, 225, 117, 29);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Exit");
+		btnNewButton_1.setBounds(273, 225, 117, 29);
+		contentPane.add(btnNewButton_1);
+		
 		
 		btnManageRecommendations.addActionListener(new ActionListener() {
 			

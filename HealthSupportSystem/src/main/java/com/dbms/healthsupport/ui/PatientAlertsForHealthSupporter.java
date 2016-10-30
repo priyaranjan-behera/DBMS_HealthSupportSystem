@@ -96,8 +96,16 @@ public class PatientAlertsForHealthSupporter extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnClearAlert = new JButton("Clear Alert");
-		btnClearAlert.setBounds(245, 214, 117, 25);
+		btnClearAlert.setBounds(59, 218, 117, 25);
 		contentPane.add(btnClearAlert);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(188, 216, 117, 29);
+		contentPane.add(btnBack);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(317, 216, 117, 29);
+		contentPane.add(btnExit);
 		
 		btnClearAlert.addActionListener(new ActionListener() {
 			
