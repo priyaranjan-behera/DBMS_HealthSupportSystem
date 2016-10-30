@@ -35,7 +35,7 @@ public class ViewFrequency extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewFrequency frame = new ViewFrequency();
+					ViewFrequency frame = new ViewFrequency("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class ViewFrequency extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewFrequency() {
+	public ViewFrequency(String currHSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -112,6 +112,11 @@ public class ViewFrequency extends JFrame {
 		contentPane.add(btnExit);
 		
 		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnBack.setBounds(38, 227, 117, 29);
 		contentPane.add(btnBack);
 		

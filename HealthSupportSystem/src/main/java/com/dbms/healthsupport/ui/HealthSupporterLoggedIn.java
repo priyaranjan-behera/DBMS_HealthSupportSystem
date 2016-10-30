@@ -58,7 +58,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnAddPatient = new JButton("Add Patient");
-		btnAddPatient.setBounds(28, 105, 162, 29);
+		btnAddPatient.setBounds(28, 78, 162, 29);
 		contentPane.add(btnAddPatient);
 		
 		JButton btnVieweditMyProfile = new JButton("View My Profile");
@@ -66,7 +66,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnVieweditMyProfile.setBounds(28, 169, 155, 29);
+		btnVieweditMyProfile.setBounds(28, 119, 155, 29);
 		contentPane.add(btnVieweditMyProfile);
 		
 		JButton btnNewButton_1 = new JButton("View/Clear Alerts");
@@ -74,7 +74,7 @@ public class HealthSupporterLoggedIn extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(233, 105, 194, 29);
+		btnNewButton_1.setBounds(236, 78, 194, 29);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Exit System");
@@ -87,12 +87,28 @@ public class HealthSupporterLoggedIn extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Edit Profile");
-		btnNewButton_3.setBounds(236, 169, 185, 29);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_3.setBounds(245, 119, 185, 29);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Back");
-		btnNewButton_4.setBounds(43, 229, 117, 29);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_4.setBounds(28, 229, 162, 29);
 		contentPane.add(btnNewButton_4);
+		
+		JButton btnManageMetadata = new JButton("Manage Metadata");
+		btnManageMetadata.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnManageMetadata.setBounds(28, 168, 162, 29);
+		contentPane.add(btnManageMetadata);
 	}
 
 }

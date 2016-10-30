@@ -128,6 +128,12 @@ public class SignUpForm extends JFrame {
 		contentPane.add(btnCreateProfile);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Start().setVisible(true);
+				
+			}
+		});
 		btnBack.setBounds(133, 324, 117, 29);
 		contentPane.add(btnBack);
 		

@@ -44,7 +44,7 @@ public class TestApp {
 		//testObservationSpec();
 		//testObservation();
 		// testObservationSpec();
-		testObservation();
+		//testObservation();
 		// testSickPatientHasMajorDisease();
 		// testWellPatientHasMinorDisease();
 		//testAllocateHSToPatient();
@@ -56,9 +56,16 @@ public class TestApp {
 		//testUpdatePatient();
 		//testAssignDiseaseToPatient();
 		//testAssignPrimaryHealthSupporter();
-		testAssignSecondaryHealthSupporter();
-		testAssignPrimaryHealthSupporter();
+		//testAssignSecondaryHealthSupporter();
+		//testAssignPrimaryHealthSupporter();
 		// testUpdatePatient();
+		testLogin();
+	}
+	
+	static void testLogin() throws Exception
+	{
+		People people = new PeopleDao().getDataById("P2");
+		new PeopleDao().logUsage(people);
 	}
 
 	static void testAssignDiseaseToPatient() throws Exception {

@@ -7,7 +7,7 @@ import java.util.List;
 public class SickPatient extends Patient {
 
 	public SickPatient(String ssn, String firstName, String lastName, String address, String password, Date dob,
-			String gender, Long primaryHealthSupporter, List<String> secondaryHealthSupporters,
+			String gender, String primaryHealthSupporter, List<String> secondaryHealthSupporters,
 			List<Integer> recommendations, List<Integer> limits, List<String> diseases, List<Integer> observations) {
 		super(ssn, firstName, lastName, address, password, dob, gender, primaryHealthSupporter, secondaryHealthSupporters,
 				recommendations, limits, diseases, observations);

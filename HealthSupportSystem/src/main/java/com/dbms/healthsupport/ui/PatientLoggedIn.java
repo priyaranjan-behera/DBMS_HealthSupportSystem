@@ -21,7 +21,7 @@ public class PatientLoggedIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientLoggedIn frame = new PatientLoggedIn("");
+					PatientLoggedIn frame = new PatientLoggedIn("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnProfile = new JButton("Profile");
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientProfile patientProfile = new PatientProfile();
+				PatientProfile patientProfile = new PatientProfile(patientSSN);
 				patientProfile.setVisible(true);
 			}
 		});
@@ -54,7 +54,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnDiagnoses = new JButton("Diagnoses");
 		btnDiagnoses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientProfile patientProfile = new PatientProfile();
+				PatientProfile patientProfile = new PatientProfile(patientSSN);
 				patientProfile.setVisible(true);
 			}
 		});
@@ -64,7 +64,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnAlerts = new JButton("Alerts");
 		btnAlerts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter();
+				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter(patientSSN);
 				patientAlert.setVisible(true);
 			}
 		});
@@ -83,7 +83,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnViewHealthSupporters = new JButton("View Health Supporters");
 		btnViewHealthSupporters.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientViewMyHealthSupporters patientViewMyHealthSupporters = new PatientViewMyHealthSupporters(patientSSN);
+				SeeHSForPatient patientViewMyHealthSupporters = new SeeHSForPatient(patientSSN);
 				patientViewMyHealthSupporters.setVisible(true);
 			}
 		});
@@ -98,6 +98,16 @@ public class PatientLoggedIn extends JFrame {
 		});
 		btnExitSystem.setBounds(227, 146, 195, 29);
 		contentPane.add(btnExitSystem);
+		
+		JButton btnButton = new JButton("Go Back");
+		btnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LoginPage().setVisible(true);
+				
+			}
+		});
+		btnButton.setBounds(37, 207, 117, 29);
+		contentPane.add(btnButton);
 	}
 
 }

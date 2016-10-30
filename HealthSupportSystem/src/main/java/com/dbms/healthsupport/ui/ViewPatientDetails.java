@@ -164,6 +164,11 @@ public class ViewPatientDetails extends JFrame {
 		contentPane.add(textArea);
 		
 		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PatientProfile(patientSSN).setVisible(true);
+			}
+		});
 		btnBack.setBounds(219, 379, 117, 29);
 		contentPane.add(btnBack);
 		
