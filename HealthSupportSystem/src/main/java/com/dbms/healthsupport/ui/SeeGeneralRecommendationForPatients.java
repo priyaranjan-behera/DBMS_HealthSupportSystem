@@ -38,7 +38,7 @@ public class SeeGeneralRecommendationForPatients extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeGeneralRecommendationForPatients frame = new SeeGeneralRecommendationForPatients();
+					SeeGeneralRecommendationForPatients frame = new SeeGeneralRecommendationForPatients("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class SeeGeneralRecommendationForPatients extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeGeneralRecommendationForPatients() {
+	public SeeGeneralRecommendationForPatients(String patientSSN) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -97,10 +97,20 @@ public class SeeGeneralRecommendationForPatients extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		btnGoBack = new JButton("Go Back");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ViewDiagnosesForPatient(patientSSN).setVisible(true);
+			}
+		});
 		btnGoBack.setBounds(166, 213, 117, 29);
 		contentPane.add(btnGoBack);
 		
 		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(295, 213, 117, 29);
 		contentPane.add(btnExit);
 	}
