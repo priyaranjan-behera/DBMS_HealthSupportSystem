@@ -100,20 +100,28 @@ public class ManageDisease extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnClearDisease = new JButton("Clear Disease");
-		btnClearDisease.setBounds(245, 205, 117, 25);
+		btnClearDisease.setBounds(162, 193, 117, 25);
 		contentPane.add(btnClearDisease);
 		
 		JButton btnAddDisease = new JButton("Add Disease");
-		btnAddDisease.setBounds(105, 205, 109, 27);
+		btnAddDisease.setBounds(41, 193, 109, 27);
 		contentPane.add(btnAddDisease);
 		
 		JButton btnAddLimit = new JButton("Manage Limit");
-		btnAddLimit.setBounds(105, 230, 109, 25);
+		btnAddLimit.setBounds(41, 230, 109, 25);
 		contentPane.add(btnAddLimit);
 		
 		JButton btnAddRecommendation = new JButton("Manage Recommendation");
-		btnAddRecommendation.setBounds(245, 230, 117, 25);
+		btnAddRecommendation.setBounds(162, 230, 117, 25);
 		contentPane.add(btnAddRecommendation);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(301, 193, 117, 29);
+		contentPane.add(btnBack);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(291, 228, 117, 29);
+		contentPane.add(btnExit);
 		
 		btnAddDisease.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

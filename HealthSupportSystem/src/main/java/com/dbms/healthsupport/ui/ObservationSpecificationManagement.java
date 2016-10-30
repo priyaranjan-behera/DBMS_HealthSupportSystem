@@ -96,12 +96,16 @@ public class ObservationSpecificationManagement extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnClearAlert = new JButton("Back");
-		btnClearAlert.setBounds(219, 214, 117, 25);
+		btnClearAlert.setBounds(252, 214, 117, 25);
 		contentPane.add(btnClearAlert);
 		
 		JButton btnAddObservationSpecification = new JButton("Add Observation Specification");
-		btnAddObservationSpecification.setBounds(77, 214, 117, 25);
+		btnAddObservationSpecification.setBounds(6, 214, 234, 25);
 		contentPane.add(btnAddObservationSpecification);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(6, 243, 117, 29);
+		contentPane.add(btnExit);
 		
 	}
 }
