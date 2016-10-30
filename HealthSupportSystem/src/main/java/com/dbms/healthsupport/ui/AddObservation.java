@@ -107,7 +107,7 @@ public class AddObservation extends JFrame {
 		btnCreateLimit.setBounds(77, 250, 117, 25);
 		contentPane.add(btnCreateLimit);
 		
-		lblCreateLimitFor = new JLabel("Record Observation for: ");
+		lblCreateLimitFor = new JLabel("Record Observation for: " + patientSSN);
 		lblCreateLimitFor.setBounds(50, 29, 200, 15);
 		contentPane.add(lblCreateLimitFor);
 		

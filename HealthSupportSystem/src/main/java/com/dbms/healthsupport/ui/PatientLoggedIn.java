@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class PatientLoggedIn extends JFrame {
 
@@ -107,6 +108,23 @@ public class PatientLoggedIn extends JFrame {
 		});
 		btnButton.setBounds(37, 207, 117, 29);
 		contentPane.add(btnButton);
+		
+		JButton btnNewButton = new JButton("Add Observation");
+		btnNewButton.setBounds(227, 232, 150, 25);
+		contentPane.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddObservation(patientSSN).setVisible(true); 
+				
+			}
+		});
+		
+		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
+		lblPatientId.setBounds(184, 0, 150, 15);
+		contentPane.add(lblPatientId);
 	}
-
 }
