@@ -75,7 +75,7 @@ public class PatientLoggedIn extends JFrame {
 		btnHealthIndicators.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TO DO
-				new PatientHealthIndicators(patientSSN).setEnabled(true);;
+				new PatientHealthIndicators(patientSSN).setVisible(true);;
 			}
 		});
 		btnHealthIndicators.setBounds(227, 91, 195, 29);

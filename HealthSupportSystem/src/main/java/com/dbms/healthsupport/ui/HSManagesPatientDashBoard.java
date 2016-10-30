@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 public class HSManagesPatientDashBoard extends JFrame{
 	
 	private JPanel contentPane;
+	String patientSSN;
 	
 	public static void main(String args[]){
 		EventQueue.invokeLater(new Runnable() {
@@ -27,7 +28,8 @@ public class HSManagesPatientDashBoard extends JFrame{
 		});
 	}
 	
-	public HSManagesPatientDashBoard(String PatientSSN){
+	public HSManagesPatientDashBoard(String currPatientSSN){
+		this.patientSSN = currPatientSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -36,27 +38,41 @@ public class HSManagesPatientDashBoard extends JFrame{
 		contentPane.setLayout(null);
 		
 		JButton btnManageAlerts = new JButton("Manage alerts");
-		btnManageAlerts.setBounds(120, 90, 117, 25);
+		btnManageAlerts.setBounds(120, 50, 200, 25);
 		contentPane.add(btnManageAlerts);
 		
 		JButton btnManageRecommendations = new JButton("Manage Recommendations");
-		btnManageRecommendations.setBounds(120, 120, 117, 25);
+		btnManageRecommendations.setBounds(120, 90, 200, 25);
 		contentPane.add(btnManageRecommendations);
 		
 		JButton btnManageLimits = new JButton("Manage limits");
-		btnManageLimits.setBounds(120, 150, 117, 25);
+		btnManageLimits.setBounds(120, 130, 200, 25);
 		contentPane.add(btnManageLimits);
 		
-		JLabel lblManageAlertsRecommendations = new JLabel("Manage alerts recommendations and limits for patient");
-		lblManageAlertsRecommendations.setBounds(141, 70, 70, 15);
+		JLabel lblManageAlertsRecommendations = new JLabel("Manage for Patient: " + patientSSN);
+		lblManageAlertsRecommendations.setBounds(100, 20, 300, 15);
 		contentPane.add(lblManageAlertsRecommendations);
+		
+		JButton btnAddObservations = new JButton("Add Observations");
+		btnAddObservations.setBounds(120, 195, 200, 25);
+		contentPane.add(btnAddObservations);
+		
+		btnAddObservations.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddObservation(patientSSN).setVisible(true);
+				
+			}
+		});
 		
 		
 		btnManageRecommendations.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SeePatientRecommendationForHealthSupporter frame = new SeePatientRecommendationForHealthSupporter(PatientSSN);
+				SeePatientRecommendationForHealthSupporter frame = new SeePatientRecommendationForHealthSupporter(patientSSN);
 				frame.setVisible(true);
 			}
 		});
@@ -65,7 +81,7 @@ public class HSManagesPatientDashBoard extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SeePatientLimitForHealthSupporter frame = new SeePatientLimitForHealthSupporter(PatientSSN);
+				SeePatientLimitForHealthSupporter frame = new SeePatientLimitForHealthSupporter(patientSSN);
 				frame.setVisible(true);
 			}
 		});
@@ -74,7 +90,7 @@ public class HSManagesPatientDashBoard extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PatientAlertsForHealthSupporter frame = new PatientAlertsForHealthSupporter(PatientSSN);
+				PatientAlertsForHealthSupporter frame = new PatientAlertsForHealthSupporter(patientSSN);
 				frame.setVisible(true);
 			}
 		});

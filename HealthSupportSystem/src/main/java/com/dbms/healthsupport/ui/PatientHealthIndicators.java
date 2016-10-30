@@ -46,7 +46,7 @@ public class PatientHealthIndicators extends JFrame {
 		JButton btnNewButton = new JButton("See General Limits");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SeeGeneralLimitForPatient().setEnabled(true);
+				new SeeGeneralLimitForPatient().setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(131, 30, 216, 29);
@@ -55,7 +55,7 @@ public class PatientHealthIndicators extends JFrame {
 		JButton btnNewButton_1 = new JButton("See General Reco");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SeeGeneralRecommendationForPatients().setEnabled(true);
+				new SeeGeneralRecommendationForPatients().setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(131, 74, 216, 29);
@@ -64,7 +64,7 @@ public class PatientHealthIndicators extends JFrame {
 		JButton btnNewButton_3 = new JButton("Back");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PatientLoggedIn(patientSSN).setEnabled(true);
+				new PatientLoggedIn(patientSSN).setVisible(true);
 			}
 		});
 		btnNewButton_3.setBounds(198, 229, 117, 29);
@@ -88,7 +88,7 @@ public class PatientHealthIndicators extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeePatientLimitForPatient(patientSSN).setEnabled(true);
+				new SeePatientLimitForPatient(patientSSN).setVisible(true);
 				
 			}
 		});
@@ -102,7 +102,7 @@ public class PatientHealthIndicators extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeePatientRecommendationForPatient(patientSSN).setEnabled(true);
+				new SeePatientRecommendationForPatient(patientSSN).setVisible(true);
 			}
 		});
 	}

@@ -95,7 +95,7 @@ public class HSManageMetaData extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeeGeneralLimitForHealthSupporter().setEnabled(true);
+				new SeeGeneralLimitForHealthSupporter().setVisible(true);
 				
 			}
 		});
@@ -109,7 +109,7 @@ public class HSManageMetaData extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new SeeGeneralRecommendationForHealthSupporter().setEnabled(true);
+				new SeeGeneralRecommendationForHealthSupporter().setVisible(true);
 			}
 		});
 	}
