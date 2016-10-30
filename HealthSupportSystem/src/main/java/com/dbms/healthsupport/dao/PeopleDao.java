@@ -187,6 +187,34 @@ public class PeopleDao implements DaoInterface<People> {
 			conn.close();
 		}
 	}
+	
+	public void logUsage(People x) throws Exception{
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			stmt = conn.createStatement();
+		    
+			String deleteSQL = " INSERT INTO LOGINDATA(SSN, LOGINDATE) VALUES (\'"
+					+ x.getSsn() + "\'," +
+					//"TO_DATE(\'"+new java.sql.Date(new java.util.Date().getTime()) + "\',\'YYYY-MON-DD HH24:MI\')"
+					 "CURRENT_TIMESTAMP"+ ")";
+			 
+			System.out.println("Delete SQL: " + deleteSQL);
+			rs = stmt.executeQuery(deleteSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+	}
+	
+	
 	public void deleteRow(People x) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;

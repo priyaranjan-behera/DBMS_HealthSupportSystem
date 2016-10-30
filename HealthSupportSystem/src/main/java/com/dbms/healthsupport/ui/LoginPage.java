@@ -6,7 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.dbms.healthsupport.dao.PeopleDao;
+import com.dbms.healthsupport.domain.People;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
@@ -84,7 +89,12 @@ public class LoginPage extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try
+				{
 				String profileInformationValue = comboBox.getSelectedItem().toString();
+				People people = new PeopleDao().getDataById(textField.getText());
+				new PeopleDao().logUsage(people);
 				if(profileInformationValue.equalsIgnoreCase("Health Supporter")) {
 					
 					///Check if health supporter propper
@@ -105,7 +115,18 @@ public class LoginPage extends JFrame {
 					patientLoggedIn.setVisible(true);
  					
 				} else {
-					System.exit(0);
+					JOptionPane.showMessageDialog(LoginPage.this,
+						    "Incorrect Credentials",
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+				}catch (Exception exp) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(LoginPage.this,
+						    exp.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
