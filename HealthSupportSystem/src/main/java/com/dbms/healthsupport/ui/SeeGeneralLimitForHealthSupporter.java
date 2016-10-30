@@ -175,7 +175,7 @@ public class SeeGeneralLimitForHealthSupporter extends JFrame {
 							    JOptionPane.WARNING_MESSAGE);
 					}
 					
-					String[] columnNames = {"Disease Name","Disease Description"};
+					String[] columnNames = {"LimitId", "ObservationSpec", "Metric", "Upper Limit", "Lower Limit"};
 					
 					table = new JTable(LimitDetails, columnNames);
 					scrollPane.setViewportView(table);
