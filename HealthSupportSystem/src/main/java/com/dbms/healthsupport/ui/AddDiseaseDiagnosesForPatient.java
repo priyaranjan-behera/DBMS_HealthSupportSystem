@@ -88,6 +88,11 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 		contentPane.add(btnAddDiseaseName);
 		
 		btnExitSystem = new JButton("Exit System");
+		btnExitSystem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExitSystem.setBounds(297, 225, 117, 29);
 		contentPane.add(btnExitSystem);
 		

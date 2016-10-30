@@ -131,6 +131,11 @@ public class AddGeneralRecommendation extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(327, 226, 117, 29);
 		contentPane.add(btnExit);
 		

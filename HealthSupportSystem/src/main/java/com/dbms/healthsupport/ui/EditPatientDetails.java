@@ -202,6 +202,11 @@ public class EditPatientDetails extends JFrame {
 		contentPane.add(btnBack);
 		
 		btnExit = new JButton("Exit System");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(333, 379, 117, 29);
 		contentPane.add(btnExit);
 		
