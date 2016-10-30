@@ -62,13 +62,14 @@ public class ViewDiagnoses extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblMyDiagnoses = new JLabel("My Diagnoses");
-		lblMyDiagnoses.setBounds(46, 17, 126, 16);
+		lblMyDiagnoses.setBounds(27, 17, 126, 16);
 		contentPane.add(lblMyDiagnoses);
 		
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.setBounds(203, 330, 117, 29);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		contentPane.add(btnNewButton);
@@ -83,7 +84,7 @@ public class ViewDiagnoses extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(77, 67, 300, 150);
+		scrollPane.setBounds(27, 70, 300, 150);
 		contentPane.add(scrollPane);
 		
 		Patient patient = null;
@@ -117,24 +118,24 @@ public class ViewDiagnoses extends JFrame {
 		table_1 = new JTable(listDiseases, columnNames);
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnSeeLimits = new JButton("See LImits");
-		btnSeeLimits.setBounds(27, 232, 117, 25);
+		JButton btnSeeLimits = new JButton("See Limits");
+		btnSeeLimits.setBounds(27, 248, 117, 25);
 		contentPane.add(btnSeeLimits);
 		
 		JButton btnSetLimit = new JButton("Set Limit");
-		btnSetLimit.setBounds(155, 232, 117, 25);
+		btnSetLimit.setBounds(238, 248, 117, 25);
 		contentPane.add(btnSetLimit);
 		
 		JButton btnSeeRecommendation = new JButton("See Recommendation");
-		btnSeeRecommendation.setBounds(155, 270, 117, 25);
+		btnSeeRecommendation.setBounds(27, 292, 165, 25);
 		contentPane.add(btnSeeRecommendation);
 		
 		JButton btnSetRecommendation = new JButton("Set Recommendation");
-		btnSetRecommendation.setBounds(293, 270, 117, 25);
+		btnSetRecommendation.setBounds(236, 293, 189, 25);
 		contentPane.add(btnSetRecommendation);
 		
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
-		lblPatientId.setBounds(203, 44, 70, 15);
+		lblPatientId.setBounds(25, 45, 219, 15);
 		contentPane.add(lblPatientId);
 		
 		

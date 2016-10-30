@@ -58,6 +58,15 @@ public class HSManageDisease extends JFrame {
 		});
 		btnNewButton_1.setBounds(314, 226, 117, 29);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnViewDiagnoses = new JButton("View Diagnoses");
+		btnViewDiagnoses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnViewDiagnoses.setBounds(151, 49, 175, 29);
+		contentPane.add(btnViewDiagnoses);
 	}
 
 }
