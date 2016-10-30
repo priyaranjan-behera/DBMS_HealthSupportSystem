@@ -54,8 +54,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnDiagnoses = new JButton("Diagnoses");
 		btnDiagnoses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientProfile patientProfile = new PatientProfile(patientSSN);
-				patientProfile.setVisible(true);
+				new ViewDiagnosesForPatient(patientSSN).setVisible(true);
 			}
 		});
 		btnDiagnoses.setBounds(25, 91, 195, 29);
@@ -64,7 +63,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnAlerts = new JButton("Alerts");
 		btnAlerts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter(patientSSN);
+				PatientAlertsForPatient patientAlert = new PatientAlertsForPatient(patientSSN);
 				patientAlert.setVisible(true);
 			}
 		});

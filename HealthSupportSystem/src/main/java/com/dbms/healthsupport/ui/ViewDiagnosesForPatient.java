@@ -26,7 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class ViewDiagnoses extends JFrame {
+public class ViewDiagnosesForPatient extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -40,7 +40,7 @@ public class ViewDiagnoses extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewDiagnoses frame = new ViewDiagnoses("P2");
+					ViewDiagnosesForPatient frame = new ViewDiagnosesForPatient("P2");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class ViewDiagnoses extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewDiagnoses(String patientSSN) {
+	public ViewDiagnosesForPatient(String patientSSN) {
 		this.patientSSN = patientSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 400);
@@ -105,7 +105,7 @@ public class ViewDiagnoses extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(ViewDiagnoses.this,
+			JOptionPane.showMessageDialog(ViewDiagnosesForPatient.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -122,17 +122,9 @@ public class ViewDiagnoses extends JFrame {
 		btnSeeLimits.setBounds(27, 248, 117, 25);
 		contentPane.add(btnSeeLimits);
 		
-		JButton btnSetLimit = new JButton("Set Limit");
-		btnSetLimit.setBounds(238, 248, 117, 25);
-		contentPane.add(btnSetLimit);
-		
 		JButton btnSeeRecommendation = new JButton("See Recommendation");
 		btnSeeRecommendation.setBounds(27, 292, 165, 25);
 		contentPane.add(btnSeeRecommendation);
-		
-		JButton btnSetRecommendation = new JButton("Set Recommendation");
-		btnSetRecommendation.setBounds(236, 293, 189, 25);
-		contentPane.add(btnSetRecommendation);
 		
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
 		lblPatientId.setBounds(25, 45, 219, 15);
