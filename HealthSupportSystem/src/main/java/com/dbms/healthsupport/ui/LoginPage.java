@@ -124,7 +124,7 @@ public class LoginPage extends JFrame {
 				}catch (Exception exp) {
 					// TODO: handle exception
 					JOptionPane.showMessageDialog(LoginPage.this,
-						    exp.getMessage(),
+						    "Incorrect Credentials",
 						    "Inane warning",
 						    JOptionPane.WARNING_MESSAGE);
 				}
