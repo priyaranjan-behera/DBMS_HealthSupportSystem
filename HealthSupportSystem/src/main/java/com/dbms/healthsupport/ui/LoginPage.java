@@ -101,7 +101,7 @@ public class LoginPage extends JFrame {
 					
 					
 					//if okay
-					PatientLoggedIn patientLoggedIn = new PatientLoggedIn();
+					PatientLoggedIn patientLoggedIn = new PatientLoggedIn(textField.getText());
 					patientLoggedIn.setVisible(true);
  					
 				} else {
