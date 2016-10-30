@@ -4,7 +4,7 @@
 ---
 #####Software : `Maven, Java-7, Oracle 11c, Swing`
 #####OS : `Ubuntu 12.04 (Linux 3.2.0-58-generic), Windows 7, Mac OS`
-##### Team : `Akshay Nayak, Priyaranjan Behera, Vivekananda Ette, Samrudhi Sharma`
+##### Team : `Akshay Nayak (anayakv), Priyaranjan Behera (pbehera), Vivekananda Ette (vette), Samrudhi Sharma (ssharm17)`
  ---
 ### Installation Guide 
 Install software packages:    
