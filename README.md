@@ -16,4 +16,8 @@ Install software packages:
 #### Steps
 
 
+### ER Diagram:
+[**ER Diagram**](https://github.com/priyaranjan-behera/DBMS_HealthSupportSystem/blob/Documents/Documents/ER%20Diagram%20Health%20Support.pdf)
+
+
 
