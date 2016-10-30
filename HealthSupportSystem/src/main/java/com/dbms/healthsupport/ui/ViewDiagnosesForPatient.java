@@ -68,7 +68,7 @@ public class ViewDiagnosesForPatient extends JFrame {
 		btnNewButton.setBounds(203, 330, 117, 29);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new PatientLoggedIn(patientSSN).setVisible(true);
 			}
 		});
 		contentPane.add(btnNewButton);
