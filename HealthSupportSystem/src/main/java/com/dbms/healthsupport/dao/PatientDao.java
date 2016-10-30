@@ -284,9 +284,9 @@ public class PatientDao implements DaoInterface<Patient> {
 				//Only those health supporters that have auth date before current date should be retrieved.
 				String selectSQL1 = "SELECT * FROM PatientToHealthSupporter WHERE PatientSSN = \'" + String.valueOf(ssn) + "\'AND primarySecondary =\'primary\'";
 				ResultSet rs1 = stmt.executeQuery(selectSQL1);
-				Long primaryHealthSupporter=null;
+				String primaryHealthSupporter=null;
 				if(rs1.next()){
-					primaryHealthSupporter=rs1.getLong("HsSSN");
+					primaryHealthSupporter=rs1.getString("HsSSN");
 				}
 				
 				

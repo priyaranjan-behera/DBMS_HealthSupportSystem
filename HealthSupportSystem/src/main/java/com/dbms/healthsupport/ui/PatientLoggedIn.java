@@ -21,7 +21,7 @@ public class PatientLoggedIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientLoggedIn frame = new PatientLoggedIn();
+					PatientLoggedIn frame = new PatientLoggedIn("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class PatientLoggedIn extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PatientLoggedIn() {
+	public PatientLoggedIn(String patientSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,7 +83,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnViewHealthSupporters = new JButton("View Health Supporters");
 		btnViewHealthSupporters.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientViewMyHealthSupporters patientViewMyHealthSupporters = new PatientViewMyHealthSupporters();
+				PatientViewMyHealthSupporters patientViewMyHealthSupporters = new PatientViewMyHealthSupporters(patientSSN);
 				patientViewMyHealthSupporters.setVisible(true);
 			}
 		});
