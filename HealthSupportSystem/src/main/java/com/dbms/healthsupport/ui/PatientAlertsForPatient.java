@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class PatientAlerts extends JFrame {
+public class PatientAlertsForPatient extends JFrame {
 
 	private JPanel contentPane;
 	String patientSSN;
@@ -35,7 +35,7 @@ public class PatientAlerts extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientAlerts frame = new PatientAlerts("P2");
+					PatientAlertsForPatient frame = new PatientAlertsForPatient("P2");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class PatientAlerts extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PatientAlerts(String currPatientSSN) {
+	public PatientAlertsForPatient(String currPatientSSN) {
 		this.patientSSN = currPatientSSN;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,7 +79,7 @@ public class PatientAlerts extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(PatientAlerts.this,
+			JOptionPane.showMessageDialog(PatientAlertsForPatient.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -94,77 +94,6 @@ public class PatientAlerts extends JFrame {
 		
 		table = new JTable(alertDetails, columnNames);
 		scrollPane.setViewportView(table);
-		
-		JButton btnClearAlert = new JButton("Clear Alert");
-		btnClearAlert.setBounds(245, 214, 117, 25);
-		contentPane.add(btnClearAlert);
-		
-		btnClearAlert.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-
-				try
-				{
-				int row = table.getSelectedRow();
-				if(row == -1)
-				{
-					JOptionPane.showMessageDialog(PatientAlerts.this,
-						    "Select a row to clear the alert");
-				}
-				else
-				{
-					String Table_click = (table.getModel().getValueAt(row, 0).toString());
-					Integer alertId = Integer.parseInt(Table_click);
-					new AlertDao().clearAlert(alertId);
-					JOptionPane.showMessageDialog(PatientAlerts.this,
-						    "Alert Id: " + alertId + " has been cleared");
-					
-					
-					String[][] alertDetails = new String[10][];
-					
-					try
-					{
-						List<Alert> alerts = new AlertDao().getAllDataForPatient(patientSSN);
-						System.out.println("Total alerts: " + alerts.size());
-					
-					
-						alertDetails = new String[alerts.size()][];
-					
-					
-					int i=0;
-					for(Alert alert: alerts)
-					{
-						String[] alertDetail = {alert.getAlertId().toString(), alert.getAlertType(), alert.getPatientId(), alert.getAlertDate().toGMTString(), alert.getLimitId().toString()};
-						alertDetails[i++] = alertDetail;
-					}
-					
-					}
-					catch (Exception exp1) {
-						// TODO: handle exception
-						JOptionPane.showMessageDialog(PatientAlerts.this,
-							    exp1.getMessage(),
-							    "Inane warning",
-							    JOptionPane.WARNING_MESSAGE);
-					}
-					
-					String[] columnNames = {"AlertId", "Alert Type", "Patient SSN", "AlertDate", "Recommendation/Limit Id"};
-					
-					table = new JTable(alertDetails, columnNames);
-					scrollPane.setViewportView(table);
-					
-				}
-				// TODO Auto-generated method stub
-				}
-				catch (Exception exp) {
-					// TODO: handle exception
-					JOptionPane.showMessageDialog(PatientAlerts.this,
-						    exp.getMessage(),
-						    "Inane warning",
-						    JOptionPane.WARNING_MESSAGE);
-				}
-				
-			}
-		});
 	}
 
 }

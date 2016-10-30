@@ -64,7 +64,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnAlerts = new JButton("Alerts");
 		btnAlerts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientAlerts patientAlert = new PatientAlerts();
+				PatientAlertsForHealthSupporter patientAlert = new PatientAlertsForHealthSupporter();
 				patientAlert.setVisible(true);
 			}
 		});
