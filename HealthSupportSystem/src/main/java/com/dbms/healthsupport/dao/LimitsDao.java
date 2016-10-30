@@ -226,8 +226,25 @@ public class LimitsDao implements DaoInterface<Limits>{
 
 
 	public void deleteRow(Limits x) throws Exception {
-		// TODO Auto-generated method stub
-		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+	    
+	    try {
+        conn = getConnection();
+        stmt = conn.createStatement();
+        
+		String deleteSQL = " DELETE FROM LIMITS WHERE (limitId="
+				+ x.getLimitID()
+				+ ")";
+        rs = stmt.executeQuery(deleteSQL);
+	    }catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 	}
 
 	public List<Limits> getAllData() throws Exception {
