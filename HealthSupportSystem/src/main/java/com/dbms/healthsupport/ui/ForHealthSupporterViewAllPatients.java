@@ -57,6 +57,11 @@ public class ForHealthSupporterViewAllPatients extends JFrame {
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(327, 22, 117, 29);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		contentPane.add(btnExit);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -94,6 +99,11 @@ public class ForHealthSupporterViewAllPatients extends JFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HealthSupporterLoggedIn(HSSSN).setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(42, 22, 117, 25);
 		contentPane.add(btnNewButton);
 
