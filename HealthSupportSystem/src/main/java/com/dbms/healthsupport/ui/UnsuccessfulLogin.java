@@ -53,6 +53,7 @@ public class UnsuccessfulLogin extends JFrame {
 		JButton btnExit = new JButton("Exit System");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		btnExit.setBounds(316, 206, 117, 29);

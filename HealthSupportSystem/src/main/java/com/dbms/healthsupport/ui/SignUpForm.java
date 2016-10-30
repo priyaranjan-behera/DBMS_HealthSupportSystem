@@ -140,6 +140,11 @@ public class SignUpForm extends JFrame {
 		contentPane.add(textArea);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(267, 324, 117, 29);
 		contentPane.add(btnExit);
 		

@@ -149,7 +149,7 @@ static void testAssignSecondaryHealthSupporter() throws Exception {
 
 		ObservationSpec observationSpec = new ObservationSpec("Blood Pres", "Blood Pres Desc", metrics);
 
-		observationSpecDao.insertData(observationSpec);
+		//observationSpecDao.insertData(observationSpec);
 
 		//observationSpec = observationSpecDao.getDataById("Blood Pressure");
 

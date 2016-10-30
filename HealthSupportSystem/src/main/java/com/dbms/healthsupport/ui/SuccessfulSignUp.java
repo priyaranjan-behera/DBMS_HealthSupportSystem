@@ -51,6 +51,11 @@ public class SuccessfulSignUp extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Exit Application");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnNewButton_1.setBounds(327, 232, 117, 29);
 		contentPane.add(btnNewButton_1);
 		

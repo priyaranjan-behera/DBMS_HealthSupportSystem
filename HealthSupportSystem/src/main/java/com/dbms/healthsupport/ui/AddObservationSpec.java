@@ -36,6 +36,7 @@ public class AddObservationSpec extends JFrame {
 	private JLabel lblObservationSpecDesc;
 	private JTextField txtObservationSpecDesc;
 	private JButton btnBack;
+	private JButton btnExit;
 	
 	/**
 	 * Launch the application.
@@ -119,6 +120,15 @@ public class AddObservationSpec extends JFrame {
 		btnBack = new JButton("Back");
 		btnBack.setBounds(294, 215, 117, 25);
 		contentPane.add(btnBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnExit.setBounds(239, 234, 117, 29);
+		contentPane.add(btnExit);
 		
 		
 		btnAddSpecification.addActionListener(new ActionListener() {

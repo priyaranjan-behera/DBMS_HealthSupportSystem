@@ -66,6 +66,11 @@ public class AddAlertThreshold extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnExitSystem = new JButton("Exit System");
+		btnExitSystem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExitSystem.setBounds(301, 226, 117, 29);
 		contentPane.add(btnExitSystem);
 	}
