@@ -49,6 +49,7 @@ public class AddObservation extends JFrame {
 	private List<JLabel> labels = new ArrayList<>();
 	ObservationSpec observationSpec;
 	String patientSSN;
+	private JButton btnButton;
 	
 	/**
 	 * Launch the application.
@@ -100,15 +101,15 @@ public class AddObservation extends JFrame {
 		contentPane.add(label);
 		
 		comboBox = new JComboBox(specNames.toArray());
-		comboBox.setBounds(161, 70, 100, 24);
+		comboBox.setBounds(150, 70, 100, 24);
 		contentPane.add(comboBox);
 		
 		btnCreateLimit = new JButton("Record Observation");
-		btnCreateLimit.setBounds(77, 250, 117, 25);
+		btnCreateLimit.setBounds(23, 252, 161, 25);
 		contentPane.add(btnCreateLimit);
 		
 		lblCreateLimitFor = new JLabel("Record Observation for: " + patientSSN);
-		lblCreateLimitFor.setBounds(50, 29, 200, 15);
+		lblCreateLimitFor.setBounds(6, 18, 200, 15);
 		contentPane.add(lblCreateLimitFor);
 		
 		btnExit = new JButton("Exit");
@@ -121,19 +122,19 @@ public class AddObservation extends JFrame {
 		contentPane.add(btnExit);
 		
 		JLabel lblMetric = new JLabel("Metric1");
-		lblMetric.setBounds(79, 153, 70, 15);
+		lblMetric.setBounds(40, 154, 70, 15);
 		labels.add(lblMetric);
 		contentPane.add(lblMetric);
 		
 		txtMetricValue = new JTextField();
 		txtMetricValue.setText("Metric1 Value");
-		txtMetricValue.setBounds(189, 151, 114, 19);
+		txtMetricValue.setBounds(150, 151, 114, 19);
 		textFields.add(txtMetricValue);
 		contentPane.add(txtMetricValue);
 		txtMetricValue.setColumns(10);
 		
 		JLabel lblObservedTime = new JLabel("Observed Date");
-		lblObservedTime.setBounds(77, 109, 70, 15);
+		lblObservedTime.setBounds(21, 70, 70, 15);
 		contentPane.add(lblObservedTime);
 		
 		txtDateYyyymmdd = new JTextField();
@@ -143,26 +144,26 @@ public class AddObservation extends JFrame {
 		txtDateYyyymmdd.setColumns(10);
 		
 		JLabel label_1 = new JLabel("Metric2");
-		label_1.setBounds(91, 170, 70, 15);
+		label_1.setBounds(40, 193, 70, 15);
 		labels.add(label_1);
 		contentPane.add(label_1);
 		
 		textField = new JTextField();
 		textField.setText("Metric2 Value");
 		textField.setColumns(10);
-		textField.setBounds(201, 201, 114, 19);
+		textField.setBounds(150, 190, 114, 19);
 		textFields.add(textField);
 		contentPane.add(textField);
 		
 		label_2 = new JLabel("Metric3");
-		label_2.setBounds(115, 241, 70, 15);
+		label_2.setBounds(40, 223, 70, 15);
 		labels.add(label_2);
 		contentPane.add(label_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setText("Metric3 Value");
 		textField_1.setColumns(10);
-		textField_1.setBounds(225, 239, 114, 19);
+		textField_1.setBounds(150, 221, 114, 19);
 		textFields.add(textField_1);
 		contentPane.add(textField_1);
 		
@@ -176,6 +177,10 @@ public class AddObservation extends JFrame {
 		}
 		
 		comboBox.setSelectedIndex(-1);
+		
+		btnButton = new JButton("Back");
+		btnButton.setBounds(175, 250, 117, 29);
+		contentPane.add(btnButton);
 
 		
 		comboBox.addActionListener(new ActionListener() {

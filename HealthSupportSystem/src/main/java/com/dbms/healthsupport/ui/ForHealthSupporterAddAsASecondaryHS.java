@@ -87,12 +87,12 @@ public class ForHealthSupporterAddAsASecondaryHS extends JFrame {
 		contentPane.add(btnGoBack);
 		
 		lblAuthorizationDate = new JLabel("Authorization Date ");
-		lblAuthorizationDate.setBounds(19, 140, 70, 15);
+		lblAuthorizationDate.setBounds(19, 140, 149, 15);
 		contentPane.add(lblAuthorizationDate);
 		
 		txtYyyymmdd = new JTextField();
 		txtYyyymmdd.setText("YYYY-MM-DD");
-		txtYyyymmdd.setBounds(130, 163, 114, 19);
+		txtYyyymmdd.setBounds(211, 137, 114, 19);
 		contentPane.add(txtYyyymmdd);
 		txtYyyymmdd.setColumns(10);
 		

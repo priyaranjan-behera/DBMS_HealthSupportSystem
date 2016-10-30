@@ -37,6 +37,7 @@ public class AddPatientLimit extends JFrame {
 	private JLabel lblCreateLimitFor;
 	String patientSSN;
 	private JButton btnExit;
+	private JButton btnButton;
 	
 	/**
 	 * Launch the application.
@@ -88,42 +89,42 @@ public class AddPatientLimit extends JFrame {
 		contentPane.add(label);
 		
 		comboBox = new JComboBox(specNames.toArray());
-		comboBox.setBounds(100, 42, 100, 24);
+		comboBox.setBounds(159, 42, 100, 24);
 		contentPane.add(comboBox);
 		
 		
 		JLabel lblMetricName = new JLabel("Metric Name");
-		lblMetricName.setBounds(64, 147, 70, 15);
+		lblMetricName.setBounds(34, 105, 70, 15);
 		contentPane.add(lblMetricName);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(200, 147, 100, 24);
+		comboBox_1.setBounds(159, 101, 100, 24);
 		contentPane.add(comboBox_1);
 		
 		JLabel lblNewLabel = new JLabel("upper limit");
-		lblNewLabel.setBounds(64, 233, 70, 15);
+		lblNewLabel.setBounds(34, 160, 70, 15);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(179, 231, 114, 19);
+		textField.setBounds(159, 157, 114, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblLowerLimit = new JLabel("lower limit");
-		lblLowerLimit.setBounds(64, 250, 70, 15);
+		lblLowerLimit.setBounds(32, 199, 70, 15);
 		contentPane.add(lblLowerLimit);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(179, 250, 114, 19);
+		textField_1.setBounds(169, 199, 114, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		btnCreateLimit = new JButton("Create Limit");
-		btnCreateLimit.setBounds(305, 105, 117, 25);
+		btnCreateLimit.setBounds(74, 230, 117, 25);
 		contentPane.add(btnCreateLimit);
 		
 		lblCreateLimitFor = new JLabel("Create Limit For: " + patientSSN);
-		lblCreateLimitFor.setBounds(179, 29, 70, 15);
+		lblCreateLimitFor.setBounds(47, 42, 70, 15);
 		contentPane.add(lblCreateLimitFor);
 		
 		btnExit = new JButton("Exit");
@@ -134,6 +135,10 @@ public class AddPatientLimit extends JFrame {
 		});
 		btnExit.setBounds(327, 227, 117, 29);
 		contentPane.add(btnExit);
+		
+		btnButton = new JButton("Button");
+		btnButton.setBounds(203, 228, 117, 29);
+		contentPane.add(btnButton);
 
 		
 		comboBox.addActionListener(new ActionListener() {

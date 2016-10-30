@@ -104,7 +104,7 @@ public class AddObservationSpec extends JFrame {
 		contentPane.add(textField_2);
 		
 		JButton btnAddSpecification = new JButton("Add Specification");
-		btnAddSpecification.setBounds(27, 236, 200, 25);
+		btnAddSpecification.setBounds(3, 236, 200, 25);
 		contentPane.add(btnAddSpecification);
 		
 		lblObservationSpecDesc = new JLabel("Observation Spec Desc: ");
@@ -118,7 +118,7 @@ public class AddObservationSpec extends JFrame {
 		contentPane.add(txtObservationSpecDesc);
 		
 		btnBack = new JButton("Back");
-		btnBack.setBounds(294, 215, 117, 25);
+		btnBack.setBounds(191, 236, 117, 25);
 		contentPane.add(btnBack);
 		
 		btnExit = new JButton("Exit");
@@ -127,7 +127,7 @@ public class AddObservationSpec extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(239, 234, 117, 29);
+		btnExit.setBounds(304, 234, 117, 29);
 		contentPane.add(btnExit);
 		
 		
