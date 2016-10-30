@@ -29,6 +29,8 @@ public class SeePatientRecommendationForPatient extends JFrame {
 	private JPanel contentPane;
 	String patientSSN;
 	private JTable table;
+	private JButton btnGoBack;
+	private JButton btnExit;
 
 	/**
 	 * Launch the application.
@@ -95,6 +97,14 @@ public class SeePatientRecommendationForPatient extends JFrame {
 		
 		table = new JTable(recommendationDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(184, 214, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(313, 214, 117, 29);
+		contentPane.add(btnExit);
 
 	}
 }

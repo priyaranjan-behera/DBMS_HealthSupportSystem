@@ -30,6 +30,8 @@ public class SeeDiseaseRecommendationForPatient extends JFrame {
 	private JPanel contentPane;
 	String diseaseName;
 	private JTable table;
+	private JButton btnGoBack;
+	private JButton btnExit;
 
 	/**
 	 * Launch the application.
@@ -96,5 +98,13 @@ public class SeeDiseaseRecommendationForPatient extends JFrame {
 		
 		table = new JTable(recommendationDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnGoBack = new JButton("Go Back ");
+		btnGoBack.setBounds(200, 223, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(329, 223, 117, 29);
+		contentPane.add(btnExit);
 	}
 }

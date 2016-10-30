@@ -28,6 +28,8 @@ public class SeeGeneralRecommendationForPatients extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnGoBack;
+	private JButton btnExit;
 
 	/**
 	 * Launch the application.
@@ -93,5 +95,13 @@ public class SeeGeneralRecommendationForPatients extends JFrame {
 		
 		table = new JTable(recommendationDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(166, 213, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(295, 213, 117, 29);
+		contentPane.add(btnExit);
 	}
 }

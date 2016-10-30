@@ -30,6 +30,8 @@ public class SeeDiseaseLimitForPatient extends JFrame {
 	private JPanel contentPane;
 	String diseaseName;;
 	private JTable table;
+	private JButton btnGoBack;
+	private JButton btnExit;
 
 	/**
 	 * Launch the application.
@@ -96,5 +98,13 @@ public class SeeDiseaseLimitForPatient extends JFrame {
 		
 		table = new JTable(limitDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(182, 228, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(327, 228, 117, 29);
+		contentPane.add(btnExit);
 	}
 }

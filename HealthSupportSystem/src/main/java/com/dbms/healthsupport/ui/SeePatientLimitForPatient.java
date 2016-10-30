@@ -29,6 +29,8 @@ public class SeePatientLimitForPatient extends JFrame {
 	private JPanel contentPane;
 	String patientSSN;
 	private JTable table;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -95,6 +97,14 @@ public class SeePatientLimitForPatient extends JFrame {
 		
 		table = new JTable(limitDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnNewButton = new JButton("Go Back");
+		btnNewButton.setBounds(117, 210, 117, 29);
+		contentPane.add(btnNewButton);
+		
+		btnNewButton_1 = new JButton("Exit");
+		btnNewButton_1.setBounds(252, 210, 117, 29);
+		contentPane.add(btnNewButton_1);
 
 	}
 }

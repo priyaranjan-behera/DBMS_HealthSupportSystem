@@ -95,8 +95,16 @@ public class SeeGeneralLimitForHealthSupporter extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnAddNewLimit = new JButton("Add New LImit");
-		btnAddNewLimit.setBounds(157, 211, 150, 25);
+		btnAddNewLimit.setBounds(34, 210, 150, 25);
 		contentPane.add(btnAddNewLimit);
+		
+		JButton btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(196, 208, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(325, 208, 117, 29);
+		contentPane.add(btnExit);
 		
 		btnAddNewLimit.addActionListener(new ActionListener() {
 			

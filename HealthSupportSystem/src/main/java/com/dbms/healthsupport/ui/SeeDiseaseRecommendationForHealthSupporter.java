@@ -98,8 +98,16 @@ public class SeeDiseaseRecommendationForHealthSupporter extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnAddNewLimit = new JButton("Add New Recommendation");
-		btnAddNewLimit.setBounds(157, 211, 150, 25);
+		btnAddNewLimit.setBounds(32, 207, 150, 25);
 		contentPane.add(btnAddNewLimit);
+		
+		JButton btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(200, 205, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(327, 205, 117, 29);
+		contentPane.add(btnExit);
 		
 		btnAddNewLimit.addActionListener(new ActionListener() {
 			

@@ -31,6 +31,8 @@ public class SeeHSForPatient extends JFrame {
 	private JPanel contentPane;
 	String patientSSN;
 	private JTable table;
+	private JButton btnGoBack;
+	private JButton btnExit;
 
 	/**
 	 * Launch the application.
@@ -108,6 +110,14 @@ public class SeeHSForPatient extends JFrame {
 		
 		table = new JTable(hsDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnGoBack = new JButton("Go Back");
+		btnGoBack.setBounds(173, 218, 117, 29);
+		contentPane.add(btnGoBack);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(310, 218, 117, 29);
+		contentPane.add(btnExit);
 
 	}
 }
