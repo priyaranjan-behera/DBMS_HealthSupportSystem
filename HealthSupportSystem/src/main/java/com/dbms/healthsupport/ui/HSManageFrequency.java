@@ -7,11 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SuccessfulSignUp extends JFrame {
+public class HSManageFrequency extends JFrame {
 
 	private JPanel contentPane;
 
@@ -22,7 +21,7 @@ public class SuccessfulSignUp extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SuccessfulSignUp frame = new SuccessfulSignUp();
+					HSManageFrequency frame = new HSManageFrequency();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +33,7 @@ public class SuccessfulSignUp extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SuccessfulSignUp() {
+	public HSManageFrequency() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,26 +41,29 @@ public class SuccessfulSignUp extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Login Page");
+		JButton btnViewFrequency = new JButton("View/Insert Frequency");
+		btnViewFrequency.setBounds(146, 24, 165, 29);
+		contentPane.add(btnViewFrequency);
+		
+		JButton btnEditFrequency = new JButton("Edit Frequency");
+		btnEditFrequency.setBounds(146, 79, 165, 29);
+		contentPane.add(btnEditFrequency);
+		
+		JButton btnDeleteFrequency = new JButton("Delete Frequency");
+		btnDeleteFrequency.setBounds(146, 137, 152, 29);
+		contentPane.add(btnDeleteFrequency);
+		
+		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(197, 232, 117, 29);
+		btnNewButton.setBounds(166, 230, 117, 29);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Exit Application");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnNewButton_1.setBounds(327, 232, 117, 29);
+		JButton btnNewButton_1 = new JButton("Exit System");
+		btnNewButton_1.setBounds(294, 230, 117, 29);
 		contentPane.add(btnNewButton_1);
-		
-		JLabel lblSuccessfulSignUp = new JLabel("Successful Sign Up! Go to Login!");
-		lblSuccessfulSignUp.setBounds(120, 108, 275, 16);
-		contentPane.add(lblSuccessfulSignUp);
 	}
 
 }

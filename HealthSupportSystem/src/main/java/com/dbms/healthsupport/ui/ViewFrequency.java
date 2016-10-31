@@ -112,6 +112,11 @@ public class ViewFrequency extends JFrame {
 		contentPane.add(btnExit);
 		
 		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnBack.setBounds(38, 227, 117, 29);
 		contentPane.add(btnBack);
 		
