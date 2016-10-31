@@ -27,6 +27,7 @@ public class PatientAlertsForPatient extends JFrame {
 	private JPanel contentPane;
 	String patientSSN;
 	private JTable table;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -94,6 +95,19 @@ public class PatientAlertsForPatient extends JFrame {
 		
 		table = new JTable(alertDetails, columnNames);
 		scrollPane.setViewportView(table);
+		
+		btnBack = new JButton("Back");
+		btnBack.setBounds(61, 217, 117, 25);
+		contentPane.add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new PatientLoggedIn(patientSSN).setVisible(true);
+			}
+		});
 	}
 
 }
