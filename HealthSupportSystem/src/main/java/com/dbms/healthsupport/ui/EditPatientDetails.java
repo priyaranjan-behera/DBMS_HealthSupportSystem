@@ -42,6 +42,7 @@ public class EditPatientDetails extends JFrame {
 	private String patientSSN;
 	private JPasswordField passwordField;
     private	JComboBox comboBox_1;
+    private JButton btnBack_1;
 	
 	/**
 	 * Launch the application.
@@ -218,5 +219,14 @@ public class EditPatientDetails extends JFrame {
 		passwordField.setBounds(206, 379, -58, 19);
 		passwordField.setText(patient.getPassword());
 		contentPane.add(passwordField);
+		
+		btnBack_1 = new JButton("Back");
+		btnBack_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PatientProfile(patientSSN).setVisible(true);
+			}
+		});
+		btnBack_1.setBounds(101, 379, 117, 29);
+		contentPane.add(btnBack_1);
 	}
 }

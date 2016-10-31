@@ -83,7 +83,7 @@ public class PatientLoggedIn extends JFrame {
 		JButton btnViewHealthSupporters = new JButton("View Health Supporters");
 		btnViewHealthSupporters.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientViewMyHealthSupporters patientViewMyHealthSupporters = new PatientViewMyHealthSupporters(patientSSN);
+				SeeHSForPatient patientViewMyHealthSupporters = new SeeHSForPatient(patientSSN);
 				patientViewMyHealthSupporters.setVisible(true);
 			}
 		});
