@@ -44,6 +44,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton = new JButton("Manage Disease");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageDisease(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(131, 30, 216, 29);
@@ -52,6 +53,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton_1 = new JButton("Manage Frequency");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageFrequency(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(131, 97, 216, 29);
@@ -60,6 +62,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton_2 = new JButton("Manage Observation");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageObservation(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton_2.setBounds(131, 168, 216, 29);
@@ -68,6 +71,7 @@ public class HSManageMetaData extends JFrame {
 		JButton btnNewButton_3 = new JButton("Back");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HSManageMetaData(currHSSSN).setVisible(true);
 			}
 		});
 		btnNewButton_3.setBounds(198, 229, 117, 29);

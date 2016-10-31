@@ -87,14 +87,26 @@ public class HealthSupporterLoggedIn extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Edit Profile");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_3.setBounds(245, 119, 185, 29);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Back");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_4.setBounds(28, 229, 162, 29);
 		contentPane.add(btnNewButton_4);
 		
 		JButton btnManageMetadata = new JButton("Manage Metadata");
+		btnManageMetadata.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnManageMetadata.setBounds(28, 168, 162, 29);
 		contentPane.add(btnManageMetadata);
 	}
