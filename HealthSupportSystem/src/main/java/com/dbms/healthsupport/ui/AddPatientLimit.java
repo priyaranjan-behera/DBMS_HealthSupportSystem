@@ -36,6 +36,7 @@ public class AddPatientLimit extends JFrame {
 	private JButton btnCreateLimit;
 	private JLabel lblCreateLimitFor;
 	String patientSSN;
+	private JButton btnExit;
 	
 	/**
 	 * Launch the application.
@@ -124,6 +125,15 @@ public class AddPatientLimit extends JFrame {
 		lblCreateLimitFor = new JLabel("Create Limit For: " + patientSSN);
 		lblCreateLimitFor.setBounds(179, 29, 70, 15);
 		contentPane.add(lblCreateLimitFor);
+		
+		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnExit.setBounds(327, 227, 117, 29);
+		contentPane.add(btnExit);
 
 		
 		comboBox.addActionListener(new ActionListener() {
