@@ -40,7 +40,7 @@ public class SeeDiseaseRecommendationForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeDiseaseRecommendationForPatient frame = new SeeDiseaseRecommendationForPatient("HIV");
+					SeeDiseaseRecommendationForPatient frame = new SeeDiseaseRecommendationForPatient("HIV", "P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class SeeDiseaseRecommendationForPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SeeDiseaseRecommendationForPatient(String currDiseaseName) {
+	public SeeDiseaseRecommendationForPatient(String currDiseaseName, String patientSSN) {
 		this.diseaseName = currDiseaseName;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,10 +100,20 @@ public class SeeDiseaseRecommendationForPatient extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		btnGoBack = new JButton("Go Back ");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PatientHealthIndicators(patientSSN).setVisible(true);
+			}
+		});
 		btnGoBack.setBounds(200, 223, 117, 29);
 		contentPane.add(btnGoBack);
 		
 		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(329, 223, 117, 29);
 		contentPane.add(btnExit);
 	}

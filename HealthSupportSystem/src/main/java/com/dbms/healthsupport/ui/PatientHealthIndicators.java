@@ -46,7 +46,7 @@ public class PatientHealthIndicators extends JFrame {
 		JButton btnNewButton = new JButton("See General Limits");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SeeGeneralLimitForPatient().setVisible(true);
+				new SeeGeneralLimitForPatient(patientSSN).setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(131, 30, 216, 29);
@@ -55,7 +55,7 @@ public class PatientHealthIndicators extends JFrame {
 		JButton btnNewButton_1 = new JButton("See General Reco");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SeeGeneralRecommendationForPatients().setVisible(true);
+				new SeeGeneralRecommendationForPatients(patientSSN).setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(131, 74, 216, 29);
