@@ -64,6 +64,7 @@ public class DeleteFrequency extends JFrame {
 		JButton btnNewButton_1 = new JButton("Exit");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		btnNewButton_1.setBounds(170, 231, 117, 29);
