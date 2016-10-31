@@ -21,7 +21,7 @@ public class PatientProfile extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientProfile frame = new PatientProfile();
+					PatientProfile frame = new PatientProfile("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class PatientProfile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PatientProfile() {
+	public PatientProfile(String patientSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -57,6 +57,15 @@ public class PatientProfile extends JFrame {
 		});
 		btnExitSystem.setBounds(29, 197, 276, 29);
 		contentPane.add(btnExitSystem);
+		
+		JButton btnNewButton = new JButton("Go Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PatientLoggedIn(patientSSN).setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(29, 156, 276, 29);
+		contentPane.add(btnNewButton);
 	}
 
 }
