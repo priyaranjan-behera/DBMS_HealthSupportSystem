@@ -18,7 +18,7 @@ public class HSManageDisease extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HSManageDisease frame = new HSManageDisease();
+					HSManageDisease frame = new HSManageDisease("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class HSManageDisease extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HSManageDisease() {
+	public HSManageDisease(String currHSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

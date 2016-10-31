@@ -18,7 +18,7 @@ public class HSManageObservation extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HSManageObservation frame = new HSManageObservation();
+					HSManageObservation frame = new HSManageObservation("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class HSManageObservation extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HSManageObservation() {
+	public HSManageObservation(String currHSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

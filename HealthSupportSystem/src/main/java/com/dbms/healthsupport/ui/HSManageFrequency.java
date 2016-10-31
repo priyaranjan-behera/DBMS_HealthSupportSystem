@@ -21,7 +21,7 @@ public class HSManageFrequency extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HSManageFrequency frame = new HSManageFrequency();
+					HSManageFrequency frame = new HSManageFrequency("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class HSManageFrequency extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HSManageFrequency() {
+	public HSManageFrequency(String currHSSSN) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,14 +42,26 @@ public class HSManageFrequency extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnViewFrequency = new JButton("View/Insert Frequency");
+		btnViewFrequency.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnViewFrequency.setBounds(146, 24, 165, 29);
 		contentPane.add(btnViewFrequency);
 		
 		JButton btnEditFrequency = new JButton("Edit Frequency");
+		btnEditFrequency.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnEditFrequency.setBounds(146, 79, 165, 29);
 		contentPane.add(btnEditFrequency);
 		
 		JButton btnDeleteFrequency = new JButton("Delete Frequency");
+		btnDeleteFrequency.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnDeleteFrequency.setBounds(146, 137, 152, 29);
 		contentPane.add(btnDeleteFrequency);
 		
@@ -62,6 +74,10 @@ public class HSManageFrequency extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Exit System");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setBounds(294, 230, 117, 29);
 		contentPane.add(btnNewButton_1);
 	}
