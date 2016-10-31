@@ -129,9 +129,28 @@ public class SeeHSForPatient extends JFrame {
 		btnGoBack.setBounds(173, 218, 117, 29);
 		contentPane.add(btnGoBack);
 		
+		btnGoBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new PatientLoggedIn(patientSSN).setVisible(true);
+				
+			}
+		});
+		
 		btnExit = new JButton("Exit");
 		btnExit.setBounds(310, 218, 117, 29);
 		contentPane.add(btnExit);
+		
+		btnExit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(DO_NOTHING_ON_CLOSE);
+			}
+		});
 
 	}
 }
