@@ -68,7 +68,7 @@ public class HSManagesPatientDashBoard extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new ViewDiagnosesForHS(patientSSN).setVisible(true);
+				new ViewDiagnosesForHS(patientSSN, hsSSN).setVisible(true);
 				
 			}
 		});

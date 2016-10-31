@@ -31,6 +31,7 @@ public class ViewDiagnosesForHS extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private String patientSSN;
+	String HSSSN;
 	private JTable table_1;
 
 	/**
@@ -40,7 +41,7 @@ public class ViewDiagnosesForHS extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewDiagnosesForHS frame = new ViewDiagnosesForHS("P2");
+					ViewDiagnosesForHS frame = new ViewDiagnosesForHS("P2", "P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,8 +53,9 @@ public class ViewDiagnosesForHS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewDiagnosesForHS(String currPatientSSN) {
+	public ViewDiagnosesForHS(String currPatientSSN, String currHSSSN) {
 		this.patientSSN = currPatientSSN;
+		this.HSSSN = currHSSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
@@ -147,7 +149,7 @@ public class ViewDiagnosesForHS extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new AddDiseaseDiagnosesForHealthSupporter(patientSSN).setVisible(true);
+				new AddDiseaseDiagnosesForHealthSupporter(patientSSN, HSSSN).setVisible(true);
 			}
 		});
 		

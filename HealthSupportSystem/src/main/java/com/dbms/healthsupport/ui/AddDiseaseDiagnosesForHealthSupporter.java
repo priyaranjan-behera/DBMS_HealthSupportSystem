@@ -28,6 +28,7 @@ public class AddDiseaseDiagnosesForHealthSupporter extends JFrame {
 	private JButton btnAddDiseaseName;
 	private JButton btnExitSystem;
 	String patientSSN;
+	String HSSSN;
 
 	/**
 	 * Launch the application.
@@ -36,7 +37,7 @@ public class AddDiseaseDiagnosesForHealthSupporter extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddDiseaseDiagnosesForHealthSupporter frame = new AddDiseaseDiagnosesForHealthSupporter("P3");
+					AddDiseaseDiagnosesForHealthSupporter frame = new AddDiseaseDiagnosesForHealthSupporter("P3","P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,8 +49,9 @@ public class AddDiseaseDiagnosesForHealthSupporter extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddDiseaseDiagnosesForHealthSupporter(String currPatientSSN) {
+	public AddDiseaseDiagnosesForHealthSupporter(String currPatientSSN, String currHSSSN) {
 		this.patientSSN = currPatientSSN;
+		this.HSSSN = currHSSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -105,7 +107,7 @@ public class AddDiseaseDiagnosesForHealthSupporter extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new HealthSupporterLoggedIn(hsSSN).setVisible(true);
+				new HealthSupporterLoggedIn(HSSSN).setVisible(true);
 				
 			}
 		});
