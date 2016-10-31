@@ -2,6 +2,8 @@ package com.dbms.healthsupport.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -166,6 +168,11 @@ public class ViewPatientDetails extends JFrame {
 		contentPane.add(btnBack);
 		
 		btnExit = new JButton("Exit System");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setBounds(333, 379, 117, 29);
 		contentPane.add(btnExit);
 	}
