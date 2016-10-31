@@ -91,38 +91,47 @@ public class AddDiseaseLimit extends JFrame {
 		
 		
 		JLabel lblMetricName = new JLabel("Metric Name");
-		lblMetricName.setBounds(66, 115, 70, 15);
+		lblMetricName.setBounds(54, 100, 70, 15);
 		contentPane.add(lblMetricName);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(164, 115, 100, 24);
+		comboBox_1.setBounds(164, 96, 100, 24);
 		contentPane.add(comboBox_1);
 		
 		JLabel lblNewLabel = new JLabel("upper limit");
-		lblNewLabel.setBounds(54, 185, 70, 15);
+		lblNewLabel.setBounds(54, 137, 70, 15);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(169, 183, 114, 19);
+		textField.setBounds(164, 145, 114, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblLowerLimit = new JLabel("lower limit");
-		lblLowerLimit.setBounds(54, 202, 70, 15);
+		lblLowerLimit.setBounds(54, 179, 70, 15);
 		contentPane.add(lblLowerLimit);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(169, 202, 114, 19);
+		textField_1.setBounds(164, 176, 114, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		btnCreateLimit = new JButton("Create Limit");
-		btnCreateLimit.setBounds(302, 115, 117, 25);
+		btnCreateLimit.setBounds(192, 233, 117, 25);
 		contentPane.add(btnCreateLimit);
 		
 		lblCreateLimitFor = new JLabel("Create Limit For: " + currDiseaseName);
-		lblCreateLimitFor.setBounds(179, 29, 70, 15);
+		lblCreateLimitFor.setBounds(54, 59, 70, 15);
 		contentPane.add(lblCreateLimitFor);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnExit.setBounds(327, 243, 117, 29);
+		contentPane.add(btnExit);
 
 		
 		comboBox.addActionListener(new ActionListener() {
