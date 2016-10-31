@@ -114,7 +114,7 @@ public class ViewFrequency extends JFrame {
 		btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				new HealthSupporterLoggedIn(currHSSSN).setVisible(true);
 			}
 		});
 		btnBack.setBounds(38, 227, 117, 29);
