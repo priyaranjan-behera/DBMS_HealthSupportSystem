@@ -110,7 +110,7 @@ public class PatientLoggedIn extends JFrame {
 		btnButton.setBounds(37, 207, 117, 29);
 		contentPane.add(btnButton);
 		
-		JButton btnNewButton = new JButton("Add Observation");
+		JButton btnNewButton = new JButton("Manage Observations");
 		btnNewButton.setBounds(227, 232, 150, 25);
 		contentPane.add(btnNewButton);
 		
@@ -119,7 +119,7 @@ public class PatientLoggedIn extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new AddObservation(patientSSN).setVisible(true); 
+				new SeeObservationForPatient(patientSSN);
 				
 			}
 		});

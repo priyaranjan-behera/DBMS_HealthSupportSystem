@@ -52,8 +52,8 @@ public class ViewDiagnosesForHS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewDiagnosesForHS(String patientSSN) {
-		this.patientSSN = patientSSN;
+	public ViewDiagnosesForHS(String currPatientSSN) {
+		this.patientSSN = currPatientSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
@@ -137,6 +137,19 @@ public class ViewDiagnosesForHS extends JFrame {
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
 		lblPatientId.setBounds(25, 45, 219, 15);
 		contentPane.add(lblPatientId);
+		
+		JButton btnAddDiagnosis = new JButton("Add Diagnosis");
+		btnAddDiagnosis.setBounds(27, 320, 117, 25);
+		contentPane.add(btnAddDiagnosis);
+		
+		btnAddDiagnosis.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddDiseaseDiagnosesForHealthSupporter(patientSSN).setVisible(true);
+			}
+		});
 		
 		
 	}

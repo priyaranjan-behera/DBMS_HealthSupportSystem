@@ -98,6 +98,8 @@ public class LoginPage extends JFrame {
 				{
 				String profileInformationValue = comboBox.getSelectedItem().toString();
 				People people = new PeopleDao().getDataById(textField.getText());
+				System.out.println("Password" + people.getPassword());
+				System.out.println("Password Field: " + passwordField.getText());
 				if(!people.getPassword().equals(passwordField.getText()))
 					throw new Exception("Incorrect Password");
 				new PeopleDao().logUsage(people);
@@ -121,7 +123,17 @@ public class LoginPage extends JFrame {
 					if(patient == null)
 						throw new Exception("Incorrect PAssword");
 					
+					
 					//if okay
+					
+					System.out.println("Password" + patient.getPassword());
+					
+					if(new PatientDao().isSick(patient.getSsn()))
+					{
+						if(patient.getPrimaryHealthSupporter() == null)
+							new ForPatientAddPatientAsAPrimaryHealthSupporter(textField.getText()).setVisible(true);
+					}
+					
 					PatientLoggedIn patientLoggedIn = new PatientLoggedIn(textField.getText());
 					patientLoggedIn.setVisible(true);
  					

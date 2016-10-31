@@ -153,7 +153,7 @@ public class ForHealthSupporterViewAllAuthorizedPatients extends JFrame {
 						//Integer alertId = Integer.parseInt(Table_click);
 						String patientSSN=Table_click;
 						System.out.println(patientSSN);
-						HSManagesPatientDashBoard epd = new HSManagesPatientDashBoard(patientSSN);
+						HSManagesPatientDashBoard epd = new HSManagesPatientDashBoard(patientSSN, HSSSN);
 						epd.setVisible(true);
 					
 					}

@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-public class AddDiseaseDiagnosesForPatient extends JFrame {
+public class AddDiseaseDiagnosesForHealthSupporter extends JFrame {
 
 	private JPanel contentPane;
 	private JComboBox textField;
@@ -36,7 +36,7 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddDiseaseDiagnosesForPatient frame = new AddDiseaseDiagnosesForPatient("P2");
+					AddDiseaseDiagnosesForHealthSupporter frame = new AddDiseaseDiagnosesForHealthSupporter("P3");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddDiseaseDiagnosesForPatient(String currPatientSSN) {
+	public AddDiseaseDiagnosesForHealthSupporter(String currPatientSSN) {
 		this.patientSSN = currPatientSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -70,7 +70,7 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(AddDiseaseDiagnosesForPatient.this,
+			JOptionPane.showMessageDialog(AddDiseaseDiagnosesForHealthSupporter.this,
 				    e.getMessage(),
 				    "Inane warning",
 				    JOptionPane.WARNING_MESSAGE);
@@ -105,7 +105,7 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new PatientLoggedIn(patientSSN).setVisible(true);
+				new HealthSupporterLoggedIn(hsSSN).setVisible(true);
 				
 			}
 		});
@@ -117,12 +117,12 @@ public class AddDiseaseDiagnosesForPatient extends JFrame {
 				try
 				{
 					new PatientDao().AssignDiseaseToPatient(new PatientDao().getDataById(patientSSN), new DiseasesDao().getDataById(textField.getSelectedItem().toString()));
-					JOptionPane.showMessageDialog(AddDiseaseDiagnosesForPatient.this,
+					JOptionPane.showMessageDialog(AddDiseaseDiagnosesForHealthSupporter.this,
 						    "Added Disease: " + textField.getSelectedItem() + " to " + patientSSN);
 					
 				}catch (Exception exp) {
 					// TODO: handle exception
-					JOptionPane.showMessageDialog(AddDiseaseDiagnosesForPatient.this,
+					JOptionPane.showMessageDialog(AddDiseaseDiagnosesForHealthSupporter.this,
 						    exp.getMessage(),
 						    "Inane warning",
 						    JOptionPane.WARNING_MESSAGE);

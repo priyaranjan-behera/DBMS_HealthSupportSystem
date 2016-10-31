@@ -39,7 +39,7 @@ public class ViewDiagnosesForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewDiagnosesForPatient frame = new ViewDiagnosesForPatient("P2");
+					ViewDiagnosesForPatient frame = new ViewDiagnosesForPatient("P3");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -171,6 +171,20 @@ public class ViewDiagnosesForPatient extends JFrame {
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
 		lblPatientId.setBounds(25, 45, 219, 15);
 		contentPane.add(lblPatientId);
+		
+		JButton btnNewButton_2 = new JButton("Add Diagnosis");
+		btnNewButton_2.setBounds(260, 248, 117, 25);
+		contentPane.add(btnNewButton_2);
+		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AddDiseaseDiagnosesForPatient(patientSSN).setVisible(true);
+				
+			}
+		});
 		
 		
 	}

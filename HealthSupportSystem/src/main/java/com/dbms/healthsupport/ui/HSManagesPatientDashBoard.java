@@ -14,12 +14,13 @@ public class HSManagesPatientDashBoard extends JFrame{
 	
 	private JPanel contentPane;
 	String patientSSN;
+	String hsSSN;
 	
 	public static void main(String args[]){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HSManagesPatientDashBoard frame = new HSManagesPatientDashBoard("P2");
+					HSManagesPatientDashBoard frame = new HSManagesPatientDashBoard("P2","P3");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,8 +29,9 @@ public class HSManagesPatientDashBoard extends JFrame{
 		});
 	}
 	
-	public HSManagesPatientDashBoard(String currPatientSSN){
+	public HSManagesPatientDashBoard(String currPatientSSN, String currHSSSN){
 		this.patientSSN = currPatientSSN;
+		this.hsSSN = currHSSSN;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,16 +55,30 @@ public class HSManagesPatientDashBoard extends JFrame{
 		lblManageAlertsRecommendations.setBounds(100, 20, 300, 15);
 		contentPane.add(lblManageAlertsRecommendations);
 		
-		JButton btnAddObservations = new JButton("Add Observations");
-		btnAddObservations.setBounds(120, 195, 200, 25);
+		JButton btnAddObservations = new JButton("Manage Observation");
+		btnAddObservations.setBounds(120, 231, 200, 25);
 		contentPane.add(btnAddObservations);
+		
+		JButton btnManageDiagnosis = new JButton("Manage Diagnosis");
+		btnManageDiagnosis.setBounds(120, 166, 200, 25);
+		contentPane.add(btnManageDiagnosis);
+		
+		btnManageDiagnosis.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ViewDiagnosesForHS(patientSSN).setVisible(true);
+				
+			}
+		});
 		
 		btnAddObservations.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new AddObservation(patientSSN).setVisible(true);
+				new SeeObservationForHealthSupporter(patientSSN, hsSSN).setVisible(true);;
 				
 			}
 		});
