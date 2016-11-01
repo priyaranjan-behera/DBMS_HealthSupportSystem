@@ -4,8 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.domain.HealthSupporter;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -134,6 +139,33 @@ public class HealthSupporterLoggedIn extends JFrame {
 		JButton btnBecomeSecondarySupporter = new JButton("Become Secondary Supporter");
 		btnBecomeSecondarySupporter.setBounds(28, 197, 225, 25);
 		contentPane.add(btnBecomeSecondarySupporter);
+		
+		JButton btnMakeMeA = new JButton("Make me a Patient");
+		btnMakeMeA.setBounds(242, 120, 180, 25);
+		contentPane.add(btnMakeMeA);
+		
+		btnMakeMeA.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try{
+					HealthSupporter healthSupporter = new HealthSupporterDao().getDataById(HSSSN);
+					new HealthSupporterDao().makeHealthSupporterAPatient(healthSupporter);
+					
+					JOptionPane.showMessageDialog(HealthSupporterLoggedIn.this,
+						    "Added as Patient");
+				}
+				catch (Exception exception) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(HealthSupporterLoggedIn.this,
+						    exception.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+			}
+		});
 		
 		btnBecomeSecondarySupporter.addActionListener(new ActionListener() {
 			

@@ -8,8 +8,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.dbms.healthsupport.dao.HealthSupporterDao;
+import com.dbms.healthsupport.dao.PatientDao;
+import com.dbms.healthsupport.domain.HealthSupporter;
+import com.dbms.healthsupport.domain.Patient;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class PatientLoggedIn extends JFrame {
 
@@ -111,7 +118,7 @@ public class PatientLoggedIn extends JFrame {
 		contentPane.add(btnButton);
 		
 		JButton btnNewButton = new JButton("Manage Observations");
-		btnNewButton.setBounds(227, 232, 150, 25);
+		btnNewButton.setBounds(227, 210, 150, 25);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -127,5 +134,32 @@ public class PatientLoggedIn extends JFrame {
 		JLabel lblPatientId = new JLabel("Patient Id: " + patientSSN);
 		lblPatientId.setBounds(184, 0, 150, 15);
 		contentPane.add(lblPatientId);
+		
+		JButton btnMakeMeA = new JButton("Make me a HS");
+		btnMakeMeA.setBounds(242, 120, 180, 25);
+		contentPane.add(btnMakeMeA);
+		
+		btnMakeMeA.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try{
+					Patient patient = new PatientDao().getDataById(patientSSN);
+					new PatientDao().makePatientAHealthSupporter(patient);
+					
+					JOptionPane.showMessageDialog(PatientLoggedIn.this,
+						    "Added as HS");
+				}
+				catch (Exception exception) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(PatientLoggedIn.this,
+						    exception.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+			}
+		});
 	}
 }

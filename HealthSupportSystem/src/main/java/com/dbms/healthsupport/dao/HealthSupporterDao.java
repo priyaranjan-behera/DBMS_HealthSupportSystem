@@ -115,6 +115,44 @@ public class HealthSupporterDao implements DaoInterface<HealthSupporter> {
 		}
 		
 	}
+	
+	
+	public void makeHealthSupporterAPatient(HealthSupporter x) throws Exception
+	{
+			Connection conn = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			Statement stmt2 = null;
+			ResultSet rs2=null;
+		    
+			try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			String insertSQL = " INSERT INTO PATIENT values (\'"
+					+ x.getSsn() + "\'," 
+					+ "TO_DATE(\'"+ "2016-11-11" + "\',\'YYYY-MM-DD\'),\'"
+					+ "Male\')";
+			 
+	        rs = stmt.executeQuery(insertSQL);
+	        
+	        stmt2 = conn.createStatement();
+	        
+	        insertSQL = " INSERT INTO WELLPATIENT values (\'"
+					+ x.getSsn() + "\')";
+	        
+	        rs2 = stmt2.executeQuery(insertSQL);
+	        
+			} catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}
+
+	}
+	
 	public HealthSupporter getDataById(Object id) throws Exception {
 		// TODO Auto-generated method stub
 		Connection conn = null;
