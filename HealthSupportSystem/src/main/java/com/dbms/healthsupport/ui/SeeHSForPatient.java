@@ -33,6 +33,9 @@ public class SeeHSForPatient extends JFrame {
 	private JTable table;
 	private JButton btnGoBack;
 	private JButton btnExit;
+	private JButton btnDelSecondary;
+	private JButton btnDelPrimary;
+	
 
 	/**
 	 * Launch the application.
@@ -41,7 +44,7 @@ public class SeeHSForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeHSForPatient frame = new SeeHSForPatient("P2");
+					SeeHSForPatient frame = new SeeHSForPatient("P1");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -151,6 +154,205 @@ public class SeeHSForPatient extends JFrame {
 				System.exit(DO_NOTHING_ON_CLOSE);
 			}
 		});
+		
+		btnDelPrimary = new JButton("Delete Primary");
+		btnDelPrimary.setBounds(20, 185, 200, 29);
+		contentPane.add(btnDelPrimary);
+		
+		
+		btnDelPrimary.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				try {
+					Patient patient = new PatientDao().getDataById(patientSSN);
+					
+					if(patient.getPrimaryHealthSupporter() == null)
+						throw new Exception("No Primary Exists");
+					
+					new PatientDao().deletePrimaryHealthSupporter(patient.getPrimaryHealthSupporter(), patientSSN);
+					
+					JOptionPane.showMessageDialog(SeeHSForPatient.this,
+						    "Deleted Primary");
+					
+					
+					
+					
+					String[][] hsDetails=null;
+					
+					try
+					{
+						
+						String primarySupporter = new PatientDao().getDataById(currPatientSSN).getPrimaryHealthSupporter();
+//						hsDetails = new String[][];
+						System.out.println(primarySupporter);
+						
+						HealthSupporter hs=new HealthSupporterDao().getDataById(primarySupporter);
+						int i=0;
+						System.out.println(hs.getSsn());
+						
+						List<String> secondarySupporter = new PatientDao().getDataById(currPatientSSN).getSecondaryHealthSupporters();
+						
+						if(secondarySupporter!=null){
+							if(secondarySupporter.size()>0){
+								hsDetails=new String[2][];
+								String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+								hsDetails[i++] = hsDetail;
+								System.out.println("=====");
+								hs = new HealthSupporterDao().getDataById(secondarySupporter.get(0));
+								String[] shsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Secondary"};
+								hsDetails[i++] = shsDetail;
+								
+							}
+						}
+						if(hsDetails==null){
+							if(primarySupporter!=null){
+								hsDetails=new String[1][];
+								String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+								hsDetails[i++] = hsDetail;
+								System.out.println("2=====");
+
+							}else{
+								hsDetails=new String[0][];
+								System.out.println("=====3");
+
+							}
+						}
+						
+
+					}
+					catch (Exception e2) {
+						JOptionPane.showMessageDialog(SeeHSForPatient.this,
+							    "Cannot delete supporter",
+							    "Inane warning",
+							    JOptionPane.WARNING_MESSAGE);
+					}
+					
+					String[] columnNames = {"HSSSN", "FirstName", "LastName", "Contact", "P/S"};
+					
+					table = new JTable(hsDetails, columnNames);
+					scrollPane.setViewportView(table);
+					
+					
+					
+					
+					
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(SeeHSForPatient.this,
+						    e1.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+				
+			}
+		});
+		
+		
+		
+		btnDelSecondary = new JButton("Delete Secondary");
+		btnDelSecondary.setBounds(20, 225, 200, 29);
+		contentPane.add(btnDelSecondary);
+		
+		btnDelSecondary.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				try {
+					Patient patient = new PatientDao().getDataById(patientSSN);
+					
+					if(patient.getSecondaryHealthSupporters() == null || patient.getSecondaryHealthSupporters().size()==0)
+						throw new Exception("No Secondary Exists");
+					
+					new PatientDao().deleteSecondaryHealthSupporter(patient.getSecondaryHealthSupporters().get(0), patientSSN);
+					
+					JOptionPane.showMessageDialog(SeeHSForPatient.this,
+						    "Deleted Secondary");
+					
+					
+					
+					
+					String[][] hsDetails=null;
+					
+					try
+					{
+						
+						String primarySupporter = new PatientDao().getDataById(currPatientSSN).getPrimaryHealthSupporter();
+//						hsDetails = new String[][];
+						System.out.println(primarySupporter);
+						
+						HealthSupporter hs=new HealthSupporterDao().getDataById(primarySupporter);
+						int i=0;
+						System.out.println(hs.getSsn());
+						
+						List<String> secondarySupporter = new PatientDao().getDataById(currPatientSSN).getSecondaryHealthSupporters();
+						
+						if(secondarySupporter!=null){
+							if(secondarySupporter.size()>0){
+								hsDetails=new String[2][];
+								String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+								hsDetails[i++] = hsDetail;
+								System.out.println("=====");
+								hs = new HealthSupporterDao().getDataById(secondarySupporter.get(0));
+								String[] shsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Secondary"};
+								hsDetails[i++] = shsDetail;
+								
+							}
+						}
+						if(hsDetails==null){
+							if(primarySupporter!=null){
+								hsDetails=new String[1][];
+								String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+								hsDetails[i++] = hsDetail;
+								System.out.println("2=====");
+
+							}else{
+								hsDetails=new String[0][];
+								System.out.println("=====3");
+
+							}
+						}
+						
+
+					}
+					catch (Exception e2) {
+						JOptionPane.showMessageDialog(SeeHSForPatient.this,
+							    e2.getMessage(),
+							    "Cannot delete supporter",
+							    JOptionPane.WARNING_MESSAGE);
+					}
+					
+					String[] columnNames = {"HSSSN", "FirstName", "LastName", "Contact", "P/S"};
+					
+					table = new JTable(hsDetails, columnNames);
+					scrollPane.setViewportView(table);
+					
+					
+					
+					
+					
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(SeeHSForPatient.this,
+						    e1.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+				
+				
+			}
+		});
+		
 
 	}
 }
