@@ -276,6 +276,26 @@ public class RecommendationDao implements DaoInterface<Recommendation>{
 
 	public void deleteRow(Recommendation x) throws Exception {
 		// TODO Auto-generated method stub
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try{
+			
+		conn = getConnection();	
+		stmt = conn.createStatement();
+		String selectSQL = "DELETE FROM RECOMMENDATION  WHERE recommendationId = " + x.getRecId(); 
+		
+		rs = stmt.executeQuery(selectSQL);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		
 	}
 

@@ -200,7 +200,6 @@ public class AddObservation extends JFrame {
 						
 						JTextField jTextField = textFields.get(i);
 						jTextField.setVisible(true);
-						jTextField.setText(observationSpec.getMetrics().get(i));
 						
 					}
 					
@@ -236,6 +235,7 @@ public class AddObservation extends JFrame {
 				{
 
 					JTextField jTextField = textFields.get(i);
+					System.out.println("Metric Value" + jTextField.getText());
 					ObservationMetricDetails observationMetricDetails = new ObservationMetricDetails(observationSpec.getMetrics().get(i), jTextField.getText());
 					metricDetails.add(observationMetricDetails);
 				}

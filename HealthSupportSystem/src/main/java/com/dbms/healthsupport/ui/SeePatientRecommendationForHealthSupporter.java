@@ -121,5 +121,79 @@ public class SeePatientRecommendationForHealthSupporter extends JFrame {
 				
 			}
 		});
+		
+
+		JButton btnDeleteRecommendation = new JButton("Delete Recommendation");
+		btnDeleteRecommendation.setBounds(180, 245, 220, 25);
+		contentPane.add(btnDeleteRecommendation);
+		
+		btnDeleteRecommendation.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try
+				{
+				int row = table.getSelectedRow();
+				if(row == -1)
+				{
+					JOptionPane.showMessageDialog(SeePatientRecommendationForHealthSupporter.this,
+						    "Select a row to clear the recommendation");
+				}
+				else
+				{
+					String Table_click = (table.getModel().getValueAt(row, 0).toString());
+					Integer recId = Integer.parseInt(Table_click);
+					//String diseaseName=Table_click;
+					//new AlertDao().clearAlert(alertId);
+					Recommendation recommendation = new RecommendationDao().getDataById(recId);
+					new RecommendationDao().deleteRow(recommendation);
+					
+					JOptionPane.showMessageDialog(SeePatientRecommendationForHealthSupporter.this,
+						    "Rec Id: " + recId + " has been cleared");
+					
+					String[][] recommendationDetails = new String[10][];
+					
+					try
+					{
+						List<Integer> recommendations = new PatientDao().getDataById(currPatientSSN).getRecommendations();
+					
+						recommendationDetails = new String[recommendations.size()][];
+					
+					
+					int i=0;
+					for(Integer recommendation1: recommendations)
+					{
+						Recommendation recommendation2 = new RecommendationDao().getDataById(recommendation1);
+						String[] recommendationDetail = {recommendation2.getRecId().toString(), recommendation2.getObservationSpecification(), recommendation2.getFrequencyName(), recommendation2.getThreshold().toString()};
+						recommendationDetails[i++] = recommendationDetail;
+					}
+					
+					}
+					catch (Exception exp2) {
+						// TODO: handle exception
+						JOptionPane.showMessageDialog(SeePatientRecommendationForHealthSupporter.this,
+							    exp2.getMessage(),
+							    "Inane warning",
+							    JOptionPane.WARNING_MESSAGE);
+					}
+					
+					String[] columnNames = {"RecommendationId", "ObservationSpec", "Frequency", "Threshold"};
+					
+					
+					table = new JTable(recommendationDetails, columnNames);
+					scrollPane.setViewportView(table);
+					
+					
+					
+				}
+				}catch (Exception exp3) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(SeePatientRecommendationForHealthSupporter.this,
+						    exp3.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+			}});
 	}
 }
