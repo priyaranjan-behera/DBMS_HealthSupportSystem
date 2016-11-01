@@ -139,6 +139,10 @@ public class PatientLoggedIn extends JFrame {
 		btnMakeMeA.setBounds(242, 120, 180, 25);
 		contentPane.add(btnMakeMeA);
 		
+		JButton btnAddPrimarySupporter = new JButton("Add Primary Supporter");
+		btnAddPrimarySupporter.setBounds(137, 175, 117, 25);
+		contentPane.add(btnAddPrimarySupporter);
+		
 		btnMakeMeA.addActionListener(new ActionListener() {
 			
 			@Override
@@ -159,6 +163,25 @@ public class PatientLoggedIn extends JFrame {
 						    JOptionPane.WARNING_MESSAGE);
 				}
 				
+			}
+		});
+		
+		btnAddPrimarySupporter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try
+				{
+					new ForPatientAddPatientAsAPrimaryHealthSupporter(patientSSN).setVisible(true);
+				}
+				catch (Exception exception) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(PatientLoggedIn.this,
+						    exception.getMessage(),
+						    "Inane warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 	}
