@@ -44,7 +44,7 @@ public class SeeHSForPatient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SeeHSForPatient frame = new SeeHSForPatient("P1");
+					SeeHSForPatient frame = new SeeHSForPatient("P4");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,39 +74,56 @@ public class SeeHSForPatient extends JFrame {
 			
 			String primarySupporter = new PatientDao().getDataById(currPatientSSN).getPrimaryHealthSupporter();
 //			hsDetails = new String[][];
-			System.out.println(primarySupporter);
 			
-			HealthSupporter hs=new HealthSupporterDao().getDataById(primarySupporter);
-			int i=0;
-			System.out.println(hs.getSsn());
-			
-			List<String> secondarySupporter = new PatientDao().getDataById(currPatientSSN).getSecondaryHealthSupporters();
-			
-			if(secondarySupporter!=null){
-				if(secondarySupporter.size()>0){
-					hsDetails=new String[2][];
-					String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
-					hsDetails[i++] = hsDetail;
-					System.out.println("=====");
-					hs = new HealthSupporterDao().getDataById(secondarySupporter.get(0));
-					String[] shsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Secondary"};
-					hsDetails[i++] = shsDetail;
-					
-				}
+			if(primarySupporter == null)
+			{
+				JOptionPane.showMessageDialog(SeeHSForPatient.this,
+					    "No Health Supporter Exists!");
+				
+				new PatientLoggedIn(patientSSN).setVisible(true);
 			}
-			if(hsDetails==null){
-				if(primarySupporter!=null){
-					hsDetails=new String[1][];
-					String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
-					hsDetails[i++] = hsDetail;
-					System.out.println("2=====");
+			else
+			{
+				System.out.println(primarySupporter);
+				
+				HealthSupporter hs=new HealthSupporterDao().getDataById(primarySupporter);
+				int i=0;
+				System.out.println(hs.getSsn());
+				
 
-				}else{
-					hsDetails=new String[0][];
-					System.out.println("=====3");
-
+				
+				List<String> secondarySupporter = new PatientDao().getDataById(currPatientSSN).getSecondaryHealthSupporters();
+				
+				if(secondarySupporter!=null){
+					if(secondarySupporter.size()>0){
+						System.out.println("Secondary Supporter Size: " + secondarySupporter.size());
+						hsDetails=new String[2][];
+						String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+						hsDetails[i++] = hsDetail;
+						System.out.println("=====");
+						hs = new HealthSupporterDao().getDataById(secondarySupporter.get(0));
+						String[] shsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Secondary"};
+						hsDetails[i++] = shsDetail;
+						
+					}
 				}
+				System.out.println("Secondary Supporter Not there");
+				if(hsDetails==null){
+					if(primarySupporter!=null){
+						hsDetails=new String[1][];
+						String[] hsDetail={hs.getSsn(),hs.getFirstName(),hs.getLastName(),hs.getContactNumber().toString(),"Primary"};
+						hsDetails[i++] = hsDetail;
+						System.out.println("2=====");
+
+					}else{
+						hsDetails=new String[0][];
+						System.out.println("=====3");
+
+					}
+				}
+				
 			}
+			
 			
 
 		}
